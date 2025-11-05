@@ -118,5 +118,4 @@
     </footer>
 
 </body>
-<!-- thay đổi trên git -->
 </html>
