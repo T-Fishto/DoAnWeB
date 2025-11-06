@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - NB Coffee</title>
-    </head>
-    <style>
-        body {
+</head>
+<style>
+body {
     font-family: Arial, sans-serif;
-    background-image: url("../images/Font/baner.jpg");
+    background-image: url("../Admin/images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -109,7 +109,8 @@
 }
 
 
-    </style>
+</style>
+
 <body>
     <div class="login-container">
         <form class="login-form" action="process_login.php" method="POST">
@@ -126,7 +127,7 @@
             <button type="submit" class="login-button">Đăng nhập</button>
             
             <p class="signup-link">
-                Bạn chưa có tài khoản? <a href="register.php">Đăng ký Tại đây</a>
+                Bạn chưa có tài khoản? <a href="dangki.php">Đăng ký Tại đây</a>
             </p>
         </form>
     </div>
