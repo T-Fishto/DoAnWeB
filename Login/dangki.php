@@ -8,7 +8,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url("../images/Font/baner.jpg");
+    background-image: url("../Admin/images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,6 +18,7 @@ body {
     align-items: center;
     min-height: 100vh; /* Đảm bảo form căn giữa theo chiều dọc */
     margin: 0;
+    padding: 50px 0;
 }
 
 .reristration-container {
@@ -56,6 +57,8 @@ body {
     font-weight: 600;
 }
 
+.form-group input[type="tel"],
+.form-group input[type="email"],
 .form-group input[type="text"],
 .form-group input[type="password"] {
     width: calc(100% - 20px); /* Trừ padding để input vừa khung */
@@ -66,6 +69,8 @@ body {
     transition: border-color 0.3s ease;
 }
 
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus,
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus {
     border-color: #6a11cb; /* Màu border khi focus */
@@ -115,33 +120,33 @@ body {
             <h1>Đăng ký Tài khoản</h1>
             <div class="form-group">
                 <label for="fullName">Họ và tên</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Tên đăng nhập" required>
+                <input type="text" id="fullName" name="fullName" placeholder="Họ và tên" required>
             </div>
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
-                <input type="tel" id="phone" name="phone" placeholder="Nhập mật khẩu" required>
+                <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Nhập mật khẩu" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Nhập mật khẩu" required>
+                <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập mật khẩu" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Mật khẩu" required>
             </div>
             <div class="form-group">
                 <label for="password">Xác nhận mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Xác nhận mật khẩu" required>
             </div>
             
-            <button type="submit" class="login-button">Đăng ký</button>
+            <button type="submit" class="reristration-button">Đăng ký</button>
             
             <p class="signup-link">
-                Bạn đã có tài khoản? <a href="dangnhap.php">Đăng nhập ngay.</a>
+                Bạn đã có tài khoản? <a href="dangnhap.php">Đăng nhập ngay.</a> 
             </p>
         </form>
     </div>

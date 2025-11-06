@@ -8,7 +8,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url("../images/Font/baner.jpg");
+    background-image: url("../Admin/images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
