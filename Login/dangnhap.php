@@ -93,6 +93,7 @@
     margin-top: 25px;
     font-size: 15px;
     color: #777;
+    /* .... */
 }
 
 .signup-link a {
