@@ -35,9 +35,13 @@
                             <i class="fa-solid fa-child-reaching ic"></i>
                             <a href="">Về Chúng Tôi</a>
                         </li>
-                        <li class="menu-items">
+                        <!-- <li class="menu-items">
                             <i class="ti-share ic"></i>
                             <a href="">Đăng Xuất</a>
+                        </li> -->
+                        <li class="menu-items">
+                            <i class="ti-user ic"></i>
+                            <a href="">Đăng Nhập</a>
                         </li>
                 </div>
             </div>
@@ -113,7 +117,7 @@
         </div>
 
         <div class="footer-bottom">
-            Copyright © 2024 - Website Food & Drink
+            Bản Quyền Bởi © 2025 - Website Food & Drink
         </div>
     </footer>
 
