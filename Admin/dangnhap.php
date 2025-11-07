@@ -8,7 +8,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url("../Admin/images/Font/baner.jpg");
+    background-image: url("images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -113,7 +113,7 @@ body {
 
 <body>
     <div class="login-container">
-        <form class="login-form" action="process_login.php" method="POST">
+        <form class="login-form" action="dangnhap_submit.php" method="POST">
             <h1>Đăng nhập</h1>
             <div class="form-group">
                 <label for="username">Username</label>
