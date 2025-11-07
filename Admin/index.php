@@ -59,7 +59,7 @@ $result = $conn->query($sql);
                         </li>
                         <li class="menu-items">
                             <i class="fa-solid fa-bowl-rice ic"></i>
-                            <a href="">Thực Đơn</a>
+                            <a href="danhsachsanpham.php">Thực Đơn</a>
                         </li>
                         <li class="menu-items">
                             <i class="fa-solid fa-thumbs-up ic"></i>
