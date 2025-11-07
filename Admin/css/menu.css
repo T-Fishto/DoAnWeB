@@ -1,0 +1,189 @@
+/* --- Cài đặt chung --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #363636;
+    color: #333;
+}
+
+/* --- Header --- */
+.menu-header {
+    text-align: center;
+    padding: 15px;
+    background-color: #f8f8f8;
+    color: #555;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.2em;
+}
+
+/* --- Layout chính --- */
+.container {
+    display: flex;
+    max-width: 1400px;
+    margin: 20px auto;
+    gap: 20px; /* Khoảng cách giữa sidebar và content */
+}
+
+/* --- Cột bên trái (Sidebar) --- */
+.sidebar {
+    width: 25%;
+    min-width: 250px;
+    background-color: #4a4a4a;
+    padding: 20px;
+    border-radius: 10px;
+    color: #f1f1f1;
+}
+
+.category-menu h3 {
+    border-bottom: 2px solid #8B4513; /* Màu nâu giống trong hình */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.category-menu ul {
+    list-style: none;
+}
+
+.category-menu ul li {
+    padding: 12px 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+}
+
+.category-menu ul li:hover {
+    background-color: #5a5a5a;
+}
+
+.category-menu ul li a {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+.category-menu ul li a i {
+    margin-right: 10px;
+    width: 20px; /* Đảm bảo icon thẳng hàng */
+}
+
+/* Phần Lưu ý */
+.notes {
+    margin-top: 30px;
+    background-color: #3e3e3e;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+.notes h4 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+.notes ul {
+    list-style-type: '◆ '; /* Ký tự đầu dòng */
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+/* --- Cột bên phải (Main Content) --- */
+.main-content {
+    width: 75%;
+}
+
+.category-section {
+    margin-bottom: 30px;
+}
+
+.category-section h2 {
+    background-color: #8B8000; /* Màu olive/nâu */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Danh sách các món ăn */
+.item-list {
+    /* Sử dụng CSS Grid để chia cột, tự động xuống hàng */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+/* Thẻ của từng món ăn (Menu Item) */
+.menu-item {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Đảm bảo hình ảnh không bị tràn ra ngoài */
+    transition: transform 0.3s;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+}
+
+.menu-item img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover; /* Đảm bảo ảnh luôn vừa vặn, không bị méo */
+    flex-shrink: 0; /* Ngăn ảnh bị co lại */
+}
+
+.menu-item .item-content {
+    padding: 15px;
+    flex: 1; /* Chiếm hết phần còn lại của thẻ */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Đẩy giá và nút + xuống dưới */
+}
+
+.menu-item h3 {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.menu-item p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.4;
+    flex-grow: 1; /* Đẩy phần footer xuống */
+    margin-bottom: 10px;
+}
+
+.item-price-add {
+    display: flex;
+    justify-content: space-between; /* Tách giá và nút + ra 2 bên */
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+}
+
+.item-price-add .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #d9534f; /* Màu đỏ cho giá */
+}
+
+.item-price-add .add-btn {
+    background-color: #f0ad4e; /* Màu cam */
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item-price-add .add-btn:hover {
+    background-color: #ec971f;
+}
