@@ -122,9 +122,9 @@ INSERT INTO `quang_cao` (`tieu_de`, `hinh_anh_banner`, `ten_mon`, `so_sao`, `nga
 ('Bún Bò Huế - Đặc Sản Huế', 'images/ads/bun_bo_hue.jpg', 'Món Nước ngon tuyệt vời', 4.5, '30 phút', 'Ưu đãi chào mừng đến NB', 'chi-tiet.php?id=2'),
 ('Cơm Cháy Chà Bông', 'images/ads/com_chay.jpg', 'Món ăn vặt giòn tan', 4.2, '15 phút', '🔥 Mua 3 Tặng 1 🔥', 'chi-tiet.php?id=3'),
 ('Gỏi Heo Tai Mũi (Gỏi Leo)', 'images/ads/goi_leo.jpg', 'Gỏi trộn chua ngọt', 4.6, '25 phút', '🎉 Món mới khao 15% 🎉', 'chi-tiet.php?id=4'),
-('Matcha Latte', 'images/ads/matcha.jpg', 'Trà xanh Nhật Bản', 4.8, '20 phút', '💚 Đồng giá 39k 💚', 'chi-tiet.php?id=5'),
+('Thịt Xiên Que Nướng', 'images/ads/thit_xien_que.jpg', 'Thơm lừng, nóng hổi', 4.3, '20 phút', '🍢 Mua 10 Tặng 2 🍢', 'chi-tiet.php?id=5'),
 ('Nước Cam Vắt Tươi', 'images/ads/nuoc_camjpg.jpg', 'Vitamin C giải nhiệt', 4.7, '10 phút', '🍊 Tươi ngon mỗi ngày 🍊', 'chi-tiet.php?id=6'),
-('Thịt Xiên Que Nướng', 'images/ads/thit_xien_que.jpg', 'Thơm lừng, nóng hổi', 4.3, '20 phút', '🍢 Mua 10 Tặng 2 🍢', 'chi-tiet.php?id=7'),
+('Matcha Latte', 'images/ads/matcha.jpg', 'Trà xanh Nhật Bản', 4.8, '20 phút', '💚 Đồng giá 39k 💚', 'chi-tiet.php?id=7'),
 ('Trà Sữa Trân Châu', 'images/ads/tra_sua.jpg', 'Trà sữa truyền thống', 4.5, '25 phút', '🎁 Tặng topping trân châu 🎁', 'chi-tiet.php?id=8'),
 ('Trà Trái Cây Nhiệt Đới', 'images/ads/tra_trai_cay.jpg', 'Giải khát mùa hè', 4.6, '20 phút', '☀️ Mua 2 Tính Tiền 1 ☀️', 'chi-tiet.php?id=9'),
 ('Trà Sữa Cam Vàng', 'images/ads/tra-sua-cam.jpg', 'Hương vị mới lạ', 4.4, '25 phút', '🧡 Thử ngay vị mới 🧡', 'chi-tiet.php?id=10');
