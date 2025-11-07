@@ -45,18 +45,18 @@ $result = $conn->query($sql);
             <div class="row justify-content">	
                 <div class="logo">
                     <img src="images/Font/logoNB.jpg" alt="">
-                    <input class="text_TimKiem" type="text">
-                    <i class="fa-solid fa-Search"></i>
-                    
-
                 </div>          
                 <div class="menu_bar">
                     
                     <span></span> 
                     <!-- thẻ span này tạo menu-->
                 </div>
- 
+    
                 <div class="menu-Items">
+                        <li class="menu-items1">
+                            <span>Coffee NB</span> 
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </li>
                         <li class="menu-items">
                             <i class="fa-solid fa-bowl-rice ic"></i>
                             <a href="">Thực Đơn</a>

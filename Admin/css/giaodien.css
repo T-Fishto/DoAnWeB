@@ -105,22 +105,26 @@ li{
 
 
 }
-/* Tìm kiểm */
-.text_TimKiem{
-    border-radius: 20px;
-    line-height: 20px;
-    width: 300px;
+/* Tiêu đề bên Nút Menu */
+
+.menu-Items .menu-items1{
     position: absolute;
-    top:30%;
-    bottom: 30%;
-    left: 70px;
-    
+    top: 0;
+    right: 0;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 68.44px;
+    width: 250px;
+    height: 68.44px;
 }
-.fa-Search{
-    background-color: #ecf0f1;
-    top:auto;
-    color: #f4f4f4;
-    z-index: 100;
+.menu-Items .menu-items1 span{
+    color: var(--sup-color);
+    margin-left: 70px;
+    font-family: "Momo Signature", cursive;
+}
+.fa-mug-hot{
+    color: #fff;
+    font-size:40px;
 }
 
 /* MENU BAR */
@@ -202,7 +206,7 @@ li{
     background-color: var(--main-color);
     top: 0;
     right: 0;
-    padding: 50px 25px; /* Tạo khoảng cách bên trong */
+    padding: 50px 20px; /* Tạo khoảng cách bên trong */
     transform: translateX(100%);
 }
 .menu-Items a{
