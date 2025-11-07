@@ -54,10 +54,8 @@ CREATE TABLE IF NOT EXISTS `san_pham` (
   `id_san_pham` INT(11) NOT NULL AUTO_INCREMENT,
   `id_danh_muc` INT(11) NOT NULL,
   `ten_san_pham` VARCHAR(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mo_ta` TEXT COLLATE utf8mb4_unicode_ci,
   `gia` DECIMAL(10, 2) NOT NULL,
   `hinh_anh` VARCHAR(255),
-  `so_luong_ton` INT(11) DEFAULT 0,
   `trang_thai` TINYINT(1) DEFAULT 1,
   PRIMARY KEY (`id_san_pham`),
   KEY `id_danh_muc` (`id_danh_muc`)
@@ -134,6 +132,53 @@ INSERT INTO `quang_cao` (`tieu_de`, `hinh_anh_banner`, `ten_mon`, `so_sao`, `nga
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Dumping data for table `danh_muc`
+--
+
+INSERT INTO `danh_muc` (`ten_danh_muc`, `mo_ta`) VALUES
+(`Món ăn`, `...`),
+(`Nước giải khát`, `...`),
+(`Đồ ăn vặt`, ``);
+
+--
+-- Dumping data for table `san_pham`
+--
+
+INSERT INTO `san_pham` (`id_danh_muc`, `ten_san_pham`, `gia`, `hinh_anh`, `trang_thai`) VALUES
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+(``, ``, ``, ``, ``),
+
 
 --
 -- Constraints for table `san_pham`
