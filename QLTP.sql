@@ -148,12 +148,23 @@ INSERT INTO `danh_muc` (`id_danh_muc`, `ten_danh_muc`, `mo_ta`) VALUES
 TRUNCATE TABLE `san_pham`;
 INSERT INTO `san_pham` (`id_danh_muc`, `ten_san_pham`, `gia`, `hinh_anh`)
 VALUES
-(1, 'Mì cay hải sản', 55000.00, 'https://sf-static.upanhlaylink.com/view/image_202511071e008c328d212d0cbf03bcb0389f0786.jpg'),
-(1, 'SPAGHTIA BOLOGASSE', 89000.00, 'https://via.placeholder.com/140x140.png?text=Spaghetti'),
-(2, 'TRÀ ĐÀO CAM SẢ', 89000.00, 'https://via.placeholder.com/140x140.png?text=Tra+Dao'),
-(2, 'SODA CHANH DÂY', 89000.00, 'https://via.placeholder.com/140x140.png?text=Soda'),
-(3, 'KHOAI TÂY CHIÊN LẮC PHÔ MAI', 0.00, 'https://via.placeholder.com/140x140.png?text=Khoai+Pho+Mai'),
-(3, 'KHOAI TÂY CHIÊN LẮC CHÀ GIÒ RÊ', 80000.00, 'https://via.placeholder.com/140x140.png?text=Khoai+Cha+Gio');
+(1, 'Mì cay hải sản', 55000.00, 'images/ads/hinhanh1.png'),
+(1, 'Mì cay bò ', 55000.00, 'images/ads/hinhanh2.png'),
+(1, 'Bún bò Huế', 25000.00, 'images/ads/hinhanh3.png'),
+(1, 'Mì Quảng', 30000.00, 'images/ads/hinhanh4.png'),
+(1, 'Phở Hà Nội', 30000.00, 'images/ads/hinhanh5.png'),
+(1, 'Cơm gà xối mỡ', 45000.00, 'images/ads/hinhanh6.png'),
+(2, 'Trà me muối ớt', 30000.00, 'images/ads/hinhanh11.png'),
+(2, 'Trà sữa truyền thống', 30000.00, 'images/ads/hinhanh12.png'),
+(2, 'Hồng trà bí đao', 25000.00, 'images/ads/hinhanh13.png'),
+(2, 'Ca cao muối', 25000.00, 'images/ads/hinhanh14.png'),
+(2, 'Matcha latte', 30000.00, 'images/ads/hinhanh15.png'),
+(2, 'Trà nhiệt đới', 25000.00, 'images/ads/hinhanh16.png'),
+(2, 'Hồng trà trân châu', 25000.00, 'images/ads/hinhanh17.png'),
+(3, 'Bánh tráng trộn', 20000.00, 'images/ads/hinhanh7.png'),
+(3, 'Bánh tráng da heo tốp mỡ', 20000.00, 'images/ads/hinhanh9.png'),
+(3, 'Cơm cháy Chà Bông', 20000.00, 'images/ads/hinhanh8.png'),
+(3, 'Đồ chiên', 5000.00 / 1, 'images/ads/hinhanh10.png');
 
 --
 -- Constraints for table `san_pham`

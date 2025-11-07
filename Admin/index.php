@@ -86,7 +86,7 @@ $result = $conn->query($sql);
         <div class="big-content">
             <h2>Food & Drink</h2>   
             <p>Chào mừng bạn đến với thế giới ẩm thực</p>
-            <button class="big-content-btn btn">Menu</button>
+            <button class="big-content-btn btn"><a href="danhsachsanpham.php">Menu</a></button>
         </div>
     </section>   
     <ul>
