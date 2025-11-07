@@ -19,6 +19,13 @@ a{
     text-decoration: none; /* Loại bỏ gạch chân trong liên kết */
     list-style-type: none; /* Loại bỏ dấu chấm đầu dòng trong danh sách */
 }
+#span{
+    color: rgb(255, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Momo Signature", cursive;
+
+}
 :root{
     --main-color: #191F3A;
     --sup-color : #EAA023;
@@ -64,9 +71,10 @@ li{
 }  
 .top .logo{
     padding: 10px 0 0 0;
+    position: relative;
 }
 .top .logo img{
-    width: 60px;
+    width: 50px;
     border-radius: 50%; /* Làm cho hình ảnh có viền tròn */
 }
 .row{
@@ -97,6 +105,24 @@ li{
 
 
 }
+/* Tìm kiểm */
+.text_TimKiem{
+    border-radius: 20px;
+    line-height: 20px;
+    width: 300px;
+    position: absolute;
+    top:30%;
+    bottom: 30%;
+    left: 70px;
+    
+}
+.fa-Search{
+    background-color: #ecf0f1;
+    top:auto;
+    color: #f4f4f4;
+    z-index: 100;
+}
+
 /* MENU BAR */
 .top .menu_bar{
     display: flex;
@@ -200,6 +226,11 @@ li{
     padding: 0 10px;
     color: #fff;
 }
+.fa-fire{
+    color: red;
+    font-size: 30px;
+    display: inline;
+}
 /* .menu-Items-bottom{
 
 
@@ -277,9 +308,49 @@ li{
 }
 /* Phần Giữa */
 .phangiua{
-    height: 400px;
-    background-color: #fff;
+    display:flex; /* Dùng flexbox để xếp hàng */
+    /* flex-wrap: wrap; Cho phép xuống hàng tự động */
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
 }
+.item{  
+    width: 18%;
+    margin: 1%;
+    box-sizing: border-box; /* Giúp padding không làm vỡ layout */
+    border: 2px solid #fcfcfc;
+    border-radius: 8px; 
+    box-shadow: 
+        /* Bóng tối (dưới phải) */
+        5px 5px 10px #bebebe,
+        /* Bóng sáng (trên trái) */
+        -5px -5px 10px #ffffff;
+    transition: all  0.5s ease-in; 
+    cursor: pointer;
+    
+}
+.item:hover{  
+    transform: scale(1.1);
+}
+.item h4{
+    text-align: center;
+}
+.item img{
+    /* Đã có sẵn: */
+    /* width: 100%; */ /* BỎ hoặc thay bằng max-width */
+    height: 150px;
+    object-fit: cover;  
+    border-radius: 20px;
+    display: block; /* GIỮ NGUYÊN HOẶC THÊM NẾU CHƯA CÓ */
+    /* THÊM 2 DÒNG NÀY ĐỂ CĂN GIỮA */
+    max-width: 90%; /* Ví dụ: ảnh chỉ chiếm 90% chiều rộng của khung */
+    margin: 0 auto; /* Đặt lề trái và phải tự động để căn giữa */
+    padding: 10px;
+   
+}
+
+
+
 /* Footer */
 /* --- BẮT ĐẦU CSS CHO FOOTER --- */
 
