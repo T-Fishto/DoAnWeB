@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `nguoi_dung` (
   `dia_chi` TEXT COLLATE utf8mb4_unicode_ci,
   `so_dien_thoai` VARCHAR(15),
   `vai_tro` TINYINT(1) DEFAULT 0,
+  `Khoa` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_nguoi_dung`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
@@ -165,6 +166,14 @@ VALUES
 (3, 'Bánh tráng da heo tốp mỡ', 20000.00, 'images/ads/hinhanh9.png'),
 (3, 'Cơm cháy Chà Bông', 20000.00, 'images/ads/hinhanh8.png'),
 (3, 'Đồ chiên', 5000.00 / 1, 'images/ads/hinhanh10.png');
+
+--
+-- Dumping data for table `nguoi_dung`
+--
+INSERT INTO `nguoi_dung` (`ten_dang_nhap`, `mat_khau`, `ho_ten`, `email`, `dia_chi`, `so_dien_thoai`, `vai_tro`, `Khoa`) VALUES
+('admin', 'mk123', 'Lệnh Hồ Xung', 'admin@NBCoffee.com', '123 Đường Admin, TP. HCM', '0901234567', 1, 0),
+('nguoidung1', 'mknd123', 'Nguyễn Văn Thắng', 'nguyenvanthang@gmail.com', '456 Đường Lập Trình, An Giang', '0912345678', 0, 0),
+('nguoidung2', 'mknd123', 'Diệp Hoàng Thành', 'diephoangthanh@gmail.com', '789 Đường Thiết Kế, Jack', '0987654321', 0, 0);
 
 --
 -- Constraints for table `san_pham`
