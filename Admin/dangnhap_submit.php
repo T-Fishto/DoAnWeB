@@ -77,7 +77,7 @@
             // Lấy mật khẩu ĐÃ BĂM từ CSDL
             $mat_khau_bam_tu_db = $dong['mat_khau']; // Đây là '$2y$10$oq6Ik...'
 
-            
+            // 7. "ẢO THUẬT" Ở ĐÂY: SO SÁNH MẬT KHẨU
             if (password_verify($MatKhau, $mat_khau_bam_tu_db)) {
                 
                 // MẬT KHẨU KHỚP!
@@ -87,11 +87,15 @@
                     // Đăng ký SESSION
                     $_SESSION['MaNguoiDung'] = $dong['id_nguoi_dung'];
                     $_SESSION['HoVaTen'] = $dong['ho_ten'];
-                    $_SESSION['VaiTro'] = $dong['vai_tro'];
+                    $_SESSION['VaiTro'] = $dong['vai_tro'];// --- PHẦN CẢI TIẾN CHUYỂN HƯỚNG BẮT ĐẦU ---
+                    // Giả sử vai_tro = 1 là quyền cao (admin/quản trị)
+                    if ($dong['vai_tro'] == 1) {
+                        header("Location: ../Admin/indexnguoidung.php"); 
+                    } else { // vai_tro = 0 hoặc các vai trò khác (người dùng thường)
+                        header("Location: ../User/index.php"); 
+                    }
+                    // --- PHẦN CẢI TIẾN CHUYỂN HƯỚNG KẾT THÚC ---
                     
-                    // Chuyển hướng về trang quản trị
-                    // (Giả sử trang admin của bạn là indexnguoidung.php)
-                    header("Location: index.php");
                     exit(); // Phải exit() sau khi chuyển hướng
                 } else {
                     ThongBaoLoi("Người dùng đã bị khóa tài khoản!");
