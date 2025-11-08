@@ -81,6 +81,10 @@ $result = $conn->query($sql);
                             <i class="ti-user ic"></i>
                             <a href="indexnguoidung.php">Quản Lý Người Dùng</a>
                         </li>
+                        <li class="menu-items">
+                            <i class="ti-user ic"></i>
+                            <a href="dangxuat.php">Đăng Xuất</a>
+                        </li>
                 </div>
             </div>
         </div>

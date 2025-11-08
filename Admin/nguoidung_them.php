@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // --- Nếu chưa tồn tại, tiến hành thêm mới ---
             
-            // 2. BĂM MẬT KHẨU
-            $mat_khau_hashed = password_hash($mat_khau, PASSWORD_DEFAULT);
+            // 2. BĂM MẬT KHẨU  
+            $mat_khau = md5($mat_khau);
+            // $mat_khau_hashed = password_hash($mat_khau, PASSWORD_DEFAULT);
             
             // 3. Chuẩn bị câu lệnh INSERT
             // Mặc định vai_tro = 0 (Thành viên) và Khoa = 0 (Không khóa)
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // "ssssss" = 6 tham số đều là string
                 $stmt->bind_param("ssssss", 
                     $ten_dang_nhap, 
-                    $mat_khau_hashed, 
+                    $mat_khau, 
                     $ho_ten, 
                     $email, 
                     $dia_chi, 

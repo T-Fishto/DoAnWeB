@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `danh_muc` (
   `ten_danh_muc` VARCHAR(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mo_ta` TEXT COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id_danh_muc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `san_pham` (
   `trang_thai` TINYINT(1) DEFAULT 1,
   PRIMARY KEY (`id_san_pham`),
   KEY `id_danh_muc` (`id_danh_muc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `don_hang` (
   `trang_thai_don_hang` VARCHAR(50) COLLATE utf8mb4_unicode_ci DEFAULT 'Mới',
   PRIMARY KEY (`id_don_hang`),
   KEY `id_nguoi_dung` (`id_nguoi_dung`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `chi_tiet_don_hang` (
   PRIMARY KEY (`id_chi_tiet`),
   KEY `id_don_hang` (`id_don_hang`),
   KEY `id_san_pham` (`id_san_pham`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
