@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `nguoi_dung` (
   `vai_tro` TINYINT(1) DEFAULT 0,
   `Khoa` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_nguoi_dung`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

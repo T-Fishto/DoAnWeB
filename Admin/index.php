@@ -77,6 +77,10 @@ $result = $conn->query($sql);
                             <i class="ti-user ic"></i>
                             <a href="../Login/dangnhap.php">Đăng Nhập</a>
                         </li>
+                        <li class="menu-items">
+                            <i class="ti-user ic"></i>
+                            <a href="indexnguoidung.php">Quản Lý Người Dùng</a>
+                        </li>
                 </div>
             </div>
         </div>
@@ -122,9 +126,9 @@ $result = $conn->query($sql);
 
             // Kết thúc một "item"
             echo '</div>';
-            echo '<br>';
+            
         } // Kết thúc vòng lặp while
-            } // Kết thúc vòng lặp while
+    }
         else {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
         }
