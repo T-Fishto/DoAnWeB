@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 /*
  * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
  * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
@@ -67,15 +68,28 @@ $result = $conn->query($sql);
                             <i class="fa-solid fa-child-reaching ic"></i>
                             <a href="">Về Chúng Tôi</a>
                         </li>
-                        <li class="menu-items">
-                            <i class="ti-user ic"></i>
-                            <a href="../Admin/dangnhap.php">Đăng Nhập</a>
-                        </li>
+                        <?php
+                        
+// Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
+if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
+    // ---- ĐÃ ĐĂNG NHẬP ----
+    // Hiển thị nút "Đăng Xuất"
+    echo '<li class="menu-items">';
+    echo '    <i class="ti-user ic"></i>';
+    // Lưu ý: Tôi đã sửa đường dẫn 'dangxuat.php' để giống với 'dangnhap.php'
+    echo '    <a href="../Admin/dangxuat.php">Đăng Xuất</a>'; 
+    echo '</li>';
 
-                        <li class="menu-items">
-                            <i class="ti-user ic"></i>
-                            <a href="dangxuat.php">Đăng Xuất</a>
-                        </li>
+} else {
+    // ---- CHƯA ĐĂNG NHẬP ----
+    // Hiển thị nút "Đăng Nhập"
+    echo '<li class="menu-items">';
+    echo '    <i class="ti-user ic"></i>';
+    echo '    <a href="../Admin/dangnhap.php">Đăng Nhập</a>';
+    echo '</li>';
+}
+                        ?>
+        
                 </div>
             </div>
         </div>
