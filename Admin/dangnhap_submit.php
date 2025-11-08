@@ -77,7 +77,7 @@
             // Lấy mật khẩu ĐÃ BĂM từ CSDL
             $mat_khau_bam_tu_db = $dong['mat_khau']; // Đây là '$2y$10$oq6Ik...'
 
-            // 7. "ẢO THUẬT" Ở ĐÂY: SO SÁNH MẬT KHẨU
+            
             if (password_verify($MatKhau, $mat_khau_bam_tu_db)) {
                 
                 // MẬT KHẨU KHỚP!

@@ -172,7 +172,7 @@ VALUES
 --
 INSERT INTO `nguoi_dung` (`ten_dang_nhap`, `mat_khau`, `ho_ten`, `email`, `dia_chi`, `so_dien_thoai`, `vai_tro`, `Khoa`) VALUES
 ('admin', 'mk123', 'Lệnh Hồ Xung', 'admin@NBCoffee.com', '123 Đường Admin, TP. HCM', '0901234567', 1, 0),
-('nguoidung1', 'mknd123', 'Nguyễn Văn Thắng', 'nguyenvanthang@gmail.com', '456 Đường Lập Trình, An Giang', '0912345678', 0, 0),
+('nguoidung1','mknd123', 'Nguyễn Văn Thắng', 'nguyenvanthang@gmail.com', '456 Đường Lập Trình, An Giang', '0912345678', 0, 0),
 ('nguoidung2', 'mknd123', 'Diệp Hoàng Thành', 'diephoangthanh@gmail.com', '789 Đường Thiết Kế, Jack', '0987654321', 0, 0);
 
 --
