@@ -1,34 +1,28 @@
 
 <?php
-session_start();
-
-/*
- * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
- *
- * !!! QUAN TRỌNG:
- * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
- */
-$servername = "localhost"; // Thường là "localhost"
-$username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
-$password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
-$dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
-
-// 1. Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
-$conn->set_charset("utf8mb4");
-
-// 3. Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối CSDL thất bại: " . $conn->connect_error);
-}
-
-// 4. Viết câu truy vấn SQL
-// Vì bạn muốn 2 hàng, mỗi hàng 5 cái, chúng ta sẽ lấy 10 sản phẩm
-$sql = "SELECT * FROM quang_cao LIMIT 10";
-$result = $conn->query($sql);
-
+    session_start();
+    /*
+    * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
+    *
+    * !!! QUAN TRỌNG:
+    * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
+    */
+    $servername = "localhost"; // Thường là "localhost"
+    $username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
+    $password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
+    $dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
+    // 1. Tạo kết nối
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
+    $conn->set_charset("utf8mb4");
+    // 3. Kiểm tra kết nối
+    if ($conn->connect_error) {
+        die("Kết nối CSDL thất bại: " . $conn->connect_error);
+    }
+    // 4. Viết câu truy vấn SQL
+    // Vì bạn muốn 2 hàng, mỗi hàng 5 cái, chúng ta sẽ lấy 10 sản phẩm
+    $sql = "SELECT * FROM quang_cao LIMIT 10";
+    $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,55 +46,51 @@ $result = $conn->query($sql);
                     
                     <span></span> 
                     <!-- thẻ span này tạo menu-->
+                </div>   
+                <div class="menu-Items">
+                    <li class="menu-items1">
+                        <span>Coffee NB</span> 
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </li>
+                    <li class="menu-items">
+                        <i class="fa-solid fa-bowl-rice ic"></i>
+                        <a href="danhsachsanpham.php">Thực Đơn</a>
+                    </li>
+                    <li class="menu-items">
+                        <i class="fa-solid fa-thumbs-up ic"></i>
+                        <a href="">Liên Hệ</a>
+                    </li>
+                    <li class="menu-items">
+                        <i class="fa-solid fa-child-reaching ic"></i>
+                        <a href="">Về Chúng Tôi</a>
+                    </li>
+                    <?php
+                    // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
+                    if (isset($_SESSION['MaNguoiDung'])) {                      
+                        //  Hiển thị "Quản lý người dùng" nếu vai trò là Quản trị viên (vai_tro = 1)
+                        if ($_SESSION['VaiTro'] == 1) {
+                            echo '<li class="menu-items">';
+                            echo '    <i class="ti-user ic"></i>';
+                            echo '    <a href="indexnguoidung.php">Quản Lý Người Dùng</a>';
+                            echo '</li>';
+                        }                       
+                        //  Hiển thị "Đăng Xuất"
+                        echo '<li class="menu-items">';
+                        echo '    <i class="ti-share ic"></i>';
+                        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
+                        echo '</li>';
+                        
+                    } else {
+                        //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
+                        echo '<li class="menu-items">';
+                        echo '    <i class="ti-user ic"></i>';
+                        echo '    <a href="dangnhap.php">Đăng Nhập</a>';
+                        echo '</li>';
+                    }
+                    ?>
                 </div>
-    
- <div class="menu-Items">
-    <li class="menu-items1">
-        <span>Coffee NB</span> 
-        <i class="fa-solid fa-mug-hot"></i>
-    </li>
-    <li class="menu-items">
-        <i class="fa-solid fa-bowl-rice ic"></i>
-        <a href="danhsachsanpham.php">Thực Đơn</a>
-    </li>
-    <li class="menu-items">
-        <i class="fa-solid fa-thumbs-up ic"></i>
-        <a href="">Liên Hệ</a>
-    </li>
-    <li class="menu-items">
-        <i class="fa-solid fa-child-reaching ic"></i>
-        <a href="">Về Chúng Tôi</a>
-    </li>
-
-    <?php
-    // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
-    if (isset($_SESSION['MaNguoiDung'])) {
-        
-        //  Hiển thị "Quản lý người dùng" nếu vai trò là Quản trị viên (vai_tro = 1)
-        if ($_SESSION['VaiTro'] == 1) {
-            echo '<li class="menu-items">';
-            echo '    <i class="ti-user ic"></i>';
-            echo '    <a href="indexnguoidung.php">Quản Lý Người Dùng</a>';
-            echo '</li>';
-        }
-        //  Hiển thị "Đăng Xuất"
-        echo '<li class="menu-items">';
-        echo '    <i class="ti-share ic"></i>';
-        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
-        echo '</li>';
-        
-    } else {
-        //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
-        echo '<li class="menu-items">';
-        echo '    <i class="ti-user ic"></i>';
-        echo '    <a href="dangnhap.php">Đăng Nhập</a>';
-        echo '</li>';
-    }
-    ?>
-</div>
             </div>
         </div>
-
     </section>
     <section class="big-image">
         <div class="big-content">
@@ -112,45 +102,34 @@ $result = $conn->query($sql);
     <ul>
         <li>
           <i class="fa-solid fa-fire"></i>  
-          <span id="span">Các món ăn nổi bậc</span>
-                   
+          <span id="span">Các món ăn nổi bậc</span>                  
         </li>
     </ul>     
     <!-- Giữa Trang --> 
     <div class="phangiua">
         <!-- <h3>Các món ăn nổi bật</h3> -->
         <?php
-
-
         // Kiểm tra xem có dữ liệu trả về không
-        if ($result->num_rows > 0) {
-            
+        if ($result->num_rows > 0) {           
             // 6Lặp qua từng dòng dữ liệu và hiển thị ra HTML
             // Mỗi lần lặp là một "khung" (product-card)
-
             while($row = $result->fetch_assoc()) {
-            echo '<div class="item">';
-            
+            echo '<div class="item">';          
             // In ra dữ liệu trực tiếp từ $row
             echo '<a href="' . $row["duong_dan_lien_ket"] . '">';
             echo '    <img width="200" height="150" src="' . $row["hinh_anh_banner"] . '">';
-            echo '</a>';
-            
+            echo '</a>';           
             echo '<h4>' . $row["tieu_de"] . '</text-algin=h4>';
             echo '<p>' . $row["ten_mon"] . '</p>';
             echo '<p>⭐ ' . $row["so_sao"] . ' | 🕒 ' . $row["ngay"] . '</p>';
-            echo '<p><strong>' . $row["tag"] . '</strong></p>';
-            
-
+            echo '<p><strong>' . $row["tag"] . '</strong></p>';          
             // Kết thúc một "item"
-            echo '</div>';
-            
+            echo '</div>';            
         } // Kết thúc vòng lặp while
     }
         else {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
-        }
-        
+        }       
         // 7. Đóng kết nối CSDL
         $conn->close();
         ?>
@@ -158,7 +137,6 @@ $result = $conn->query($sql);
     <!-- Chân trang -->
    <footer class="footer">
         <div class="footer-container">
-
             <div class="footer-column-left">
                 <h3>Về Food & Drink</h3>
                 <ul>
@@ -172,7 +150,6 @@ $result = $conn->query($sql);
                     </li>
                 </ul>
             </div>
-
             <div class="footer-column-center">
                 <h3>Liên hệ Email</h3>
                 <ul>
@@ -186,7 +163,6 @@ $result = $conn->query($sql);
                     </li>
                 </ul>
             </div>
-
             <div class="footer-column-right social-column"> <h3>Theo dõi chúng tôi</h3>
                 <ul class="footer-social-list">
                     <li>
@@ -211,11 +187,9 @@ $result = $conn->query($sql);
             </div>
 
         </div>
-
         <div class="footer-bottom">
             Bản Quyền Bởi © 2025 - Website Food & Drink
         </div>
     </footer>
-
 </body>
 </html>
