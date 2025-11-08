@@ -57,6 +57,7 @@ body {
     font-weight: 600;
 }
 
+.form-group input[type="address"],
 .form-group input[type="tel"],
 .form-group input[type="email"],
 .form-group input[type="text"],
@@ -69,6 +70,7 @@ body {
     transition: border-color 0.3s ease;
 }
 
+.form-group input[type="address"]:focus,
 .form-group input[type="tel"]:focus,
 .form-group input[type="email"]:focus,
 .form-group input[type="text"]:focus,
@@ -125,6 +127,10 @@ body {
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="address" id="address" name="address" placeholder="Địa chỉ" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

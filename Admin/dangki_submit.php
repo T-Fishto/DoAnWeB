@@ -44,6 +44,7 @@
     // 2. LẤY DỮ LIỆU TỪ FORM
     $hoTen = $_POST['fullName'];
     $soDienThoai = $_POST['phone'];
+    $diaChi = $_POST['address'];
     $email = $_POST['email'];
     $tenDangNhap = $_POST['username'];
     $matKhau = $_POST['password'];
@@ -54,6 +55,8 @@
 		ThongBaoLoi("Họ và tên không được bỏ trống!");
 	elseif(trim($soDienThoai) == "")
 		ThongBaoLoi("Số điện thoại không được bỏ trống!");
+    if(trim($diaChi) == "")
+		ThongBaoLoi("Địa chỉ không được bỏ trống!");
 	elseif(trim($email) == "")
 		ThongBaoLoi("Email không được bỏ trống!");
     elseif(trim($tenDangNhap) == "")
@@ -91,8 +94,8 @@
             $matKhauAnToan = password_hash($matKhau, PASSWORD_DEFAULT);
 
             // 7. THỰC HIỆN TRUY VẤN INSERT (Sử dụng Prepared Statement)
-            $sql_them = "INSERT INTO nguoi_dung (ho_ten, so_dien_thoai, email, ten_dang_nhap, mat_khau, vai_tro, Khoa)
-                        VALUES (?, ?, ?, ?, ?, 0, 0)";
+            $sql_them = "INSERT INTO nguoi_dung (ho_ten, so_dien_thoai, dia_chi, email, ten_dang_nhap, mat_khau, vai_tro, Khoa)
+                        VALUES (?, ?, ?, ?, ?, ?, 0, 0)";
 
             if (!($stmt_them = $connect->prepare($sql_them))) {
                 ThongBaoLoi("Lỗi chuẩn bị SQL thêm: " . $connect->error);
@@ -101,7 +104,7 @@
 
             // Gắn các biến vào dấu ?
             // s: string (chuỗi), i: integer (số nguyên)
-            $stmt_them->bind_param("sssss", $hoTen, $soDienThoai, $email, $tenDangNhap, $matKhauAnToan);
+            $stmt_them->bind_param("ssssss", $hoTen, $soDienThoai, $diaChi, $email, $tenDangNhap, $matKhauAnToan);
 
             if($stmt_them->execute()) {
                 ThongBao("Đăng ký tài khoản **$tenDangNhap** thành công. <a href='dangnhap.php'>Đăng nhập ngay!</a>");
