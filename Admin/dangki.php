@@ -57,6 +57,7 @@ body {
     font-weight: 600;
 }
 
+.form-group input[type="address"],
 .form-group input[type="tel"],
 .form-group input[type="email"],
 .form-group input[type="text"],
@@ -69,6 +70,7 @@ body {
     transition: border-color 0.3s ease;
 }
 
+.form-group input[type="address"]:focus,
 .form-group input[type="tel"]:focus,
 .form-group input[type="email"]:focus,
 .form-group input[type="text"]:focus,
@@ -116,7 +118,7 @@ body {
 </style>
  <body>
     <div class="reristration-container">
-        <form class="reristration-form" action="process_login.php" method="POST">
+        <form class="reristration-form" action="dangki_submit.php" method="POST">
             <h1>Đăng ký Tài khoản</h1>
             <div class="form-group">
                 <label for="fullName">Họ và tên</label>
@@ -125,6 +127,10 @@ body {
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="address" id="address" name="address" placeholder="Địa chỉ" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -136,11 +142,11 @@ body {
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
             </div>
             <div class="form-group">
-                <label for="password">Xác nhận mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Xác nhận mật khẩu" required>
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
             </div>
             
             <button type="submit" class="reristration-button">Đăng ký</button>
