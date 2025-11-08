@@ -116,7 +116,7 @@ body {
 </style>
  <body>
     <div class="reristration-container">
-        <form class="reristration-form" action="process_login.php" method="POST">
+        <form class="reristration-form" action="dangki_submit.php" method="POST">
             <h1>Đăng ký Tài khoản</h1>
             <div class="form-group">
                 <label for="fullName">Họ và tên</label>
@@ -136,11 +136,11 @@ body {
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
             </div>
             <div class="form-group">
-                <label for="password">Xác nhận mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Xác nhận mật khẩu" required>
+                <label for="confirmPassword">Xác nhận mật khẩu</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
             </div>
             
             <button type="submit" class="reristration-button">Đăng ký</button>
