@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 /*
  * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
  *
@@ -52,40 +54,50 @@ $result = $conn->query($sql);
                     <!-- thẻ span này tạo menu-->
                 </div>
     
-                <div class="menu-Items">
-                        <li class="menu-items1">
-                            <span>Coffee NB</span> 
-                            <i class="fa-solid fa-mug-hot"></i>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-bowl-rice ic"></i>
-                            <a href="danhsachsanpham.php">Thực Đơn</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-thumbs-up ic"></i>
-                            <a href="">Liên Hệ</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-child-reaching ic"></i>
-                            <a href="">Về Chúng Tôi</a>
-                        </li>
-                        <!-- <li class="menu-items">
-                            <i class="ti-share ic"></i>
-                            <a href="">Đăng Xuất</a>
-                        </li> -->
-                        <li class="menu-items">
-                            <i class="ti-user ic"></i>
-                            <a href="dangnhap.php">Đăng Nhập</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="ti-user ic"></i>
-                            <a href="indexnguoidung.php">Quản Lý Người Dùng</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="ti-user ic"></i>
-                            <a href="dangxuat.php">Đăng Xuất</a>
-                        </li>
-                </div>
+ <div class="menu-Items">
+    <li class="menu-items1">
+        <span>Coffee NB</span> 
+        <i class="fa-solid fa-mug-hot"></i>
+    </li>
+    <li class="menu-items">
+        <i class="fa-solid fa-bowl-rice ic"></i>
+        <a href="danhsachsanpham.php">Thực Đơn</a>
+    </li>
+    <li class="menu-items">
+        <i class="fa-solid fa-thumbs-up ic"></i>
+        <a href="">Liên Hệ</a>
+    </li>
+    <li class="menu-items">
+        <i class="fa-solid fa-child-reaching ic"></i>
+        <a href="">Về Chúng Tôi</a>
+    </li>
+
+    <?php
+    // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
+    if (isset($_SESSION['MaNguoiDung'])) {
+        
+        //  Hiển thị "Quản lý người dùng" nếu vai trò là Quản trị viên (vai_tro = 1)
+        if ($_SESSION['VaiTro'] == 1) {
+            echo '<li class="menu-items">';
+            echo '    <i class="ti-user ic"></i>';
+            echo '    <a href="indexnguoidung.php">Quản Lý Người Dùng</a>';
+            echo '</li>';
+        }
+        //  Hiển thị "Đăng Xuất"
+        echo '<li class="menu-items">';
+        echo '    <i class="ti-share ic"></i>';
+        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
+        echo '</li>';
+        
+    } else {
+        //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
+        echo '<li class="menu-items">';
+        echo '    <i class="ti-user ic"></i>';
+        echo '    <a href="dangnhap.php">Đăng Nhập</a>';
+        echo '</li>';
+    }
+    ?>
+</div>
             </div>
         </div>
 
@@ -109,11 +121,13 @@ $result = $conn->query($sql);
         <!-- <h3>Các món ăn nổi bật</h3> -->
         <?php
 
+
         // Kiểm tra xem có dữ liệu trả về không
         if ($result->num_rows > 0) {
             
             // 6Lặp qua từng dòng dữ liệu và hiển thị ra HTML
             // Mỗi lần lặp là một "khung" (product-card)
+
             while($row = $result->fetch_assoc()) {
             echo '<div class="item">';
             
