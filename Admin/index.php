@@ -53,9 +53,13 @@
                         <i class="fa-solid fa-mug-hot"></i>
                     </li>
                     <li class="menu-items">
-                        <i class="fa-solid fa-bowl-rice ic"></i>
-                        <a href="danhsachsanpham.php">Thực Đơn</a>
+                        <i class="fa-solid fa-circle-info ic"></i>
+                        <a href="">Thông Tin</a>
                     </li>
+                    <!-- <li class="menu-items">
+                        <i class="fa-solid fa-bowl-rice ic"></i>
+                        <a href="danhsachsanpham.php">QL Sản Phẩm</a>
+                    </li> -->
                     <!-- <li class="menu-items">
                         <i class="fa-solid fa-thumbs-up ic"></i>
                         <a href="">Liên Hệ</a>
@@ -71,14 +75,22 @@
                         if ($_SESSION['VaiTro'] == 1) {
                             echo '<li class="menu-items">';
                             echo '    <i class="ti-user ic"></i>';
-                            echo '    <a href="indexnguoidung.php">Quản Lý Người Dùng</a>';
+                            echo '    <a href="indexnguoidung.php">QL Người Dùng</a>';
                             echo '</li>';
-                        }                       
+                        } 
+                        // Hiển thị "QL Sản Phẩm"
+                        echo '<li class="menu-items">';
+                        echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
+                        echo '    <a href="danhsachsanpham.php">QL Sản Phẩm</a>'; // Hiển thị sản phẩm
+                        echo '</li>';
+
                         //  Hiển thị "Đăng Xuất"
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-share ic"></i>';
                         echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
                         echo '</li>';
+
+
                         
                     } else {
                         //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
