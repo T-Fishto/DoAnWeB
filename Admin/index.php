@@ -56,13 +56,13 @@
                         <i class="fa-solid fa-bowl-rice ic"></i>
                         <a href="danhsachsanpham.php">Thực Đơn</a>
                     </li>
-                    <li class="menu-items">
+                    <!-- <li class="menu-items">
                         <i class="fa-solid fa-thumbs-up ic"></i>
                         <a href="">Liên Hệ</a>
                     </li>
                     <li class="menu-items">
                         <i class="fa-solid fa-child-reaching ic"></i>
-                        <a href="">Về Chúng Tôi</a>
+                        <a href="">Về Chúng Tôi</a> -->
                     </li>
                     <?php
                     // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
