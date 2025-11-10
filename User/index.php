@@ -133,16 +133,16 @@
                 </div>
             
             <div class="about-us-content">
-                <h2>NBFOOD VIETNAM</h2>
+                <h2>NB FOOD VIETNAM</h2>
                 <span class="decorator-line"></span>
                 <p>
-                    NBFood VN cung cấp các phần ăn lành mạnh hàng tuần giúp bạn duy trì
+                    NB Food VN cung cấp các phần ăn lành mạnh hàng tuần giúp bạn duy trì
                     một lối sống khỏe. Chúng tôi tập trung vào chế độ ăn cân bằng được thiết 
                     kế chuyên biệt để hỗ trợ bạn kiểm soát cân nặng một cách hiệu quả nhất.
                 </p>
                 <p>
                     Nếu bạn đang tìm kiếm những bữa ăn ngon và tốt cho sức khỏe được 
-                    chuẩn bị sẵn ở Saigon thì FitFood là một lựa chọn tối ưu. Thực đơn đa 
+                    chuẩn bị sẵn ở Saigon thì NB Food là một lựa chọn tối ưu. Thực đơn đa 
                     dạng với hơn 100 món của chúng tôi có thể giúp bạn thưởng thức mà 
                     không ngán trong hơn 1 tháng.
                 </p>
@@ -167,14 +167,14 @@
 
             <div class="order-step-card">
                 <i class="fa-solid fa-fire-burner step-icon"></i>
-                <h3>NB food nấu</h3>
+                <h3>NB Food nấu</h3>
                 <p>Chúng tôi lựa chọn những nguyên liệu tốt nhất, và nấu trong bếp công nghiệp hiện đại</p>
             </div>
 
             <div class="order-step-card">
                 <i class="fa-solid fa-truck-fast step-icon"></i>
                 <h3>Giao hàng</h3>
-                <p>Đội ngũ giao hàng của NB food sẽ giao tận nơi các phần ăn cho bạn mỗi ngày</p>
+                <p>Đội ngũ giao hàng của NB Food sẽ giao tận nơi các phần ăn cho bạn mỗi ngày</p>
             </div>
 
             <div class="order-step-card">
@@ -192,7 +192,7 @@
                 <ul>
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Coffee NB, Phường Long Xuyên, Quán nhỏ cuối hẻm 9! 52/2</span>
+                        <span>Coffee NB, 55 2 Phường Mỹ Xuyên,Thành Phố Long Xuyên,An Giang</span>
                     </li>
                     <li>
                         <i class="fas fa-phone-alt"></i>
