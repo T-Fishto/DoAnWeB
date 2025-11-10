@@ -12,6 +12,6 @@
     // session_destroy(); 
 
 	// 2. Chuyển hướng người dùng về trang chủ
-	header("Location: index.php");
+	header("Location: ../TrangWeb/index.php");
     exit(); // Luôn thêm exit() sau header() để đảm bảo chuyển hướng thực thi ngay lập tức
 ?>
