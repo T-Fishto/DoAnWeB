@@ -352,9 +352,72 @@ li{
     padding: 10px;
    
 }
+/* ============ CSS CHO PHẦN ABOUT US =========== */
 
+.about-us {
+    width: 100%;
+    margin-top: 40px; /* Tạo khoảng cách với phần "món ăn nổi bật" */
+    background-color: #1a1a1a; /* Màu nền tối cho cột nội dung */
+}
 
+.about-us-container {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống hàng trên di động */
+    max-width: 1400px; /* Giống .phangiua */
+    margin: 0 auto;
+}
 
+/* Cột hình ảnh (bên trái) */
+.about-us-image {
+    flex: 1; /* Chiếm 1/2 chiều rộng */
+    min-height: 450px; /* Đặt chiều cao tối thiểu */
+    
+    /* !!! THAY ĐỔI ĐƯỜNG DẪN NÀY !!! */
+    background-image: url('../images/Font/anh_about.jpg'); /* Đường dẫn tới ảnh của bạn */
+    
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Cột nội dung (bên phải) */
+.about-us-content {
+    flex: 1; /* Chiếm 1/2 chiều rộng */
+    color: #ffffff; /* Màu chữ trắng */
+    padding: 60px 40px; /* Tạo không gian bên trong */
+    box-sizing: border-box; /* Để padding không làm vỡ layout */
+}
+
+.about-us-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Đây là vạch đỏ nhỏ dưới tiêu đề */
+.about-us-content .decorator-line {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #e53935; /* Màu đỏ */
+    margin-bottom: 30px;
+}
+
+.about-us-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #f0f0f0; /* Màu chữ xám nhạt cho dễ đọc */
+    margin-bottom: 20px;
+}
+
+/* --- Responsive cho di động --- */
+@media (max-width: 768px) {
+    .about-us-image,
+    .about-us-content {
+        /* Trên di động, 2 cột sẽ xếp chồng lên nhau */
+        flex-basis: 100%; 
+    }
+}
 /* Footer */
 /* --- BẮT ĐẦU CSS CHO FOOTER --- */
 

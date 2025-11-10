@@ -146,6 +146,30 @@
         $conn->close();
         ?>
     </div>
+    <section class="about-us">
+        <div class="about-us-container">
+            <div class="about-us-image">
+                </div>
+            
+            <div class="about-us-content">
+                <h2>NBFOOD VIETNAM</h2>
+                <span class="decorator-line"></span>
+                <p>
+                    NBFood VN cung cấp các phần ăn lành mạnh hàng tuần giúp bạn duy trì
+                    một lối sống khỏe. Chúng tôi tập trung vào chế độ ăn cân bằng được thiết 
+                    kế chuyên biệt để hỗ trợ bạn kiểm soát cân nặng một cách hiệu quả nhất.
+                </p>
+                <p>
+                    Nếu bạn đang tìm kiếm những bữa ăn ngon và tốt cho sức khỏe được 
+                    chuẩn bị sẵn ở Saigon thì FitFood là một lựa chọn tối ưu. Thực đơn đa 
+                    dạng với hơn 100 món của chúng tôi có thể giúp bạn thưởng thức mà 
+                    không ngán trong hơn 1 tháng.
+                </p>
+                <p>
+                    Cảm ơn các bạn đã đọc! Chúc mọi người một ngày tốt lành
+                </p>
+            </div>
+        </div>
     <!-- Chân trang -->
    <footer class="footer">
         <div class="footer-container">
