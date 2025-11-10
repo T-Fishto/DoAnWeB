@@ -92,7 +92,7 @@
                     if ($dong['vai_tro'] == 1) {
                         header("Location: ../Admin/indexnguoidung.php"); 
                     } else { // vai_tro = 0 hoặc các vai trò khác (người dùng thường)
-                        header("Location: ../User/index.php"); 
+                        header("Location: ../TrangWeb/index.php"); 
                     }
                     // --- PHẦN CẢI TIẾN CHUYỂN HƯỚNG KẾT THÚC ---
                     
