@@ -10,6 +10,14 @@ body {
     background-color: #363636;
     color: #333;
 }
+.logo img{
+    width: 50px;
+    border-radius: 50%; 
+}
+a{
+    text-decoration: none;
+    color:#5a5a5a;
+}
 
 /* --- Header --- */
 .menu-header {
@@ -20,7 +28,10 @@ body {
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
 }
+
 
 /* --- Layout chính --- */
 .container {

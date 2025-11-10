@@ -72,7 +72,14 @@ function display_products($result)
 <body>
 
     <header class="menu-header">
-        <i class="fas fa-utensils"></i> MENU THỰC ĐƠN
+        <div class="trangchu">
+            <i class="fa-solid fa-house"></i> 
+            <span><a href="index.php">TRANG CHỦ</a></span>
+        </div>
+        <div class="menu">
+            <i class="fas fa-utensils"></i> 
+            <span>MENU THỰC ĐƠN</span>
+        </div>
     </header>
 
     <div class="container">

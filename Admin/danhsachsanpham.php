@@ -44,7 +44,7 @@ function display_products($result)
             } else {
                  echo '      <span class="price"></span>';
             }
-            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-delete-left"></i></button>'; 
+            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-trash"></i></button>'; 
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-screwdriver-wrench"></i></button>'; 
             // Nút +: Thêm sự kiện onclick để đảm bảo click vào nút vẫn chuyển trang
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>'; 
@@ -73,7 +73,19 @@ function display_products($result)
 <body>
 
     <header class="menu-header">
-        <i class="fas fa-utensils"></i> MENU THỰC ĐƠN
+        <div class="trangchu">
+            <i class="fa-solid fa-house"></i> 
+            <span><a href="index.php">TRANG CHỦ</a></span>
+           
+        </div>
+        <div class="menu">
+            <i class="fas fa-utensils"></i> 
+            <span>MENU THỰC ĐƠN</span>
+        </div>
+        
+        
+
+
     </header>
 
     <div class="container">

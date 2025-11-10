@@ -352,7 +352,7 @@ li{
     padding: 10px;
    
 }
-/* ============ CSS CHO PHẦN ABOUT US =========== */
+/* ============ CSS CHO PHẦN về Chúng tôi  =========== */
 
 .about-us {
     width: 100%;
@@ -417,6 +417,71 @@ li{
         /* Trên di động, 2 cột sẽ xếp chồng lên nhau */
         flex-basis: 100%; 
     }
+}
+/* ============ CSS CHO PHẦN CÁCH ĐẶT HÀNG =========== */
+
+.how-to-order {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f9f9f9; /* Màu nền xám nhạt */
+}
+
+.how-to-order h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.how-to-order .decorator-line {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: #e53935; /* Màu đỏ */
+    margin: 0 auto 40px auto; /* Căn giữa và tạo khoảng cách */
+}
+
+.how-to-order-container {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép rớt hàng khi không đủ chỗ */
+    justify-content: center; /* Căn giữa các cột */
+    gap: 20px; /* Khoảng cách giữa các cột */
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.order-step-card {
+    flex: 1; /* Các cột tự co giãn */
+    min-width: 250px; /* Chiều rộng tối thiểu của 1 cột */
+    max-width: 300px; /* Chiều rộng tối đa của 1 cột */
+    
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Bóng mờ nhẹ */
+    text-align: left; /* Căn chữ về bên trái như mẫu */
+    transition: transform 0.3s ease;
+}
+
+.order-step-card:hover {
+    transform: translateY(-5px); /* Hiệu ứng nhấc lên khi hover */
+}
+
+.order-step-card .step-icon {
+    font-size: 45px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-step-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.order-step-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
 }
 /* Footer */
 /* --- BẮT ĐẦU CSS CHO FOOTER --- */
