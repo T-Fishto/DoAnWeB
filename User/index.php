@@ -1,18 +1,18 @@
 
 <?php
-session_start();
-/*
- * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
- * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
- */
-$servername = "localhost"; // Thường là "localhost"
-$username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
-$password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
-$dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
-// 1. Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-// 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
-$conn->set_charset("utf8mb4");
+    session_start();
+    /*
+    * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
+    * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
+    */
+    $servername = "localhost"; // Thường là "localhost"
+    $username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
+    $password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
+    $dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
+    // 1. Tạo kết nối
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
+    $conn->set_charset("utf8mb4");
     // 3. Kiểm tra kết nối
     if ($conn->connect_error) {
         die("Kết nối CSDL thất bại: " . $conn->connect_error);
@@ -71,7 +71,6 @@ $conn->set_charset("utf8mb4");
                             // Lưu ý: Tôi đã sửa đường dẫn 'dangxuat.php' để giống với 'dangnhap.php'
                             echo '    <a href="../Admin/dangxuat.php">Đăng Xuất</a>'; 
                             echo '</li>';
-
                         } else {
                             // ---- CHƯA ĐĂNG NHẬP ----
                             // Hiển thị nút "Đăng Nhập"
@@ -178,7 +177,6 @@ $conn->set_charset("utf8mb4");
                     </li>
                 </ul>
             </div>
-
         </div>
         <div class="footer-bottom">
             Bản Quyền Bởi © 2025 - Website Food & Drink
