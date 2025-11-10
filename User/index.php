@@ -126,6 +126,64 @@
         $conn->close();
         ?>
     </div>
+       <!-- Về menu và nhà hàng -->
+    <section class="about-us">
+        <div class="about-us-container">
+            <div class="about-us-image">
+                </div>
+            
+            <div class="about-us-content">
+                <h2>NBFOOD VIETNAM</h2>
+                <span class="decorator-line"></span>
+                <p>
+                    NBFood VN cung cấp các phần ăn lành mạnh hàng tuần giúp bạn duy trì
+                    một lối sống khỏe. Chúng tôi tập trung vào chế độ ăn cân bằng được thiết 
+                    kế chuyên biệt để hỗ trợ bạn kiểm soát cân nặng một cách hiệu quả nhất.
+                </p>
+                <p>
+                    Nếu bạn đang tìm kiếm những bữa ăn ngon và tốt cho sức khỏe được 
+                    chuẩn bị sẵn ở Saigon thì FitFood là một lựa chọn tối ưu. Thực đơn đa 
+                    dạng với hơn 100 món của chúng tôi có thể giúp bạn thưởng thức mà 
+                    không ngán trong hơn 1 tháng.
+                </p>
+                <p>
+                    Cảm ơn các bạn đã đọc! Chúc mọi người một ngày tốt lành
+                </p>
+            </div>
+        </div>
+
+    </section> 
+    <!-- Giới thiệu cách hoạt động -->
+    <section class="how-to-order">
+        <h2>CÁCH ĐẶT HÀNG</h2>
+        <span class="decorator-line"></span>
+
+        <div class="how-to-order-container">
+            <div class="order-step-card">
+                <i class="fa-solid fa-file-invoice step-icon"></i>
+                <h3>Chọn Gói Ăn</h3>
+                <p>Chọn gói ăn phù hợp với nhu cầu của bạn và điền đầy đủ thông tin giao hàng</p>
+            </div>
+
+            <div class="order-step-card">
+                <i class="fa-solid fa-fire-burner step-icon"></i>
+                <h3>NB food nấu</h3>
+                <p>Chúng tôi lựa chọn những nguyên liệu tốt nhất, và nấu trong bếp công nghiệp hiện đại</p>
+            </div>
+
+            <div class="order-step-card">
+                <i class="fa-solid fa-truck-fast step-icon"></i>
+                <h3>Giao hàng</h3>
+                <p>Đội ngũ giao hàng của NB food sẽ giao tận nơi các phần ăn cho bạn mỗi ngày</p>
+            </div>
+
+            <div class="order-step-card">
+                <i class="fa-solid fa-utensils step-icon"></i>
+                <h3>Thưởng thức</h3>
+                <p>Không cần suy nghĩ, shopping hay nấu nướng dầu mỡ, chỉ cần hâm và thưởng thức!</p>
+            </div>
+        </div>
+    </section>
     <!-- Chân trang -->
    <footer class="footer">
         <div class="footer-container">
