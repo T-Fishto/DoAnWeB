@@ -67,7 +67,7 @@
                             // ---- ĐÃ ĐĂNG NHẬP ----
                             // Hiển thị nút "Đăng Xuất"
                             echo '<li class="menu-items">';
-                            echo '    <i class="ti-user ic"></i>';
+                            echo '    <i class="ti-share ic"></i>';
                             // Lưu ý: Tôi đã sửa đường dẫn 'dangxuat.php' để giống với 'dangnhap.php'
                             echo '    <a href="../Admin/dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
                             echo '</li>';
