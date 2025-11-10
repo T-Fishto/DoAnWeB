@@ -206,7 +206,7 @@ li{
     background-color: var(--main-color);
     top: 0;
     right: 0;
-    padding: 50px 20px; /* Tạo khoảng cách bên trong */
+    padding: 70px 20px; /* Tạo khoảng cách bên trong */
     transform: translateX(100%);
 }
 .menu-Items a{

@@ -53,16 +53,20 @@
                         <i class="fa-solid fa-mug-hot"></i>
                     </li>
                     <li class="menu-items">
-                        <i class="fa-solid fa-bowl-rice ic"></i>
-                        <a href="danhsachsanpham.php">Thực Đơn</a>
+                        <i class="fa-solid fa-circle-info ic"></i>
+                        <a href="">Thông Tin</a>
                     </li>
-                    <li class="menu-items">
+                    <!-- <li class="menu-items">
+                        <i class="fa-solid fa-bowl-rice ic"></i>
+                        <a href="danhsachsanpham.php">QL Sản Phẩm</a>
+                    </li> -->
+                    <!-- <li class="menu-items">
                         <i class="fa-solid fa-thumbs-up ic"></i>
                         <a href="">Liên Hệ</a>
                     </li>
                     <li class="menu-items">
                         <i class="fa-solid fa-child-reaching ic"></i>
-                        <a href="">Về Chúng Tôi</a>
+                        <a href="">Về Chúng Tôi</a> -->
                     </li>
                     <?php
                     // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
@@ -71,14 +75,22 @@
                         if ($_SESSION['VaiTro'] == 1) {
                             echo '<li class="menu-items">';
                             echo '    <i class="ti-user ic"></i>';
-                            echo '    <a href="indexnguoidung.php">Quản Lý Người Dùng</a>';
+                            echo '    <a href="indexnguoidung.php">QL Người Dùng</a>';
                             echo '</li>';
-                        }                       
+                        } 
+                        // Hiển thị "QL Sản Phẩm"
+                        echo '<li class="menu-items">';
+                        echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
+                        echo '    <a href="danhsachsanpham.php">QL Sản Phẩm</a>'; // Hiển thị sản phẩm
+                        echo '</li>';
+
                         //  Hiển thị "Đăng Xuất"
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-share ic"></i>';
                         echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
                         echo '</li>';
+
+
                         
                     } else {
                         //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
@@ -134,6 +146,30 @@
         $conn->close();
         ?>
     </div>
+    <section class="about-us">
+        <div class="about-us-container">
+            <div class="about-us-image">
+                </div>
+            
+            <div class="about-us-content">
+                <h2>NBFOOD VIETNAM</h2>
+                <span class="decorator-line"></span>
+                <p>
+                    NBFood VN cung cấp các phần ăn lành mạnh hàng tuần giúp bạn duy trì
+                    một lối sống khỏe. Chúng tôi tập trung vào chế độ ăn cân bằng được thiết 
+                    kế chuyên biệt để hỗ trợ bạn kiểm soát cân nặng một cách hiệu quả nhất.
+                </p>
+                <p>
+                    Nếu bạn đang tìm kiếm những bữa ăn ngon và tốt cho sức khỏe được 
+                    chuẩn bị sẵn ở Saigon thì FitFood là một lựa chọn tối ưu. Thực đơn đa 
+                    dạng với hơn 100 món của chúng tôi có thể giúp bạn thưởng thức mà 
+                    không ngán trong hơn 1 tháng.
+                </p>
+                <p>
+                    Cảm ơn các bạn đã đọc! Chúc mọi người một ngày tốt lành
+                </p>
+            </div>
+        </div>
     <!-- Chân trang -->
    <footer class="footer">
         <div class="footer-container">

@@ -44,7 +44,8 @@ function display_products($result)
             } else {
                  echo '      <span class="price"></span>';
             }
-           
+            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-delete-left"></i></button>'; 
+            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-screwdriver-wrench"></i></button>'; 
             // Nút +: Thêm sự kiện onclick để đảm bảo click vào nút vẫn chuyển trang
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>'; 
             
@@ -83,6 +84,7 @@ function display_products($result)
                     <li><a href="#mon-an"><i class="fas fa-hamburger"></i> MÓN ĂN</a></li>
                     <li><a href="#nuoc-giai-khat"><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</a></li>
                     <li><a href="#do-an-vat"><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</a></li>
+                    <li><a href="#them-san-pham"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
                 </ul>
             </nav>
 
