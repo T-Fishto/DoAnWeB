@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gia = $_POST['gia'];
     $id_danh_muc = $_POST['id_danh_muc'];
     $hinh_anh = null;
-    $upload_dir = 'images/sanpham/'; // Thư mục lưu ảnh
+    $upload_dir = '../images/sanpham/'; // Thư mục lưu ảnh
 
     // Xử lý Upload Ảnh
     if (isset($_FILES['hinh_anh']) && $_FILES['hinh_anh']['error'] == 0) {
