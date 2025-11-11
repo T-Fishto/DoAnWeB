@@ -15,6 +15,43 @@ if ($conn->connect_error) {
 // Đặt encoding là UTF-8 để hiển thị tiếng Việt
 $conn->set_charset("utf8");
 
+// --- ĐẦU FILE danhsachsanpham.php (trước khi HTML bắt đầu) ---
+session_start(); // **BỔ SUNG NẾU CHƯA CÓ**
+// ... (Kết nối CSDL) ...
+
+// --- XỬ LÝ XÓA SẢN PHẨM (Chỉ Admin) ---
+// Kiểm tra quyền Admin
+$is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
+
+if ($is_admin && isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
+    $id_san_pham_to_delete = $conn->real_escape_string($_GET['id']);
+    
+    // 1. Lấy thông tin ảnh để xóa file vật lý (Tùy chọn)
+    $sql_img = "SELECT hinh_anh FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
+    $result_img = $conn->query($sql_img);
+    if ($result_img->num_rows > 0) {
+        $row_img = $result_img->fetch_assoc();
+        $file_path = $row_img['hinh_anh'];
+        // Xóa file ảnh (kiểm tra để tránh xóa file hệ thống)
+        if (!empty($file_path) && file_exists($file_path) && strpos($file_path, 'images/sanpham/') !== false) {
+             unlink($file_path);
+        }
+    }
+    
+    // 2. Thực hiện xóa trong CSDL
+    $sql_delete = "DELETE FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
+    if ($conn->query($sql_delete) === TRUE) {
+        // Chuyển hướng lại trang để làm sạch URL và hiển thị danh sách mới
+        header("Location: danhsachsanpham.php?msg=deleted");
+        exit();
+    } else {
+        // Có thể hiển thị lỗi
+        // echo "Lỗi khi xóa sản phẩm: " . $conn->error;
+    }
+}
+// ------------------------------------------
+// ... (Các hàm display_products và các code PHP khác)
+
 // --- 2. HÀM ĐỂ HIỂN THỊ SẢN PHẨM ---
 function display_products($result)
 {
@@ -71,7 +108,6 @@ function display_products($result)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
     <header class="menu-header">
         <div class="trangchu">
             <i class="fa-solid fa-house"></i> 
@@ -82,12 +118,7 @@ function display_products($result)
             <i class="fas fa-utensils"></i> 
             <span>MENU THỰC ĐƠN</span>
         </div>
-        
-        
-
-
     </header>
-
     <div class="container">
         <aside class="sidebar">
             <nav class="category-menu">
@@ -96,10 +127,9 @@ function display_products($result)
                     <li><a href="#mon-an"><i class="fas fa-hamburger"></i> MÓN ĂN</a></li>
                     <li><a href="#nuoc-giai-khat"><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</a></li>
                     <li><a href="#do-an-vat"><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</a></li>
-                    <li><a href="#them-san-pham"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
+                    <li><a href="sanpham_them.php"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
                 </ul>
             </nav>
-
             <div class="notes">
                 <h4>Lưu ý</h4>
                 <ul>
@@ -109,9 +139,7 @@ function display_products($result)
                 </ul>
             </div>
         </aside>
-
         <main class="main-content">
-            
             <section id="mon-an" class="category-section">
                 <h2><i class="fas fa-hamburger"></i> MÓN ĂN</h2>
                 <div class="item-list">
@@ -126,7 +154,6 @@ function display_products($result)
                     ?>
                 </div>
             </section>
-
             <section id="nuoc-giai-khat" class="category-section">
                 <h2><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</h2>
                 <div class="item-list">
@@ -141,7 +168,6 @@ function display_products($result)
                     ?>
                 </div>
             </section>
-
             <section id="do-an-vat" class="category-section">
                 <h2><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</h2>
                 <div class="item-list">
@@ -156,10 +182,8 @@ function display_products($result)
                     ?>
                 </div>
             </section>
-
         </main>
     </div>
-
     <?php
     // Đóng kết nối CSDL
     $conn->close();
