@@ -44,7 +44,14 @@ function display_products($result)
             } else {
                  echo '      <span class="price"></span>';
             }
-            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-trash"></i></button>'; 
+            // SỬA LẠI: Thêm JavaScript confirm() và trỏ đến file xoa_sanpham.php
+
+           $delete_url = "sanpham_xoa.php?id=" . $product_id;
+
+            echo '          <button class="add-btn" 
+                               onclick="if(confirm(\'Bạn có chắc chắn muốn xóa món ' . htmlspecialchars($row["ten_san_pham"]) . '?\')) { window.location.href=\'' . htmlspecialchars($delete_url) . '\'; } return false;">
+                               <i class="fa-solid fa-trash"></i>
+                            </button>';
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-screwdriver-wrench"></i></button>'; 
             // Nút +: Thêm sự kiện onclick để đảm bảo click vào nút vẫn chuyển trang
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>'; 
