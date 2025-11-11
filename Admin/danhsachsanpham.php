@@ -60,14 +60,11 @@ function display_products($result)
             // Lấy ID sản phẩm để tạo link
             $product_id = $row["id_san_pham"];
             // Đặt tên trang chi tiết là chi_tiet.php
-            $detail_url = "chi_tiet.php?id=" . $product_id; 
-            
+            $detail_url = "chi_tiet.php?id=" . $product_id;          
             // BẮT ĐẦU: Bọc toàn bộ menu item trong thẻ <a>
             echo '<a href="' . htmlspecialchars($detail_url) . '" style="text-decoration: none; color: inherit;">'; 
-
             // Sử dụng ECHO để in HTML và dữ liệu từ CSDL
-            echo '<div class="menu-item">';
-            
+            echo '<div class="menu-item">';      
             // ... (Hình ảnh, nội dung thông tin)
             echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
             echo '  <div class="item-content">';
