@@ -86,7 +86,12 @@ function display_products($result)
                                onclick="if(confirm(\'Bạn có chắc chắn muốn xóa món ' . htmlspecialchars($row["ten_san_pham"]) . '?\')) { window.location.href=\'' . htmlspecialchars($delete_url) . '\'; } return false;">
                                <i class="fa-solid fa-trash"></i>
                             </button>';
-            echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fa-solid fa-screwdriver-wrench"></i></button>'; 
+           // Sửa lại dòng code cho nút SỬA (fa-screwdriver-wrench)
+           $edit_url = "sanpham_sua.php?id=" . $product_id;
+            echo '      <button class="add-btn" 
+                           onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
+                           <i class="fa-solid fa-screwdriver-wrench"></i>
+                         </button>';
             // Nút +: Thêm sự kiện onclick để đảm bảo click vào nút vẫn chuyển trang
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>'; 
             

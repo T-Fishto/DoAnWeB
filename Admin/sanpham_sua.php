@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_danh_muc = $_POST['id_danh_muc'];
     $hinh_anh_old = $_POST['hinh_anh_old'];
     $hinh_anh_new = $hinh_anh_old; // Mặc định giữ ảnh cũ
-    $upload_dir = 'images/sanpham/'; 
+    $upload_dir = '../images/sanpham/'; 
 
     // Xử lý Upload Ảnh Mới
     if (isset($_FILES['hinh_anh_new']) && $_FILES['hinh_anh_new']['error'] == 0) {
@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (move_uploaded_file($_FILES['hinh_anh_new']['tmp_name'], $target_file)) {
             $hinh_anh_new = $target_file; 
-            // Xóa ảnh cũ nếu nó tồn tại và là ảnh sản phẩm
-            if (!empty($hinh_anh_old) && file_exists($hinh_anh_old) && strpos($hinh_anh_old, 'images/sanpham/') !== false) {
+            // Xóa ảnh cũ
+            if (!empty($hinh_anh_old) && file_exists($hinh_anh_old)) {
                  unlink($hinh_anh_old);
             }
         } else {
@@ -65,14 +65,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // --- TẢI DỮ LIỆU SẢN PHẨM HIỆN TẠI ---
-$sql_sp = "SELECT * FROM san_pham WHERE id_san_pham = '$product_id'";
-$result_sp = $conn->query($sql_sp);
+// SỬA LẠI: Dùng prepared statement để an toàn hơn
+$sql_sp = "SELECT * FROM san_pham WHERE id_san_pham = ?";
+$stmt_sp = $conn->prepare($sql_sp);
+$stmt_sp->bind_param("i", $product_id);
+$stmt_sp->execute();
+$result_sp = $stmt_sp->get_result();
+
 
 if ($result_sp->num_rows == 0) {
     die("Không tìm thấy sản phẩm.");
 }
 $product_data = $result_sp->fetch_assoc();
-
+$stmt_sp->close();
 
 // Lấy danh sách danh mục để hiển thị trong Select Box
 $sql_dm = "SELECT id_danh_muc, ten_danh_muc FROM danh_muc ORDER BY id_danh_muc";
@@ -106,7 +111,15 @@ $conn->close();
         .form-group input[type="file"] { padding: 5px; }
         .form-group button { 
             background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; float: right; 
+            transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
         }
+        
+        /* === THAY ĐỔI 1: THÊM CSS CHO NÚT KHI BỊ MỜ === */
+        .form-group button:disabled {
+            background-color: #cccccc; /* Màu xám mờ */
+            cursor: not-allowed; /* Biểu tượng cấm */
+        }
+
         .message { padding: 10px; margin-bottom: 15px; border-radius: 4px; font-weight: bold; text-align: center; }
         .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
         .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
@@ -128,15 +141,15 @@ $conn->close();
             
             <div class="form-group">
                 <label for="ten_san_pham">Tên Sản Phẩm:</label>
-                <input type="text" id="ten_san_pham" name="ten_san_pham" value="<?php echo htmlspecialchars($product_data['ten_san_pham']); ?>" required>
+                <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control" value="<?php echo htmlspecialchars($product_data['ten_san_pham']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="gia">Giá (VNĐ):</label>
-                <input type="number" id="gia" name="gia" min="0" step="1000" value="<?php echo htmlspecialchars($product_data['gia']); ?>" required>
+                <input type="number" id="gia" name="gia" min="0" step="1000" class="form-control" value="<?php echo htmlspecialchars($product_data['gia']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="id_danh_muc">Danh Mục:</label>
-                <select id="id_danh_muc" name="id_danh_muc" required>
+                <select id="id_danh_muc" name="id_danh_muc" class="form-control" required>
                     <?php echo $danh_muc_options; ?>
                 </select>
             </div>
@@ -152,15 +165,45 @@ $conn->close();
 
             <div class="form-group">
                 <label for="hinh_anh_new">Chọn Ảnh Mới (Bỏ qua nếu không đổi):</label>
-                <input type="file" id="hinh_anh_new" name="hinh_anh_new" accept="image/*">
+                <input type="file" id="hinh_anh_new" name="hinh_anh_new" class="form-control" accept="image/*">
             </div>
             
             <div class="form-group">
-                <button type="submit">Cập Nhật Sản Phẩm</button>
+                <button type="submit" id="update-btn" disabled>Cập Nhật Sản Phẩm</button>
             </div>
         </form>
         <div style="clear: both;"></div>
         <p style="text-align: center; margin-top: 20px;"><a href="danhsachsanpham.php"><i class="fas fa-arrow-left"></i> Quay lại Menu</a></p>
     </div>
+
+    <script>
+        // Chờ cho toàn bộ nội dung HTML tải xong
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. Tìm nút Cập Nhật
+            const updateButton = document.getElementById('update-btn');
+            
+            // 2. Tìm TẤT CẢ các ô input/select/file cần theo dõi
+            const formInputs = document.querySelectorAll('.form-control');
+            
+            // 3. Tạo một hàm để kích hoạt nút
+            function enableButton() {
+                updateButton.disabled = false;
+                // Bạn có thể đổi chữ nếu muốn, ví dụ:
+                // updateButton.innerHTML = "Lưu thay đổi";
+            }
+            
+            // 4. Gắn hàm 'enableButton' vào SỰ KIỆN "input" hoặc "change" của TỪNG ô
+            formInputs.forEach(function(input) {
+                if (input.type === 'file') {
+                    // Đối với ô tải file, dùng sự kiện 'change'
+                    input.addEventListener('change', enableButton);
+                } else {
+                    // Đối với text, number, select, dùng sự kiện 'input'
+                    input.addEventListener('input', enableButton);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

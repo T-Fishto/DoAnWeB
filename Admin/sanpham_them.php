@@ -122,7 +122,7 @@ $conn->close();
             </div>
             <div class="form-group">
                 <label for="hinh_anh">Hình Ảnh:</label>
-                <input type="file" id="hinh_anh" name="hinh_anh" accept="../images/*" required>
+                <input type="file" id="hinh_anh" name="hinh_anh" accept="image/*" required>
             </div>
             <div class="form-group">
                 <button type="submit">Thêm Sản Phẩm</button>
