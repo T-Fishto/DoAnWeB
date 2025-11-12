@@ -1,42 +1,38 @@
 <?php
-// --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "qltp"; 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qltp"; 
 
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
-$conn->set_charset("utf8");
-
-// --- 2. LẤY ID SẢN PHẨM TỪ URL VÀ TRUY VẤN CSDL ---
-$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$product = null;
-
-if ($product_id > 0) {
-    // Truy vấn JOIN để lấy thông tin chi tiết sản phẩm
-    $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
-            FROM san_pham sp 
-            JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-            WHERE sp.id_san_pham = $product_id";
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-        $product = $result->fetch_assoc();
+    if ($conn->connect_error) {
+        die("Kết nối thất bại: " . $conn->connect_error);
     }
-}
 
-// Nếu không tìm thấy sản phẩm, chuyển hướng hoặc hiển thị lỗi
-if (!$product) {
-    header("Location: danhsachsanpham.php"); 
-    exit();
-}
+    $conn->set_charset("utf8");
+
+    $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    $product = null;
+
+    if ($product_id > 0) {
+        $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
+                FROM san_pham sp 
+                JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
+                WHERE sp.id_san_pham = $product_id";
+
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $product = $result->fetch_assoc();
+        }
+    }
+
+    // Nếu không tìm thấy sản phẩm, chuyển hướng hoặc hiển thị lỗi
+    if (!$product) {
+        header("Location: danhsachsanpham.php"); 
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -49,21 +45,18 @@ if (!$product) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
 <div class="header-placeholder">
     </div>
-
 <?php if ($product): ?>
 <div class="product-detail-container">
     <div class="product-image-section">
         <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="<?php echo htmlspecialchars($product['ten_san_pham']); ?>" class="main-product-img">
-        
         <div class="product-thumbnails">
             <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="Thumbnail 1">
             <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="Thumbnail 2">
-            </div>
+        </div>
     </div>
-    
+
     <div class="product-info-section">
         <h1><?php echo htmlspecialchars($product['ten_san_pham']); ?></h1>
         
@@ -122,9 +115,9 @@ if (!$product) {
             <p>Nhập "FREESHIP"</p>
             <p>Freeship tối 3km, đơn tối thiểu 100k</p>
         </div>
-
     </div>
 </div>
+
 <?php else: ?>
     <div style="text-align: center; padding: 50px;">
         <h2>Sản phẩm không tìm thấy.</h2>

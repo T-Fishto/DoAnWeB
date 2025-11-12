@@ -1,26 +1,20 @@
 
 <?php
     session_start();
-    /*
-    * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
-    *
-    * !!! QUAN TRỌNG:
-    * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
-    */
-    $servername = "localhost"; // Thường là "localhost"
-    $username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
-    $password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
-    $dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
-    // 1. Tạo kết nối
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qltp";
+    
     $conn = new mysqli($servername, $username, $password, $dbname);
-    // 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
+    
     $conn->set_charset("utf8mb4");
-    // 3. Kiểm tra kết nối
-    if ($conn->connect_error) {
+    
+    if ($conn->connect_error) 
+    {
         die("Kết nối CSDL thất bại: " . $conn->connect_error);
     }
-    // 4. Viết câu truy vấn SQL
-    // Vì bạn muốn 2 hàng, mỗi hàng 5 cái, chúng ta sẽ lấy 10 sản phẩm
+
     $sql = "SELECT * FROM quang_cao LIMIT 10";
     $result = $conn->query($sql);
 ?>
@@ -35,57 +29,57 @@
     <script src="js/giaodien.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
     <section class="top">
         <div class="container">
             <div class="row justify-content">	
                 <div class="logo">
                     <img src="images/Font/logoNB.jpg" alt="">
+                </div>     
 
-                </div>          
                 <div class="menu_bar">
-                    
                     <span></span> 
-                    <!-- thẻ span này tạo menu-->
-                </div>   
+                </div>
+
                 <div class="menu-Items">
                     <li class="menu-items1">
                         <span>Coffee NB</span> 
                         <i class="fa-solid fa-mug-hot"></i>
-                    </li>
+                    </li>        
                     <li class="menu-items">
                         <i class="fa-solid fa-circle-info ic"></i>
                         <a href="">Thông Tin</a>
                     </li>
-                    </li>
                     <?php
-                    // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
-                    if (isset($_SESSION['MaNguoiDung'])) {                      
-                        //  Hiển thị "Quản lý người dùng" nếu vai trò là Quản trị viên (vai_tro = 1)
-                        if ($_SESSION['VaiTro'] == 1) {
+                    if (isset($_SESSION['MaNguoiDung'])) 
+                    {                      
+                        if ($_SESSION['VaiTro'] == 1) 
+                        {
                             echo '<li class="menu-items">';
                             echo '    <i class="ti-user ic"></i>';
                             echo '    <a href="indexnguoidung.php">QL Người Dùng</a>';
                             echo '</li>';
                         } 
-                        // Hiển thị "QL Sản Phẩm"
+
                         echo '<li class="menu-items">';
                         echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
-                        echo '    <a href="danhsachsanpham.php">QL Sản Phẩm</a>'; // Hiển thị sản phẩm
+                        echo '    <a href="danhsachsanpham.php">QL Sản Phẩm</a>';
                         echo '</li>';
-                        //  Hiển thị "Thống kê"
+
                         echo '<li class="menu-items">';
                         echo '    <i class="fa-solid fa-chart-simple ic"></i>';
                         echo '    <a href="">Thống kê</a>';
                         echo '</li>';
-                        //  Hiển thị "Đăng Xuất"
+
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-share ic"></i>';
-                        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
+                        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>';
                         echo '</li>';
 
                     }
-                     else {
+                     else 
+                    {
                         //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-user ic"></i>';
@@ -97,30 +91,29 @@
             </div>
         </div>
     </section>
+
     <section class="big-image">
         <div class="big-content">
             <h2>Food & Drink</h2>   
             <p>Chào mừng bạn đến với thế giới ẩm thực</p>
             <a href="danhsachsanpham.php"><button class="big-content-btn btn">Menu</button></a>
         </div>
-    </section>   
+    </section>
+
     <ul>
         <li>
           <i class="fa-solid fa-fire"></i>  
           <span id="span">Các món ăn nổi bậc</span>                  
         </li>
-    </ul>     
-    <!-- Giữa Trang --> 
+    </ul> 
+
     <div class="phangiua">
-        <!-- <h3>Các món ăn nổi bật</h3> -->
         <?php
-        // Kiểm tra xem có dữ liệu trả về không
-        if ($result->num_rows > 0) {           
-            // 6Lặp qua từng dòng dữ liệu và hiển thị ra HTML
-            // Mỗi lần lặp là một "khung" (product-card)
-            while($row = $result->fetch_assoc()) {
+        if ($result->num_rows > 0) 
+        {           
+            while($row = $result->fetch_assoc()) 
+            {
             echo '<div class="item">';          
-            // In ra dữ liệu trực tiếp từ $row
             echo '<a href="' . $row["duong_dan_lien_ket"] . '">';
             echo '    <img width="200" height="150" src="' . $row["hinh_anh_banner"] . '">';
             echo '</a>';           
@@ -128,23 +121,21 @@
             echo '<p>' . $row["ten_mon"] . '</p>';
             echo '<p>⭐ ' . $row["so_sao"] . ' | 🕒 ' . $row["ngay"] . '</p>';
             echo '<p><strong>' . $row["tag"] . '</strong></p>';          
-            // Kết thúc một "item"
             echo '</div>';            
-        } // Kết thúc vòng lặp while
-    }
-        else {
+            }
+        }
+        else
+        {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
         }       
-        // 7. Đóng kết nối CSDL
         $conn->close();
         ?>
     </div>
-    <!-- Về menu và nhà hàng -->
+
     <section class="about-us">
         <div class="about-us-container">
-            <div class="about-us-image">
-                </div>
-            
+            <div class="about-us-image"></div>
+
             <div class="about-us-content">
                 <h2>NB FOOD VIETNAM</h2>
                 <span class="decorator-line"></span>
@@ -153,24 +144,23 @@
                     một lối sống khỏe. Chúng tôi tập trung vào chế độ ăn cân bằng được thiết 
                     kế chuyên biệt để hỗ trợ bạn kiểm soát cân nặng một cách hiệu quả nhất.
                 </p>
+
                 <p>
                     Nếu bạn đang tìm kiếm những bữa ăn ngon và tốt cho sức khỏe được 
                     chuẩn bị sẵn ở Saigon thì NB Food là một lựa chọn tối ưu. Thực đơn đa 
                     dạng với hơn 100 món của chúng tôi có thể giúp bạn thưởng thức mà 
                     không ngán trong hơn 1 tháng.
                 </p>
+
                 <p>
                     Cảm ơn các bạn đã đọc! Chúc mọi người một ngày tốt lành
                 </p>
             </div>
         </div>
-
     </section> 
-    <!-- Giới thiệu cách hoạt động -->
     <section class="how-to-order">
         <h2>CÁCH ĐẶT HÀNG</h2>
         <span class="decorator-line"></span>
-
         <div class="how-to-order-container">
             <div class="order-step-card">
                 <i class="fa-solid fa-file-invoice step-icon"></i>
@@ -197,7 +187,7 @@
             </div>
         </div>
     </section>
-    <!-- Chân trang -->
+
    <footer class="footer">
         <div class="footer-container">
             <div class="footer-column-left">

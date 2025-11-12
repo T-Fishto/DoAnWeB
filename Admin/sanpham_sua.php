@@ -1,96 +1,104 @@
 <?php
-// BẮT ĐẦU SESSION và KẾT NỐI CƠ SỞ DỮ LIỆU
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "qltp";
+    session_start();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
-$conn->set_charset("utf8mb4");
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qltp";
 
-// KIỂM TRA QUYỀN ADMIN VÀ ID SẢN PHẨM
-if (!isset($_SESSION['VaiTro']) || $_SESSION['VaiTro'] != 1 || !isset($_GET['id'])) {
-    header("Location: danhsachsanpham.php");
-    exit();
-}
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) 
+    {
+        die("Kết nối thất bại: " . $conn->connect_error);
+    }
+    $conn->set_charset("utf8mb4");
 
-$product_id = $conn->real_escape_string($_GET['id']);
-$message = "";
 
-// --- XỬ LÝ KHI FORM ĐƯỢC GỬI (POST) ĐỂ CẬP NHẬT ---
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $ten_san_pham = $_POST['ten_san_pham'];
-    $gia = $_POST['gia'];
-    $id_danh_muc = $_POST['id_danh_muc'];
-    $hinh_anh_old = $_POST['hinh_anh_old'];
-    $hinh_anh_new = $hinh_anh_old; // Mặc định giữ ảnh cũ
-    $upload_dir = '../images/sanpham/'; 
+    if (!isset($_SESSION['VaiTro']) || $_SESSION['VaiTro'] != 1 || !isset($_GET['id'])) 
+    {
+        header("Location: danhsachsanpham.php");
+        exit();
+    }
 
-    // Xử lý Upload Ảnh Mới
-    if (isset($_FILES['hinh_anh_new']) && $_FILES['hinh_anh_new']['error'] == 0) {
-        $file_name = uniqid('sp_') . '_' . basename($_FILES['hinh_anh_new']['name']);
-        $target_file = $upload_dir . $file_name;
-        
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
+    $product_id = $conn->real_escape_string($_GET['id']);
+    $message = "";
 
-        if (move_uploaded_file($_FILES['hinh_anh_new']['tmp_name'], $target_file)) {
-            $hinh_anh_new = $target_file; 
-            // Xóa ảnh cũ
-            if (!empty($hinh_anh_old) && file_exists($hinh_anh_old)) {
-                 unlink($hinh_anh_old);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    {
+        $ten_san_pham = $_POST['ten_san_pham'];
+        $gia = $_POST['gia'];
+        $id_danh_muc = $_POST['id_danh_muc'];
+        $hinh_anh_old = $_POST['hinh_anh_old'];
+        $hinh_anh_new = $hinh_anh_old;
+        $upload_dir = '../images/sanpham/'; 
+
+        if (isset($_FILES['hinh_anh_new']) && $_FILES['hinh_anh_new']['error'] == 0) 
+        {
+            $file_name = uniqid('sp_') . '_' . basename($_FILES['hinh_anh_new']['name']);
+            $target_file = $upload_dir . $file_name;
+            
+            if (!is_dir($upload_dir)) 
+            {
+                mkdir($upload_dir, 0777, true);
             }
-        } else {
-            $message = "Lỗi khi upload ảnh mới.";
+
+            if (move_uploaded_file($_FILES['hinh_anh_new']['tmp_name'], $target_file)) 
+            {
+                $hinh_anh_new = $target_file; 
+                // Xóa ảnh cũ
+                if (!empty($hinh_anh_old) && file_exists($hinh_anh_old)) 
+                {
+                    unlink($hinh_anh_old);
+                }
+            } 
+            else 
+            {
+                $message = "Lỗi khi upload ảnh mới.";
+            }
+        }
+
+        if (empty($message)) 
+        {
+            $stmt = $conn->prepare("UPDATE san_pham SET id_danh_muc = ?, ten_san_pham = ?, gia = ?, hinh_anh = ? WHERE id_san_pham = ?");
+            $stmt->bind_param("isdsi", $id_danh_muc, $ten_san_pham, $gia, $hinh_anh_new, $product_id);
+
+            if ($stmt->execute()) 
+            {
+                $message = "Cập nhật sản phẩm **thành công**!";
+            } 
+            else 
+            {
+                $message = "Lỗi: " . $stmt->error;
+            }
+            $stmt->close();
         }
     }
 
-    if (empty($message)) {
-        // Chuẩn bị câu lệnh SQL UPDATE
-        $stmt = $conn->prepare("UPDATE san_pham SET id_danh_muc = ?, ten_san_pham = ?, gia = ?, hinh_anh = ? WHERE id_san_pham = ?");
-        $stmt->bind_param("isdsi", $id_danh_muc, $ten_san_pham, $gia, $hinh_anh_new, $product_id);
+    $sql_sp = "SELECT * FROM san_pham WHERE id_san_pham = ?";
+    $stmt_sp = $conn->prepare($sql_sp);
+    $stmt_sp->bind_param("i", $product_id);
+    $stmt_sp->execute();
+    $result_sp = $stmt_sp->get_result();
 
-        if ($stmt->execute()) {
-            $message = "Cập nhật sản phẩm **thành công**!";
-        } else {
-            $message = "Lỗi: " . $stmt->error;
+    if ($result_sp->num_rows == 0) 
+    {
+        die("Không tìm thấy sản phẩm.");
+    }
+    $product_data = $result_sp->fetch_assoc();
+    $stmt_sp->close();
+
+    $sql_dm = "SELECT id_danh_muc, ten_danh_muc FROM danh_muc ORDER BY id_danh_muc";
+    $result_dm = $conn->query($sql_dm);
+    $danh_muc_options = "";
+    if ($result_dm->num_rows > 0) 
+    {
+        while ($row = $result_dm->fetch_assoc()) 
+        {
+            $selected = ($row['id_danh_muc'] == $product_data['id_danh_muc']) ? 'selected' : '';
+            $danh_muc_options .= '<option value="' . $row['id_danh_muc'] . '" ' . $selected . '>' . htmlspecialchars($row['ten_danh_muc']) . '</option>';
         }
-        $stmt->close();
     }
-}
-
-// --- TẢI DỮ LIỆU SẢN PHẨM HIỆN TẠI ---
-// SỬA LẠI: Dùng prepared statement để an toàn hơn
-$sql_sp = "SELECT * FROM san_pham WHERE id_san_pham = ?";
-$stmt_sp = $conn->prepare($sql_sp);
-$stmt_sp->bind_param("i", $product_id);
-$stmt_sp->execute();
-$result_sp = $stmt_sp->get_result();
-
-
-if ($result_sp->num_rows == 0) {
-    die("Không tìm thấy sản phẩm.");
-}
-$product_data = $result_sp->fetch_assoc();
-$stmt_sp->close();
-
-// Lấy danh sách danh mục để hiển thị trong Select Box
-$sql_dm = "SELECT id_danh_muc, ten_danh_muc FROM danh_muc ORDER BY id_danh_muc";
-$result_dm = $conn->query($sql_dm);
-$danh_muc_options = "";
-if ($result_dm->num_rows > 0) {
-    while ($row = $result_dm->fetch_assoc()) {
-        $selected = ($row['id_danh_muc'] == $product_data['id_danh_muc']) ? 'selected' : '';
-        $danh_muc_options .= '<option value="' . $row['id_danh_muc'] . '" ' . $selected . '>' . htmlspecialchars($row['ten_danh_muc']) . '</option>';
-    }
-}
-
-$conn->close();
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -100,31 +108,88 @@ $conn->close();
     <title>Sửa Sản Phẩm</title>
     <link rel="stylesheet" href="css/menu.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        .admin-form { max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; }
-        .admin-form h2 { text-align: center; color: #333; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input[type="text"], 
-        .form-group input[type="number"], 
-        .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .form-group input[type="file"] { padding: 5px; }
-        .form-group button { 
-            background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; float: right; 
-            transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
-        }
-        
-        /* === THAY ĐỔI 1: THÊM CSS CHO NÚT KHI BỊ MỜ === */
-        .form-group button:disabled {
-            background-color: #cccccc; /* Màu xám mờ */
-            cursor: not-allowed; /* Biểu tượng cấm */
+        .admin-form { 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            border: 1px solid #ccc; 
+            border-radius: 8px; 
+            background-color: #f9f9f9; 
         }
 
-        .message { padding: 10px; margin-bottom: 15px; border-radius: 4px; font-weight: bold; text-align: center; }
-        .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
-        .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
-        .current-image { text-align: center; margin-bottom: 15px; }
-        .current-image img { max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px; border-radius: 4px; }
+        .admin-form h2 { 
+            text-align: center; 
+            color: #333; 
+        }
+
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: bold; 
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="number"], 
+        .form-group select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+        }
+
+        .form-group input[type="file"] { 
+            padding: 5px; 
+        }
+
+        .form-group button { 
+            background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; float: right; 
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-group button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .message { 
+            padding: 10px; 
+            margin-bottom: 15px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            text-align: center; 
+        }
+
+        .success { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border-color: #c3e6cb; 
+        }
+
+        .error { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border-color: #f5c6cb; 
+        }
+
+        .current-image { 
+            text-align: center; 
+            margin-bottom: 15px; 
+        }
+
+        .current-image img { 
+            max-width: 100%; 
+            height: auto; 
+            border: 1px solid #ddd; 
+            padding: 5px; 
+            border-radius: 4px; 
+        }
     </style>
 </head>
 <body>
@@ -143,10 +208,12 @@ $conn->close();
                 <label for="ten_san_pham">Tên Sản Phẩm:</label>
                 <input type="text" id="ten_san_pham" name="ten_san_pham" class="form-control" value="<?php echo htmlspecialchars($product_data['ten_san_pham']); ?>" required>
             </div>
+
             <div class="form-group">
                 <label for="gia">Giá (VNĐ):</label>
                 <input type="number" id="gia" name="gia" min="0" step="1000" class="form-control" value="<?php echo htmlspecialchars($product_data['gia']); ?>" required>
             </div>
+
             <div class="form-group">
                 <label for="id_danh_muc">Danh Mục:</label>
                 <select id="id_danh_muc" name="id_danh_muc" class="form-control" required>
@@ -177,29 +244,23 @@ $conn->close();
     </div>
 
     <script>
-        // Chờ cho toàn bộ nội dung HTML tải xong
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. Tìm nút Cập Nhật
-            const updateButton = document.getElementById('update-btn');
-            
-            // 2. Tìm TẤT CẢ các ô input/select/file cần theo dõi
+        document.addEventListener('DOMContentLoaded', function() 
+        { 
+            const updateButton = document.getElementById('update-btn');         
             const formInputs = document.querySelectorAll('.form-control');
-            
-            // 3. Tạo một hàm để kích hoạt nút
-            function enableButton() {
+            function enableButton() 
+            {
                 updateButton.disabled = false;
-                // Bạn có thể đổi chữ nếu muốn, ví dụ:
-                // updateButton.innerHTML = "Lưu thay đổi";
             }
             
-            // 4. Gắn hàm 'enableButton' vào SỰ KIỆN "input" hoặc "change" của TỪNG ô
-            formInputs.forEach(function(input) {
-                if (input.type === 'file') {
-                    // Đối với ô tải file, dùng sự kiện 'change'
+            formInputs.forEach(function(input) 
+            {
+                if (input.type === 'file') 
+                {
                     input.addEventListener('change', enableButton);
-                } else {
-                    // Đối với text, number, select, dùng sự kiện 'input'
+                } 
+                else 
+                {
                     input.addEventListener('input', enableButton);
                 }
             });
