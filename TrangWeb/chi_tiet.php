@@ -95,15 +95,6 @@ if (!$product) {
                 <label for="size-l">L</label>
             </div>
         </div>
-
-        <div class="options-group">
-            <label>Màu sắc:</label>
-            <div class="checkbox-options">
-                <input type="checkbox" id="color-default" checked>
-                <label for="color-default"><i class="fas fa-check"></i></label>
-            </div>
-        </div>
-
         <div class="options-group">
             <label>Ghi chú</label>
             <input type="text" placeholder="Thêm ghi chú món này" class="notes-input">

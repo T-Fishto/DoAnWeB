@@ -34,55 +34,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <section class="top">
-        <div class="container">
-            <div class="row justify-content">	
+ <section class="top">
+    <div class="container">
+        <div class="row justify-content"> 
+            
+            <div class="top-left-group">
+                
                 <div class="logo">
                     <img src="images/Font/logoNB.jpg" alt="">
-                </div>          
-                <div class="menu_bar">              
-                    <span></span> 
-                    <!-- thẻ span này tạo menu-->
-                </div>  
-                <div class="menu-Items">
-                        <li class="menu-items1">
-                            <span>Coffee NB</span> 
-                            <i class="fa-solid fa-mug-hot"></i>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-bowl-rice ic"></i>
-                            <a href="danhsachsanpham.php">Thực Đơn</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-thumbs-up ic"></i>
-                            <a href="">Liên Hệ</a>
-                        </li>
-                        <li class="menu-items">
-                            <i class="fa-solid fa-child-reaching ic"></i>
-                            <a href="">Về Chúng Tôi</a>
-                        </li>
-                    <?php
-                        // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
-                        if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                            // ---- ĐÃ ĐĂNG NHẬP ----
-                            // Hiển thị nút "Đăng Xuất"
-                            echo '<li class="menu-items">';
-                            echo '    <i class="ti-share ic"></i>';
-                            // Lưu ý: Tôi đã sửa đường dẫn 'dangxuat.php' để giống với 'dangnhap.php'
-                            echo '    <a href="../Admin/dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>'; // Hiển thị tên người dùng
-                            echo '</li>';
-                        } else {
-                            // ---- CHƯA ĐĂNG NHẬP ----
-                            // Hiển thị nút "Đăng Nhập"
-                            echo '<li class="menu-items">';
-                            echo '    <i class="ti-user ic"></i>';
-                            echo '    <a href="../Admin/dangnhap.php">Đăng Nhập</a>';
-                            echo '</li>';
-                        }
-                    ?>
                 </div>
+                
+                <?php
+                // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
+                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
+                    // ---- ĐÃ ĐĂNG NHẬP ----
+                    echo '<li class="top_login">';
+                    echo '    <a href="../Admin/dangxuat.php">';
+                    echo '        <i class="ti-share ic"></i>';
+                    echo '        <span>Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</span>'; 
+                    echo '    </a>';
+                    echo '</li>';
+                } else {
+                    // ---- CHƯA ĐĂNG NHẬP ----
+                    echo '<li class="top_login">';
+                    echo '    <a href="../Admin/dangnhap.php">';
+                    echo '        <i class="ti-user ic"></i>';
+                    echo '        <span>Đăng Nhập</span>'; 
+                    echo '    </a>';
+                    echo '</li>';
+                }
+                ?>
+            </div> <div class="top_right">
+                <div class="menu_bar"> 
+                    <span></span> 
+                </div> 
+            </div> <div class="menu-Items">
+                <li class="menu-items1">
+                    <span>Coffee NB</span> 
+                    <i class="fa-solid fa-mug-hot"></i>
+                </li>
+                <li class="menu-items">
+                    <i class="fa-solid fa-bowl-rice ic"></i>
+                    <a href="danhsachsanpham.php">Thực Đơn</a>
+                </li>
+                <li class="menu-items">
+                    <i class="fa-solid fa-thumbs-up ic"></i>
+                    <a href="">Liên Hệ</a>
+                </li>
+                <li class="menu-items">
+                    <i class="fa-solid fa-child-reaching ic"></i>
+                    <a href="">Về Chúng Tôi</a>
+                </li>
             </div>
         </div>
+    </div>
     </section>
     <section class="big-image">
         <div class="big-content">

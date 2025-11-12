@@ -102,9 +102,71 @@ li{
 .top.active::before{
     transform: translateY(0);   
     transition: all 0.3s ease;
-
-
 }
+/* --- CSS SỬA LẠI CHO NÚT ĐĂNG NHẬP BÊN TRÁI --- */    
+/* 1. Nhóm bên TRÁI (Logo + Đăng nhập) */
+.top-left-group {
+    display: flex;
+    align-items: center; 
+    /* LỚP 101: Luôn nằm trên menu trượt */
+    z-index: 101; 
+    position: relative; /* Cần thiết để z-index hoạt động */
+}
+
+/* 2. Nhóm bên PHẢI (Chỉ còn nút 3 gạch) */
+.top_right {
+    display: flex;
+    align-items: center; 
+    /* LỚP 101: Luôn nằm trên menu trượt */
+    z-index: 101; 
+}
+
+/* 3. Nút Đăng nhập (nằm sau logo) */
+.top_login {
+    margin-left: 20px; /* Tạo khoảng cách với Logo */
+    list-style: none; /* Ẩn dấu chấm <li> */
+}
+
+/* Tạo kiểu cho nút Đăng Nhập (thẻ <a>) */
+.top_login a {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    
+    background-color: var(--sup-color);
+    color: var(--text-color); 
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 140px; 
+}
+
+/* Icon bên trong nút */
+.top_login .ic {
+    font-size: 18px;
+    color: var(--text-color);
+    margin-right: 8px;
+    padding: 0; 
+}
+
+/* Chữ bên trong nút */
+.top_login a span {
+    line-height: 1; 
+}
+
+/* Hiệu ứng khi hover */
+.top_login a:hover {
+    background-color: var(--text-color);
+    color: var(--main-color);
+    text-decoration: none; 
+}
+.top_login a:hover .ic {
+    color: var(--main-color);
+}
+/* ... (phần CSS còn lại cho hover...) ... */
 /* Tiêu đề bên Nút Menu */
 
 .menu-Items .menu-items1{

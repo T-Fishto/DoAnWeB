@@ -41,6 +41,7 @@
             <div class="row justify-content">	
                 <div class="logo">
                     <img src="images/Font/logoNB.jpg" alt="">
+
                 </div>          
                 <div class="menu_bar">
                     
@@ -56,21 +57,6 @@
                         <i class="fa-solid fa-circle-info ic"></i>
                         <a href="">Thông Tin</a>
                     </li>
-                    <!-- <li class="menu-items">
-                        <i class="fa-solid fa-chart-simple ic"></i>
-                        <a href="">Thống kê</a>
-                    </li> -->
-                    <!-- <li class="menu-items">
-                        <i class="fa-solid fa-bowl-rice ic"></i>
-                        <a href="danhsachsanpham.php">QL Sản Phẩm</a>
-                    </li> -->
-                    <!-- <li class="menu-items">
-                        <i class="fa-solid fa-thumbs-up ic"></i>
-                        <a href="">Liên Hệ</a>
-                    </li>
-                    <li class="menu-items">
-                        <i class="fa-solid fa-child-reaching ic"></i>
-                        <a href="">Về Chúng Tôi</a> -->
                     </li>
                     <?php
                     // Kiểm tra xem người dùng đã đăng nhập chưa (dựa vào session MaNguoiDung)
