@@ -12,6 +12,18 @@ if ($conn->connect_error) {
 }
 // Đặt encoding là UTF-8 để hiển thị tiếng Việt
 $conn->set_charset("utf8");
+
+//XỬ LÝ TÌM KIẾM ---
+$search_keyword = '';
+$search_condition = '';
+
+if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+    // Làm sạch từ khóa tìm kiếm
+    $search_keyword = $conn->real_escape_string(trim($_GET['search']));
+    // Tạo điều kiện tìm kiếm: Tìm trong tên sản phẩm HOẶC mô tả
+    $search_condition = " AND (sp.ten_san_pham LIKE '%$search_keyword%' OR dm.mo_ta LIKE '%$search_keyword%')";
+}
+
 // --- 2. HÀM ĐỂ HIỂN THỊ SẢN PHẨM ---
 function display_products($result)
 {
@@ -81,6 +93,15 @@ function display_products($result)
                     <li><a href="#do-an-vat"><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</a></li>
                 </ul>
             </nav>
+
+            <form action="danhsachsanpham.php" method="GET" class="search-form" style="padding: 15px 0 15px 0; background: none; border: none; margin-bottom: 0;">
+                <input type="text" name="search" placeholder="Nhập tên món hoặc mô tả..." value="<?php echo htmlspecialchars($search_keyword); ?>">
+                <button type="submit"><i class="fas fa-search"></i></button>
+                <?php if (!empty($search_keyword)): ?>
+                    <a href="danhsachsanpham.php" class="clear-search-btn" style="display: block; text-align: center; margin-top: 5px;"><i class="fas fa-times"></i> Xóa tìm kiếm</a>
+                <?php endif; ?>
+            </form>
+
             <div class="notes">
                 <h4>Lưu ý</h4>
                 <ul>
@@ -90,46 +111,69 @@ function display_products($result)
                 </ul>
             </div>
         </aside>
-        <main class="main-content">         
+        <main class="main-content">
+            <?php if (!empty($search_keyword)): ?>
+                <section id="search-results" class="category-section">
+                    <h2><i class="fas fa-clipboard-list"></i> Kết quả tìm kiếm cho: "<?php echo htmlspecialchars($search_keyword); ?>"</h2>
+                    <div class="item-list">
+                        </div>
+                </section>
+            <?php endif; ?>
+
             <section id="mon-an" class="category-section">
                 <h2><i class="fas fa-hamburger"></i> MÓN ĂN</h2>
                 <div class="item-list">
                     <?php
-                    // [CẬP NHẬT SQL] THÊM sp.id_san_pham
+                    // [ĐÃ SỬA] Áp dụng $search_condition VÀ KHÔNG ẩn danh mục khi tìm kiếm
                     $sql_mon_an = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                   WHERE dm.ten_danh_muc = 'Món ăn'";
+                                   WHERE dm.ten_danh_muc = 'Món ăn' " . $search_condition;
                     $result_mon_an = $conn->query($sql_mon_an);
                     display_products($result_mon_an);
+
+                    // BỔ SUNG: Hiển thị thông báo nếu tìm kiếm không có kết quả trong danh mục này
+                    if (!empty($search_keyword) && $result_mon_an->num_rows == 0) {
+                        echo "<p style='padding: 10px; color: #777;'>Không tìm thấy món ăn nào khớp với từ khóa.</p>";
+                    }
                     ?>
                 </div>
             </section>
+
             <section id="nuoc-giai-khat" class="category-section">
                 <h2><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</h2>
                 <div class="item-list">
                     <?php
-                    // [CẬP NHẬT SQL] THÊM sp.id_san_pham
+                    // [ĐÃ SỬA] Áp dụng $search_condition
                     $sql_nuoc = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                  FROM san_pham sp 
                                  JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                 WHERE dm.ten_danh_muc = 'Nước giải khát'";
+                                 WHERE dm.ten_danh_muc = 'Nước giải khát' " . $search_condition;
                     $result_nuoc = $conn->query($sql_nuoc);
                     display_products($result_nuoc);
+                    
+                    if (!empty($search_keyword) && $result_nuoc->num_rows == 0) {
+                        echo "<p style='padding: 10px; color: #777;'>Không tìm thấy nước giải khát nào khớp với từ khóa.</p>";
+                    }
                     ?>
                 </div>
             </section>
+
             <section id="do-an-vat" class="category-section">
                 <h2><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</h2>
                 <div class="item-list">
                     <?php
-                    // [CẬP NHẬT SQL] THÊM sp.id_san_pham
+                    // [ĐÃ SỬA] Áp dụng $search_condition
                     $sql_an_vat = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                   WHERE dm.ten_danh_muc = 'Đồ ăn vặt'";
+                                   WHERE dm.ten_danh_muc = 'Đồ ăn vặt' " . $search_condition;
                     $result_an_vat = $conn->query($sql_an_vat);
                     display_products($result_an_vat);
+                    
+                    if (!empty($search_keyword) && $result_an_vat->num_rows == 0) {
+                        echo "<p style='padding: 10px; color: #777;'>Không tìm thấy đồ ăn vặt nào khớp với từ khóa.</p>";
+                    }
                     ?>
                 </div>
             </section>
