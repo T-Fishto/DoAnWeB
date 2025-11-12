@@ -170,7 +170,7 @@ a{
 
 .item-price-add {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     border-top: 1px solid #f0f0f0;
     padding-top: 10px;
@@ -193,6 +193,8 @@ a{
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
+
+
 }
 
 .item-price-add .add-btn:hover {

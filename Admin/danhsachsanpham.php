@@ -46,7 +46,6 @@
             {
                 $product_id = $row["id_san_pham"];
                 $detail_url = "chi_tiet.php?id=" . $product_id;          
-                echo '<a href="' . htmlspecialchars($detail_url) . '" style="text-decoration: none; color: inherit;">'; 
                 echo '<div class="menu-item">';      
                 echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
                 echo '  <div class="item-content">';
@@ -75,11 +74,9 @@
                             onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
                             <i class="fa-solid fa-screwdriver-wrench"></i>
                             </button>';
-                echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>'; 
                 echo '      </div>';
                 echo '  </div>';
                 echo '</div>';
-                echo '</a>';
             }
         } else 
         {
