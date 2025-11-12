@@ -1,4 +1,5 @@
 <?php
+session_start();
 // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
 $servername = "localhost";
 $username = "root";
@@ -17,7 +18,21 @@ $conn->set_charset("utf8");
 // --- 2. LẤY ID SẢN PHẨM TỪ URL VÀ TRUY VẤN CSDL ---
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $product = null;
-
+// KIỂM TRA ĐĂNG NHẬP
+if (!isset($_SESSION['MaNguoiDung'])) {
+    
+    // 1. Ghi một thông báo vào SESSION
+    $_SESSION['flash_message'] = "Bạn cần đăng nhập để xem chi tiết sản phẩm!";
+    
+    // 2. Lấy URL trang hiện tại (bao gồm cả ?id=...)
+    // $_SERVER['QUERY_STRING'] sẽ lấy "id=1" (hoặc bất cứ id nào)
+    $redirect_url = "chi_tiet.php?" . $_SERVER['QUERY_STRING'];
+    
+    // 3. Chuyển hướng đến trang đăng nhập
+    // Chúng ta vẫn gửi redirect_url để biết đường quay lại
+    header("Location: ../Admin/dangnhap.php?redirect_url=" . urlencode($redirect_url));
+    exit; // Dừng chạy code ngay lập tức
+}
 if ($product_id > 0) {
     // Truy vấn JOIN để lấy thông tin chi tiết sản phẩm
     $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 

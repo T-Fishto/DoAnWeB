@@ -194,11 +194,6 @@ li{
     transform:  rotate(-45deg); /* Xoay thanh menu thứ ba thành dấu chéo */
   
 }
-.timkiem{
-    background-color: #fff;
-    
-
-}
 .menu-Items{
     position: fixed;
     width: 250px;
@@ -218,7 +213,7 @@ li{
 
 .menu-Items a:hover{
     color: var(--sup-color);
-    text-decoration: underline;
+    border-bottom: 3px solid var(--sup-color);
     transition: all 0.3s ease; /* Giúp tạo hiệu ứng chuyển đổi mượt mà khi hover */
 }
 .menu-Items.active {
