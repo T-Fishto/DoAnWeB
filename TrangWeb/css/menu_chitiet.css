@@ -8,15 +8,24 @@ body {
 .product-detail-container {
     display: flex;
     max-width: 1200px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 30px;
     gap: 50px;
+    position: relative;
 }
 
 .product-image-section {
     width: 50%;
 }
-
+.giohang{
+    position: absolute;
+    top: 0;
+    right: 0;
+}   
+.fa-cart-shopping{
+    color: #FFC107;
+    font-size: 30px;
+}
 .main-product-img {
     width: 100%;
     height: auto;
@@ -27,7 +36,6 @@ body {
 .product-thumbnails {
     display: flex;
     gap: 10px;
-    margin-top: 15px;
 }
 
 .product-thumbnails img {

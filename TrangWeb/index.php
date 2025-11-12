@@ -51,7 +51,21 @@
                     echo '<li class="top_login">';
                     echo '    <a href="../Admin/dangxuat.php">';
                     echo '        <i class="ti-share ic"></i>';
-                    echo '        <span>Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</span>'; 
+                    echo '        <span>Đăng Xuất</span>'; 
+                    echo '    </a>';
+                    echo '</li>';
+
+                    // echo '<li class="top_login">';
+                    // echo '    <a href="../Admin/dangxuat.php">';
+                    // echo '        <i class="ti-share ic"></i>';
+                    // echo '        <span>Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</span>'; 
+                    // echo '    </a>';
+                    // echo '</li>';
+
+                    // Hiện giỏ hàng
+                    echo '<li class="top_login">';
+                    echo '    <a href="giohang.php">';
+                    echo '        <i class="fa-solid fa-cart-shopping"></i>';
                     echo '    </a>';
                     echo '</li>';
                 } else {

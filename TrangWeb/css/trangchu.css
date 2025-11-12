@@ -103,7 +103,7 @@ li{
     transform: translateY(0);   
     transition: all 0.3s ease;
 }
-/* --- CSS SỬA LẠI CHO NÚT ĐĂNG NHẬP BÊN TRÁI --- */    
+/* --- CSS SỬA LẠI CHO NÚT ĐĂNG NHẬP BÊN TRÁI --- */
 /* 1. Nhóm bên TRÁI (Logo + Đăng nhập) */
 .top-left-group {
     display: flex;
@@ -123,7 +123,7 @@ li{
 
 /* 3. Nút Đăng nhập (nằm sau logo) */
 .top_login {
-    margin-left: 20px; /* Tạo khoảng cách với Logo */
+    margin-left: 10px; /* Tạo khoảng cách với Logo */
     list-style: none; /* Ẩn dấu chấm <li> */
 }
 
@@ -141,7 +141,7 @@ li{
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
-    min-width: 140px; 
+    min-width: 30px; 
 }
 
 /* Icon bên trong nút */

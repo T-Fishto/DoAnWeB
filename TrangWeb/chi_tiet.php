@@ -58,12 +58,12 @@ if (!$product) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-<div class="header-placeholder">
-    </div>
-
 <?php if ($product): ?>
 <div class="product-detail-container">
+    <div class="giohang">
+        <i class="fa-solid fa-cart-shopping"></i>
+        
+    </div>
     <div class="product-image-section">
         <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="<?php echo htmlspecialchars($product['ten_san_pham']); ?>" class="main-product-img">
         
