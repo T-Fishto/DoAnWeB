@@ -1,50 +1,106 @@
 <?php
-session_start();
+session_start(); // Luôn bắt đầu session ở đầu file
+
 // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "qltp"; 
-
-// Tạo kết nối
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+if ($conn->connect_error) { die("Kết nối thất bại: " . $conn->connect_error); }
 $conn->set_charset("utf8");
 
-// --- 2. LẤY ID SẢN PHẨM TỪ URL VÀ TRUY VẤN CSDL ---
-$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$product = null;
-// KIỂM TRA ĐĂNG NHẬP
-if (!isset($_SESSION['MaNguoiDung'])) {
-    // $_SERVER['QUERY_STRING'] sẽ lấy "id=1" (hoặc bất cứ id nào)
-    $redirect_url = "chi_tiet.php?" . $_SERVER['QUERY_STRING'];
-    // 3. Chuyển hướng đến trang đăng nhập
-    // Chúng ta vẫn gửi redirect_url để biết đường quay lại
-    header("Location: ../Admin/dangnhap.php?redirect_url=" . urlencode($redirect_url));
-    exit; // Dừng chạy code ngay lập tức
-}
-if ($product_id > 0) {
-    // Truy vấn JOIN để lấy thông tin chi tiết sản phẩm
-    $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
-            FROM san_pham sp 
-            JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-            WHERE sp.id_san_pham = $product_id";
+// --- 2. XỬ LÝ KHI NGƯỜI DÙNG NHẤN NÚT "THÊM VÀO GIỎ" HOẶC "ĐẶT HÀNG NGAY" ---
+if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || isset($_POST['order_now']))) {
+    
+    // --- PHẦN A: LOGIC THÊM VÀO GIỎ HÀNG (Dùng chung cho cả 2 nút) ---
+    $product_id_to_add = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $product_price = $_POST['product_price'];
+    $product_image = $_POST['product_image'];
+    $quantity = (int)$_POST['quantity'];
+    $size = $_POST['size'];
+    $notes = $_POST['notes'];
 
-    $result = $conn->query($sql);
+    $desc = "Size " . $size; 
+    $cart_item_id = $product_id_to_add . '_' . $size;
 
-    if ($result && $result->num_rows > 0) {
-        $product = $result->fetch_assoc();
+    $cart_item = [
+        'id' => $product_id_to_add,
+        'name' => $product_name,
+        'price' => $product_price,
+        'image' => $product_image,
+        'quantity' => $quantity,
+        'size' => $size,
+        'desc' => $desc,
+        'notes' => $notes 
+    ];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    if (isset($_SESSION['cart'][$cart_item_id])) {
+        $_SESSION['cart'][$cart_item_id]['quantity'] += $quantity;
+    } else {
+        $_SESSION['cart'][$cart_item_id] = $cart_item;
+    }
+
+    // --- PHẦN B: LOGIC CHUYỂN HƯỚNG (Khác nhau) ---
+    
+    if (isset($_POST['order_now'])) {
+        // NẾU BẤM "ĐẶT HÀNG NGAY" -> Chuyển thẳng đến giỏ hàng
+        header("Location: giohang.php");
+        exit;
+        
+    } else {
+        // NẾU BẤM "THÊM VÀO GIỎ" -> Gửi thông báo và tải lại trang
+        $_SESSION['flash_message'] = "Đã thêm '" . $product_name . " (" . $desc . ")' vào giỏ hàng!";
+        header("Location: chi_tiet.php?id=" . $product_id_to_add);
+        exit;
     }
 }
 
-// Nếu không tìm thấy sản phẩm, chuyển hướng hoặc hiển thị lỗi
+
+// --- 3. LẤY ID SẢN PHẨM TỪ URL VÀ KIỂM TRA ĐĂNG NHẬP ---
+$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$product = null;
+
+if (!isset($_SESSION['MaNguoiDung'])) {
+    $_SESSION['flash_message'] = "Bạn cần đăng nhập để xem chi tiết sản phẩm!";
+    $redirect_url = "chi_tiet.php?" . $_SERVER['QUERY_STRING'];
+    header("Location: ../Admin/dangnhap.php?redirect_url=" . urlencode($redirect_url));
+    exit;
+}
+
+// --- 4. TRUY VẤN DỮ LIỆU SẢN PHẨM (AN TOÀN) ---
+if ($product_id > 0) {
+    $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
+            FROM san_pham sp 
+            JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
+            WHERE sp.id_san_pham = ?";
+            
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result && $result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+    }
+    $stmt->close();
+}
+
 if (!$product) {
     header("Location: danhsachsanpham.php"); 
     exit();
+}
+
+// 5. LẤY VÀ XÓA FLASH MESSAGE (NẾU CÓ)
+$flash_message = "";
+if (isset($_SESSION['flash_message'])) {
+    $flash_message = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']);
 }
 ?>
 
@@ -53,78 +109,104 @@ if (!$product) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $product ? htmlspecialchars($product['ten_san_pham']) : 'Sản phẩm không tồn tại'; ?></title>
+    <title><?php echo htmlspecialchars($product['ten_san_pham']); ?></title>
     <link rel="stylesheet" href="css/menu_chitiet.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/thongbao_giohang.css"> </head>
 <body>
+
+<a href="giohang.php" class="cart-icon-link">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <?php
+    $cart_count = 0;
+    if (isset($_SESSION['cart'])) {
+        $cart_count = count($_SESSION['cart']);
+    }
+    if ($cart_count > 0) {
+        echo '<span class="cart-item-count">' . $cart_count . '</span>';
+    }
+    ?>
+</a>
+
+<?php if (!empty($flash_message)): ?>
+    <div class="flash-message">
+        <span><?php echo $flash_message; ?></span>
+        <a href="danhsachsanpham.php" class="back-to-menu-link">
+            <i class="fas fa-arrow-left"></i> Quay lại Menu
+        </a>
+    </div>
+<?php endif; ?>
+
+
 <?php if ($product): ?>
-<div class="product-detail-container">
-    <div class="giohang">
-        <i class="fa-solid fa-cart-shopping"></i>
-        
-    </div>
-    <div class="product-image-section">
-        <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="<?php echo htmlspecialchars($product['ten_san_pham']); ?>" class="main-product-img">
-        
-        <div class="product-thumbnails">
-            <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="Thumbnail 1">
-            <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="Thumbnail 2">
-            </div>
-    </div>
-    
-    <div class="product-info-section">
-        <h1><?php echo htmlspecialchars($product['ten_san_pham']); ?></h1>
-        
-        <div class="rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-        </div>
-        
-        <p class="description">Mô tả: <?php echo htmlspecialchars($product['mo_ta']); ?></p>
-        
-        <div class="options-group">
-            <label>Size:</label>
-            <div class="radio-options">
-                <input type="radio" id="size-m" name="size" checked>
-                <label for="size-m">M</label>
-                <input type="radio" id="size-l" name="size">
-                <label for="size-l">L</label>
-            </div>
-        </div>
-        <div class="options-group">
-            <label>Ghi chú</label>
-            <input type="text" placeholder="Thêm ghi chú món này" class="notes-input">
-        </div>
 
-        <div class="options-group quantity-control">
-            <label>Số lượng:</label>
-            <div class="quantity-input-group">
-                <button type="button" class="quantity-btn" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
-                <input type="number" name="quantity" value="1" min="1" max="99" class="quantity-input">
-                <button type="button" class="quantity-btn" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+<form method="POST" action="chi_tiet.php?id=<?php echo $product_id; ?>">
+
+    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+    <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['ten_san_pham']); ?>">
+    <input type="hidden" name="product_price" value="<?php echo $product['gia']; ?>">
+    <input type="hidden" name="product_image" value="<?php echo htmlspecialchars($product['hinh_anh']); ?>">
+
+    <div class="product-detail-container">
+        
+        <div class="product-image-section">
+            <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="<?php echo htmlspecialchars($product['ten_san_pham']); ?>" class="main-product-img">
+            <div class="product-thumbnails">
+                <img src="<?php echo htmlspecialchars($product['hinh_anh']); ?>" alt="Thumbnail 1">
             </div>
         </div>
         
-        <div class="action-buttons">
-            <button class="add-to-cart-btn">Thêm vào giỏ hàng</button>
-            <button class="order-now-btn">Đặt hàng ngay</button>
-        </div>
+        <div class="product-info-section">
+            <h1><?php echo htmlspecialchars($product['ten_san_pham']); ?></h1>
+            
+            <div class="rating">
+                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="far fa-star"></i>
+            </div>
+            
+            <p class="description">Mô tả: <?php echo htmlspecialchars($product['mo_ta']); ?></p>
+            
+            <div class="options-group">
+                <label>Size:</label>
+                <div class="radio-options">
+                    <input type="radio" id="size-m" name="size" value="M" checked>
+                    <label for="size-m">M</label>
+                    <input type="radio" id="size-l" name="size" value="L">
+                    <label for="size-l">L</label>
+                </div>
+            </div>
+            <div class="options-group">
+                <label>Ghi chú</label>
+                <input type="text" name="notes" placeholder="Thêm ghi chú món này" class="notes-input">
+            </div>
 
-        <div class="promo-box">
-            <p>Nhập "YEUQUAN"</p>
-            <p>Giảm 10k, đơn tối thiểu 80k</p>
-        </div>
-        <div class="promo-box">
-            <p>Nhập "FREESHIP"</p>
-            <p>Freeship tối 3km, đơn tối thiểu 100k</p>
-        </div>
+            <div class="options-group quantity-control">
+                <label>Số lượng:</label>
+                <div class="quantity-input-group">
+                    <button type="button" class="quantity-btn" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                    <input type="number" name="quantity" value="1" min="1" max="99" class="quantity-input">
+                    <button type="button" class="quantity-btn" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button type="submit" name="add_to_cart" class="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                
+                <button type="submit" name="order_now" class="order-now-btn">Đặt hàng ngay</button>
+            </div>
 
+            <div class="promo-box">
+                <p>Nhập "YEUQUAN"</p>
+                <p>Giảm 10k, đơn tối thiểu 80k</p>
+            </div>
+            <div class="promo-box">
+                <p>Nhập "FREESHIP"</p>
+                <p>Freeship tối 3km, đơn tối thiểu 100k</p>
+            </div>
+
+        </div>
     </div>
-</div>
+</form>
+
 <?php else: ?>
     <div style="text-align: center; padding: 50px;">
         <h2>Sản phẩm không tìm thấy.</h2>

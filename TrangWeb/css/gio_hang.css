@@ -1,0 +1,201 @@
+/* --- CSS CHO GIỎ HÀNG (giohang.css) --- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --orange: #E77F3F;
+    --tan: #FDF3E9;
+    --text-dark: #333;
+    --text-light: #888;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    min-height: 100vh;
+}
+
+.cart-container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* --- 1. Header --- */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+}
+
+.cart-title {
+    background-color: var(--orange);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.continue-shopping {
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+.continue-shopping:hover {
+    text-decoration: underline;
+}
+
+/* --- 2. Body (Bảng sản phẩm) --- */
+.cart-body {
+    padding: 0 30px;
+}
+
+/* Định dạng lưới cho bảng */
+.cart-table-header,
+.product-item {
+    display: grid;
+    /* Cột: Mua | Sản phẩm | Số lượng | Thành tiền | Xóa */
+    grid-template-columns: 50px 2fr 1fr 1fr 50px;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+/* Tiêu đề bảng */
+.cart-table-header {
+    background-color: var(--tan);
+    color: var(--text-light);
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.cart-table-header .header-mua,
+.product-item .product-mua { text-align: center; }
+
+.cart-table-header .header-xoa,
+.product-item .product-xoa { text-align: center; }
+
+/* Từng sản phẩm */
+.product-item {
+    border-bottom: 1px solid #eee;
+}
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-sanpham {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.product-sanpham img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.product-info {
+    display: flex;
+    flex-direction: column;
+}
+.product-name {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+.product-desc {
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+.product-soluong { font-weight: 500; }
+.product-thanhtien { font-weight: 700; color: var(--text-dark); }
+
+.product-xoa a {
+    color: var(--text-light);
+    text-decoration: none;
+}
+.product-xoa i {
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.product-xoa i:hover {
+    color: #E74C3C; /* Màu đỏ khi hover */
+}
+
+/* --- 3. Tóm tắt đơn hàng --- */
+.cart-summary {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-top: 1px solid #eee;
+}
+.cart-summary h3 {
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: var(--text-light);
+    font-size: 0.95em;
+}
+.summary-line .summary-subtotal {
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* --- 4. Nút Thanh toán --- */
+.cart-footer {
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+.btn-checkout {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: var(--orange);
+    color: white;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-checkout:hover {
+    background-color: #d36a2a; /* Màu cam đậm hơn */
+}
+.summary-line.total-line {
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+.summary-line.total-line .summary-total {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--orange); /* Dùng biến màu cam của bạn */
+}
+/* Thêm style cho dòng Tổng Cộng */
+
+.summary-line.total-line {
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+.summary-line.total-line .summary-total {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--orange);
+}
