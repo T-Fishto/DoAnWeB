@@ -1,7 +1,6 @@
-/* --- detail_style.css --- */
 body {
     font-family: Arial, sans-serif;
-    background-color: #F8F4EE; /* Màu nền nâu nhạt */
+    background-color: #F8F4EE;
     color: #333;
 }
 
@@ -46,12 +45,12 @@ body {
 
 .product-info-section h1 {
     font-size: 2.2em;
-    color: #3B2A1E; /* Màu chữ nâu đậm */
+    color: #3B2A1E;
     margin-bottom: 10px;
 }
 
 .rating {
-    color: #FFC107; /* Màu vàng sao */
+    color: #FFC107;
     margin-bottom: 20px;
 }
 
@@ -66,10 +65,10 @@ body {
     color: #5A4739;
 }
 
-/* Kiểu dáng cho Radio Size */
 .radio-options input[type="radio"] {
     display: none;
 }
+
 .radio-options label {
     display: inline-block;
     padding: 8px 15px;
@@ -80,31 +79,32 @@ body {
     font-weight: normal;
     color: #333;
 }
+
 .radio-options input[type="radio"]:checked + label {
-    background-color: #D2B48C; /* Màu nâu sáng khi chọn */
+    background-color: #D2B48C;
     color: white;
     border-color: #D2B48C;
 }
 
-/* Kiểu dáng cho Checkbox Màu sắc */
 .checkbox-options input[type="checkbox"] {
     display: none;
 }
 .checkbox-options label i {
-    color: #5A4739; /* Màu icon check */
+    color: #5A4739;
 }
-/* ... (Thêm styling cho phần Số lượng và Ghi chú) */
 
 .quantity-input-group {
     display: flex;
     align-items: center;
 }
+
 .quantity-input {
     width: 40px;
     text-align: center;
     border: 1px solid #ccc;
     height: 35px;
 }
+
 .quantity-btn {
     background: #fff;
     border: 1px solid #ccc;
@@ -113,7 +113,6 @@ body {
     height: 35px;
 }
 
-/* Nút hành động */
 .action-buttons button {
     padding: 12px 25px;
     border: none;
@@ -125,17 +124,16 @@ body {
 }
 
 .add-to-cart-btn {
-    background-color: #D2B48C; /* Nút "Thêm vào giỏ hàng" */
+    background-color: #D2B48C;
     color: white;
 }
 
 .order-now-btn {
-    background-color: #F8F4EE; /* Nút "Đặt hàng ngay" */
+    background-color: #F8F4EE;
     border: 1px solid #D2B48C;
     color: #D2B48C;
 }
 
-/* Mã ưu đãi */
 .promo-box {
     border: 1px dashed #D2B48C;
     padding: 15px;

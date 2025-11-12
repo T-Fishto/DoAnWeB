@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - NB Coffee</title>
-</head>
-<style>
 body {
     font-family: Arial, sans-serif;
-    background-image: url("images/Font/baner.jpg");
+    background-image: url("../Admin/images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Đảm bảo form căn giữa theo chiều dọc */
+    min-height: 100vh;
     margin: 0;
+    padding: 50px 0;
 }
 
-.login-container {
+.reristration-container {
     background-color: #fff;
     padding: 30px 40px;
     border-radius: 8px;
@@ -29,7 +22,7 @@ body {
     text-align: center;
 }
 
-.login-container h1 {
+.reristration-container h1 {
     color: #333;
     margin-bottom: 25px;
     font-size: 28px;
@@ -55,6 +48,9 @@ body {
     font-weight: 600;
 }
 
+.form-group input[type="address"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
 .form-group input[type="text"],
 .form-group input[type="password"] {
     width: calc(100% - 20px); /* Trừ padding để input vừa khung */
@@ -65,13 +61,16 @@ body {
     transition: border-color 0.3s ease;
 }
 
+.form-group input[type="address"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus,
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus {
     border-color: #6a11cb; /* Màu border khi focus */
     outline: none; /* Bỏ outline mặc định */
 }
 
-.login-button {
+.reristration-button {
     width: 100%;
     padding: 13px;
     border: none;
@@ -84,7 +83,7 @@ body {
     transition: background 0.3s ease;
 }
 
-.login-button:hover {
+.reristration-button:hover {
     background: linear-gradient(to right, #5a0eae, #1e5fc7); /* Đổi màu khi hover */
 }
 
@@ -92,7 +91,6 @@ body {
     margin-top: 25px;
     font-size: 15px;
     color: #777;
-    /* .... */
 }
 
 .signup-link a {
@@ -106,28 +104,3 @@ body {
     color: #6a11cb;
     text-decoration: underline;
 }
-
-</style>
-<body>
-    <div class="login-container">
-        <form class="login-form" action="dangnhap_submit.php" method="POST">
-            <h1>Đăng nhập</h1>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-            </div>
-            
-            <button type="submit" class="login-button">Đăng nhập</button>
-            
-            <p class="signup-link">
-                Bạn chưa có tài khoản? <a href="dangki.php">Đăng ký Tại đây</a>
-            </p>
-        </form>
-    </div>
-</body>
-</html>

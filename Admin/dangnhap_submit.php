@@ -1,5 +1,4 @@
 <?php
-    // !!! QUAN TRỌNG: Bắt đầu SESSION trước mọi nội dung HTML/PHP khác
     session_start();
     
     function ThongBaoLoi($thongbao = "")
@@ -12,6 +11,7 @@
         echo "<h3>Hoàn thành</h3><p class='ThongBao'>$thongbao</p>";
     }
 ?>
+
 <style>
 .ThongBaoLoi {
     padding: 0;
@@ -27,7 +27,6 @@
 </style>
 
 <?php
-    // 1. KẾT NỐI CSDL
     $servername = "localhost";
     $username_db = "root";
     $password_db = "";
@@ -40,26 +39,21 @@
         die("Kết nối CSDL thất bại: " . $connect->connect_error);
     }
     
-    // 2. LẤY DỮ LIỆU TỪ FORM
     $TenDangNhap = $_POST['username'];
-    $MatKhau = $_POST['password']; // Đây là mật khẩu GÕ VÀO (vd: 'mk123')
+    $MatKhau = $_POST['password'];
     
-    // 3. KIỂM TRA ĐẦU VÀO (Làm đầu tiên)
     if (trim($TenDangNhap) == "") {
         ThongBaoLoi("Tên đăng nhập không được bỏ trống!");
     } elseif (trim($MatKhau) == "") {
         ThongBaoLoi("Mật khẩu không được bỏ trống!");
     } else {
         
-        // 4. LẤY NGƯỜI DÙNG BẰNG PREPARED STATEMENT (Chống SQL Injection)
-        // **Chỉ tìm theo ten_dang_nhap**
         $sql_kiemtra = "SELECT * FROM `nguoi_dung` WHERE `ten_dang_nhap` = ?";
         
         if (!($stmt = $connect->prepare($sql_kiemtra))) {
             die("Lỗi chuẩn bị SQL: " . $connect->error);
         }
         
-        // Gắn biến $TenDangNhap vào dấu ?
         $stmt->bind_param("s", $TenDangNhap);
         
         if (!$stmt->execute()) {
@@ -68,49 +62,33 @@
         
         $danhsach = $stmt->get_result();
         
-        // 5. KIỂM TRA XEM CÓ TÌM THẤY NGƯỜI DÙNG KHÔNG
         if ($danhsach->num_rows == 1) {
             
-            // 6. TÌM THẤY! LẤY DỮ LIỆU CỦA HỌ
             $dong = $danhsach->fetch_assoc();
-            
-            // Lấy mật khẩu ĐÃ BĂM từ CSDL
-            $mat_khau_bam_tu_db = $dong['mat_khau']; // Đây là '$2y$10$oq6Ik...'
+            $mat_khau_bam_tu_db = $dong['mat_khau'];
 
-            // 7. "ẢO THUẬT" Ở ĐÂY: SO SÁNH MẬT KHẨU
-            if (password_verify($MatKhau, $mat_khau_bam_tu_db)) {
-                
-                // MẬT KHẨU KHỚP!
-                
-                // 8. Kiểm tra tài khoản có bị khóa không
+            if (password_verify($MatKhau, $mat_khau_bam_tu_db)) {                          
+                // Kiểm tra tài khoản có bị khóa không
                 if($dong['Khoa'] == 0) {
-                    // Đăng ký SESSION
                     $_SESSION['MaNguoiDung'] = $dong['id_nguoi_dung'];
                     $_SESSION['HoVaTen'] = $dong['ho_ten'];
-                    $_SESSION['VaiTro'] = $dong['vai_tro'];// --- PHẦN CẢI TIẾN CHUYỂN HƯỚNG BẮT ĐẦU ---
-                    // Giả sử vai_tro = 1 là quyền cao (admin/quản trị)
+                    $_SESSION['VaiTro'] = $dong['vai_tro'];
                     if ($dong['vai_tro'] == 1) {
                         header("Location: ../Admin/indexnguoidung.php"); 
-                    } else { // vai_tro = 0 hoặc các vai trò khác (người dùng thường)
+                    } else {
                         header("Location: ../TrangWeb/index.php"); 
-                    }
-                    // --- PHẦN CẢI TIẾN CHUYỂN HƯỚNG KẾT THÚC ---
-                    
-                    exit(); // Phải exit() sau khi chuyển hướng
+                    } 
+                    exit();
                 } else {
                     ThongBaoLoi("Người dùng đã bị khóa tài khoản!");
                 }
             } else {
-                // MẬT KHẨU KHÔNG KHỚP!
                 ThongBaoLoi("Tên đăng nhập hoặc mật khẩu không chính xác!");
             }
         } else {
-            // KHÔNG TÌM THẤY TÊN ĐĂNG NHẬP
             ThongBaoLoi("Tên đăng nhập hoặc mật khẩu không chính xác!");
         }
-        
         $stmt->close();
     }
-    
     $connect->close();
 ?>
