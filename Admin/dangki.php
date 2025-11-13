@@ -3,134 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dangki.css">
     <title>Đăng ký - NB Coffee</title>
 </head>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-image: url("../Admin/images/Font/baner.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 50px 0;
-}
 
-.reristration-container {
-    background-color: #fff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
-    width: 100%;
-    max-width: 380px; /* Chiều rộng tối đa của form */
-    text-align: center;
-}
-
-.reristration-container h1 {
-    color: #333;
-    margin-bottom: 25px;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.error-message {
-    color: #e74c3c; /* Màu đỏ cho thông báo lỗi */
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.form-group input[type="address"],
-.form-group input[type="tel"],
-.form-group input[type="email"],
-.form-group input[type="text"],
-.form-group input[type="password"] {
-    width: calc(100% - 20px); /* Trừ padding để input vừa khung */
-    padding: 12px 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input[type="address"]:focus,
-.form-group input[type="tel"]:focus,
-.form-group input[type="email"]:focus,
-.form-group input[type="text"]:focus,
-.form-group input[type="password"]:focus {
-    border-color: #6a11cb; /* Màu border khi focus */
-    outline: none; /* Bỏ outline mặc định */
-}
-
-.reristration-button {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 5px;
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient màu nút */
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.reristration-button:hover {
-    background: linear-gradient(to right, #5a0eae, #1e5fc7); /* Đổi màu khi hover */
-}
-
-.signup-link {
-    margin-top: 25px;
-    font-size: 15px;
-    color: #777;
-}
-
-.signup-link a {
-    color: #2575fc; /* Màu link Đăng ký */
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.signup-link a:hover {
-    color: #6a11cb;
-    text-decoration: underline;
-}
-</style>
-
- <body>
-    <div class="reristration-container">
-        <form class="reristration-form" action="dangki_submit.php" method="POST">
+<body>
+    <div class="registration-container"> 
+        <form id="registrationForm" class="registration-form" 
+              action="dangki_submit.php" method="POST"
+              onsubmit="return validateForm()"> 
             <h1>Đăng ký Tài khoản</h1>
+            
+            <div id="errorMessage" class="error-message hidden" role="alert"></div>
+
             <div class="form-group">
                 <label for="fullName">Họ và tên</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Họ và tên" required>
+                <input type="text" id="fullName" name="fullName" placeholder="Họ và tên" minlength="3" required>
             </div>
 
             <div class="form-group">
                 <label for="phone">Số điện thoại</label>
-                <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" required>
+                <input type="tel" id="phone" name="phone" placeholder="Số điện thoại" 
+                       pattern="[0-9]{10,11}" 
+                       title="Số điện thoại phải có 10 hoặc 11 chữ số" 
+                       required>
             </div>
 
             <div class="form-group">
                 <label for="address">Địa chỉ</label>
-                <input type="address" id="address" name="address" placeholder="Địa chỉ" required>
+                <input type="text" id="address" name="address" placeholder="Địa chỉ" required>
             </div>
 
             <div class="form-group">
@@ -140,12 +41,12 @@ body {
 
             <div class="form-group">
                 <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+                <input type="text" id="username" name="username" placeholder="Tên đăng nhập" minlength="5" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Mật khẩu" minlength="6" required>
             </div>
 
             <div class="form-group">
@@ -153,7 +54,7 @@ body {
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
             </div>
             
-            <button type="submit" class="reristration-button">Đăng ký</button>
+            <button type="submit" class="registration-button">Đăng ký</button>
             
             <p class="signup-link">
                 Bạn đã có tài khoản? <a href="dangnhap.php">Đăng nhập ngay.</a> 
@@ -161,25 +62,7 @@ body {
         </form>
     </div>
 
-    <script>
-        function validateForm() 
-        {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const errorElement = document.getElementById('errorMessage');
-
-            if (password !== confirmPassword) {
-                errorElement.textContent = "Lỗi: Mật khẩu và Xác nhận mật khẩu không khớp!";
-                errorElement.classList.remove('hidden');
-                return false;
-            } else {
-                errorElement.classList.add('hidden');
-                
-                console.log('Dữ liệu hợp lệ. Form sẵn sàng để gửi.');
-                                
-                return false;
-            }
-        }
-    </script>
+    <script src="/js/dangki.js" defer></script> 
+    
 </body>
 </html>
