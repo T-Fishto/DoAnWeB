@@ -10,15 +10,14 @@
     {
         echo "<h3>Hoàn thành</h3><p class='ThongBao'>$thongbao</p>";
     }
-?>
 
+?>
 <style>
 .ThongBaoLoi {
     padding: 0;
     margin: 0;
     color: #ff0000;
 }
-
 .ThongBao {
     padding: 0;
     margin: 0;
