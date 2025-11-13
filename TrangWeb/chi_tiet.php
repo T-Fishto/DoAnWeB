@@ -1,17 +1,17 @@
 <?php
-session_start(); // Luôn bắt đầu session ở đầu file
+    session_start(); // Luôn bắt đầu session ở đầu file
 
-// --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "qltp"; 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) { die("Kết nối thất bại: " . $conn->connect_error); }
-$conn->set_charset("utf8");
+    // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qltp"; 
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) { die("Kết nối thất bại: " . $conn->connect_error); }
+    $conn->set_charset("utf8");
 
-// --- 2. XỬ LÝ KHI NGƯỜI DÙNG NHẤN NÚT "THÊM VÀO GIỎ" HOẶC "ĐẶT HÀNG NGAY" ---
-if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || isset($_POST['order_now']))) {
+    // --- 2. XỬ LÝ KHI NGƯỜI DÙNG NHẤN NÚT "THÊM VÀO GIỎ" HOẶC "ĐẶT HÀNG NGAY" ---
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || isset($_POST['order_now']))) {
     
     // --- PHẦN A: LOGIC THÊM VÀO GIỎ HÀNG (Dùng chung cho cả 2 nút) ---
     $product_id_to_add = $_POST['product_id'];
@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || iss
     }
 
     // --- PHẦN B: LOGIC CHUYỂN HƯỚNG (Khác nhau) ---
-    
     if (isset($_POST['order_now'])) {
         // NẾU BẤM "ĐẶT HÀNG NGAY" -> Chuyển thẳng đến giỏ hàng
         header("Location: giohang.php");
@@ -60,8 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || iss
         exit;
     }
 }
-
-
 // --- 3. LẤY ID SẢN PHẨM TỪ URL VÀ KIỂM TRA ĐĂNG NHẬP ---
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $product = null;
@@ -73,13 +70,12 @@ if (!isset($_SESSION['MaNguoiDung'])) {
     exit;
 }
 
-// --- 4. TRUY VẤN DỮ LIỆU SẢN PHẨM (AN TOÀN) ---
+// --- 4. TRUY VẤN DỮ LIỆU SẢN PHẨM ---
 if ($product_id > 0) {
     $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
             FROM san_pham sp 
             JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
             WHERE sp.id_san_pham = ?";
-            
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
@@ -90,20 +86,17 @@ if ($product_id > 0) {
     }
     $stmt->close();
 }
-
 if (!$product) {
     header("Location: danhsachsanpham.php"); 
     exit();
 }
-
-// 5. LẤY VÀ XÓA FLASH MESSAGE (NẾU CÓ)
+// 5. LẤY VÀ XÓA FLASH MESSAGE (thông báo nếu đăng hàng thành công)
 $flash_message = "";
 if (isset($_SESSION['flash_message'])) {
     $flash_message = $_SESSION['flash_message'];
     unset($_SESSION['flash_message']);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -127,7 +120,6 @@ if (isset($_SESSION['flash_message'])) {
     }
     ?>
 </a>
-
 <?php if (!empty($flash_message)): ?>
     <div class="flash-message">
         <span><?php echo $flash_message; ?></span>
@@ -213,7 +205,6 @@ if (isset($_SESSION['flash_message'])) {
         <p><a href="danhsachsanpham.php">Quay lại Menu</a></p>
     </div>
 <?php endif; ?>
-
 <?php $conn->close(); ?>
 </body>
 </html>

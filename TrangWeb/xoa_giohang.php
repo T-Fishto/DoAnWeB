@@ -15,7 +15,6 @@ if (isset($_GET['action'])) {
         }
     }
 }
-
 // Quay trở lại trang giỏ hàng
 header('Location: giohang.php');
 exit;

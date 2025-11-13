@@ -1,41 +1,38 @@
 <?php
-// --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
-$servername = "localhost"; // Máy chủ XAMPP
-$username = "root";
-$password = "";            // Mật khẩu CSDL mặc định
-$dbname = "qltp"; // [CHỈNH SỬA] Tên database mới
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
-// Đặt encoding là UTF-8 để hiển thị tiếng Việt
-$conn->set_charset("utf8");
+   // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
+   $servername = "localhost"; 
+   $username = "root";
+   $password = "";           
+   $dbname = "qltp"; 
+   // Tạo kết nối
+   $conn = new mysqli($servername, $username, $password, $dbname);
+   // Kiểm tra kết nối
+   if ($conn->connect_error) {
+       die("Kết nối thất bại: " . $conn->connect_error);
+   }
+   $conn->set_charset("utf8");
 
-//XỬ LÝ TÌM KIẾM ---
-$search_keyword = '';
-$search_condition = '';
+   //xử lý tìm kiếm
+   $search_keyword = '';
+   $search_condition = '';
 
-if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
+   if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
     // Làm sạch từ khóa tìm kiếm
     $search_keyword = $conn->real_escape_string(trim($_GET['search']));
     // Tạo điều kiện tìm kiếm: Tìm trong tên sản phẩm HOẶC mô tả
     $search_condition = " AND (sp.ten_san_pham LIKE '%$search_keyword%' OR dm.mo_ta LIKE '%$search_keyword%')";
-}
+   }
 
-// --- 2. HÀM ĐỂ HIỂN THỊ SẢN PHẨM ---
+     // --- 2. HÀM ĐỂ HIỂN THỊ SẢN PHẨM ---
 function display_products($result)
 {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             // Lấy ID sản phẩm để tạo link
             $product_id = $row["id_san_pham"];
-            // Đặt tên trang chi tiết là chi_tiet.php
             $detail_url = "chi_tiet.php?id=" . $product_id;      
             // BẮT ĐẦU: Bọc toàn bộ menu item trong thẻ <a>
             echo '<a href="' . htmlspecialchars($detail_url) . '" style="text-decoration: none; color: inherit;">'; 
-            // Sử dụng ECHO để in HTML và dữ liệu từ CSDL
             echo '<div class="menu-item">';
             // ... (Hình ảnh, nội dung thông tin)
             echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
@@ -50,12 +47,11 @@ function display_products($result)
             } else {
                  echo '      <span class="price"></span>';
             }    
-            // Nút +: Thêm sự kiện onclick để đảm bảo click vào nút vẫn chuyển trang
             echo '          <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($detail_url) . '\'; return false;"><i class="fas fa-plus"></i></button>';       
             echo '      </div>';
             echo '  </div>';
             echo '</div>';   
-            echo '</a>'; // KẾT THÚC: Đóng thẻ <a>
+            echo '</a>'; 
         }
     } else {
         echo "<p>Chưa có món ăn nào trong danh mục này.</p>";
@@ -124,7 +120,7 @@ function display_products($result)
                 <h2><i class="fas fa-hamburger"></i> MÓN ĂN</h2>
                 <div class="item-list">
                     <?php
-                    // [ĐÃ SỬA] Áp dụng $search_condition VÀ KHÔNG ẩn danh mục khi tìm kiếm
+                    //Áp dụng $search_condition VÀ KHÔNG ẩn danh mục khi tìm kiếm
                     $sql_mon_an = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
@@ -132,7 +128,7 @@ function display_products($result)
                     $result_mon_an = $conn->query($sql_mon_an);
                     display_products($result_mon_an);
 
-                    // BỔ SUNG: Hiển thị thông báo nếu tìm kiếm không có kết quả trong danh mục này
+                    // Hiển thị thông báo nếu tìm kiếm không có kết quả trong danh mục này
                     if (!empty($search_keyword) && $result_mon_an->num_rows == 0) {
                         echo "<p style='padding: 10px; color: #777;'>Không tìm thấy món ăn nào khớp với từ khóa.</p>";
                     }
@@ -144,7 +140,7 @@ function display_products($result)
                 <h2><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</h2>
                 <div class="item-list">
                     <?php
-                    // [ĐÃ SỬA] Áp dụng $search_condition
+                    // Áp dụng $search_condition
                     $sql_nuoc = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                  FROM san_pham sp 
                                  JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
@@ -163,7 +159,7 @@ function display_products($result)
                 <h2><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</h2>
                 <div class="item-list">
                     <?php
-                    // [ĐÃ SỬA] Áp dụng $search_condition
+                    // Áp dụng $search_condition
                     $sql_an_vat = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
@@ -180,7 +176,6 @@ function display_products($result)
         </main>
     </div>
     <?php
-    // Đóng kết nối CSDL
     $conn->close();
     ?>
 </body>

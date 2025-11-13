@@ -1,4 +1,4 @@
-/* --- detail_style.css --- */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #F8F4EE; /* Màu nền nâu nhạt */
@@ -101,8 +101,6 @@ body {
 .checkbox-options label i {
     color: #5A4739; /* Màu icon check */
 }
-/* ... (Thêm styling cho phần Số lượng và Ghi chú) */
-
 .quantity-input-group {
     display: flex;
     align-items: center;
@@ -120,8 +118,6 @@ body {
     cursor: pointer;
     height: 35px;
 }
-
-/* Nút hành động */
 .action-buttons button {
     padding: 12px 25px;
     border: none;
@@ -152,8 +148,6 @@ body {
     background-color: #FFF9F3;
     font-size: 0.9em;
 }
-/* --- CSS CHO THÔNG BÁO VÀ ICON GIỎ HÀNG --- */
-
 /* CSS cho thông báo */
 .flash-message {
     padding: 15px;

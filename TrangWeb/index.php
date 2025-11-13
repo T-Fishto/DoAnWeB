@@ -1,24 +1,19 @@
 
 <?php
     session_start();
-    /*
-    * PHẦN 1: KẾT NỐI CƠ SỞ DỮ LIỆU
-    * Hãy thay đổi các giá trị bên dưới cho phù hợp với cấu hình XAMPP/VertrigoServ của bạn.
-    */
-    $servername = "localhost"; // Thường là "localhost"
-    $username = "root"; // Tên đăng nhập CSDL, XAMPP mặc định là "root"
-    $password = ""; // Mật khẩu CSDL, XAMPP mặc định là rỗng
-    $dbname = "qltp"; // !!! THAY BẰNG TÊN DATABASE BẠN ĐÃ IMPORT SQL VÀO
-    // 1. Tạo kết nối
+    $servername = "localhost"; 
+    $username = "root"; 
+    $password = ""; 
+    $dbname = "qltp"; 
+    //Tạo kết nối
     $conn = new mysqli($servername, $username, $password, $dbname);
-    // 2. Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
+    //Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
     $conn->set_charset("utf8mb4");
-    // 3. Kiểm tra kết nối
+    // Kiểm tra kết nối
     if ($conn->connect_error) {
         die("Kết nối CSDL thất bại: " . $conn->connect_error);
     }
-    // 4. Viết câu truy vấn SQL
-    // Vì bạn muốn 2 hàng, mỗi hàng 5 cái, chúng ta sẽ lấy 10 sản phẩm
+    //Viết câu truy vấn SQL lấy 10 sản phẩm
     $sql = "SELECT * FROM quang_cao LIMIT 10";
     $result = $conn->query($sql);
 ?>
@@ -47,21 +42,12 @@
                 <?php
                 // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
                 if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                    // ---- ĐÃ ĐĂNG NHẬP ----
                     echo '<li class="top_login">';
                     echo '    <a href="../Admin/dangxuat.php">';
                     echo '        <i class="ti-share ic"></i>';
                     echo '        <span>Đăng Xuất</span>'; 
                     echo '    </a>';
                     echo '</li>';
-
-                    // echo '<li class="top_login">';
-                    // echo '    <a href="../Admin/dangxuat.php">';
-                    // echo '        <i class="ti-share ic"></i>';
-                    // echo '        <span>Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</span>'; 
-                    // echo '    </a>';
-                    // echo '</li>';
-
                     // Hiện giỏ hàng
                     echo '<li class="top_login">';
                     echo '    <a href="giohang.php">';
@@ -118,12 +104,9 @@
     </ul>     
     <!-- Giữa Trang --> 
     <div class="phangiua">
-        <!-- <h3>Các món ăn nổi bật</h3> -->
         <?php
         // Kiểm tra xem có dữ liệu trả về không
         if ($result->num_rows > 0) {           
-            // 6Lặp qua từng dòng dữ liệu và hiển thị ra HTML
-            // Mỗi lần lặp là một "khung" (product-card)
             while($row = $result->fetch_assoc()) {
             echo '<div class="item">';       
             // In ra dữ liệu trực tiếp từ $row
@@ -136,12 +119,11 @@
             echo '<p><strong>' . $row["tag"] . '</strong></p>';
             // Kết thúc một "item"
             echo '</div>';  
-            } // Kết thúc vòng lặp while
+            } 
         }
         else {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
         }
-        // 7. Đóng kết nối CSDL
         $conn->close();
         ?>
     </div>

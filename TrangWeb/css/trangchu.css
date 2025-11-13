@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&family=Momo+Signature&display=swap');
 /* Lên gg font lấy font rồi copy link vào đây
 copy cái vào các chữ cần dùng font này
-
 tranfrom là để di duyển các cái cần dấu và dùng tranlateX(di chuyển theo trục hoành) 
 tration tạo hiệu ứng chuyển  động mượt mà
 animation thực hiện hiệu ứng cao hơn dùng bằng keyframs
-
 */
 *{
     margin: 0;
     padding: 0;
     outline: none; 
-    /* Loại bỏ viền khi focus (focus là gì? Khi người dùng nhấp vào một phần tử, phần tử đó sẽ được "focus" và viền sẽ xuất hiện xung quanh nó) */
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
@@ -39,7 +36,7 @@ a{
     border-radius: 50px;
     color: var(--text-color);
     font-size: 20px;
-    cursor: pointer; /* Khi di chuột qua sẽ hiện con trỏ tay */
+    cursor: pointer;
 }
 .btn:hover{
     background-color: var(--sup-color);
@@ -53,7 +50,6 @@ body {
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
-    /* padding: 20px; */
 }
 ul{
     list-style: none; /* Loại bỏ dấu chấm đầu dòng trong danh sách */
@@ -103,30 +99,22 @@ li{
     transform: translateY(0);   
     transition: all 0.3s ease;
 }
-/* --- CSS SỬA LẠI CHO NÚT ĐĂNG NHẬP BÊN TRÁI --- */
-/* 1. Nhóm bên TRÁI (Logo + Đăng nhập) */
+/* Đăng Nhập */
 .top-left-group {
     display: flex;
     align-items: center; 
-    /* LỚP 101: Luôn nằm trên menu trượt */
     z-index: 101; 
     position: relative; /* Cần thiết để z-index hoạt động */
 }
-
-/* 2. Nhóm bên PHẢI (Chỉ còn nút 3 gạch) */
 .top_right {
     display: flex;
     align-items: center; 
-    /* LỚP 101: Luôn nằm trên menu trượt */
     z-index: 101; 
 }
-
-/* 3. Nút Đăng nhập (nằm sau logo) */
 .top_login {
     margin-left: 10px; /* Tạo khoảng cách với Logo */
     list-style: none; /* Ẩn dấu chấm <li> */
 }
-
 /* Tạo kiểu cho nút Đăng Nhập (thẻ <a>) */
 .top_login a {
     display: flex; 
@@ -143,20 +131,15 @@ li{
     transition: all 0.3s ease;
     min-width: 30px; 
 }
-
-/* Icon bên trong nút */
 .top_login .ic {
     font-size: 18px;
     color: var(--text-color);
     margin-right: 8px;
     padding: 0; 
 }
-
-/* Chữ bên trong nút */
 .top_login a span {
     line-height: 1; 
 }
-
 /* Hiệu ứng khi hover */
 .top_login a:hover {
     background-color: var(--text-color);
@@ -166,9 +149,7 @@ li{
 .top_login a:hover .ic {
     color: var(--main-color);
 }
-/* ... (phần CSS còn lại cho hover...) ... */
 /* Tiêu đề bên Nút Menu */
-
 .menu-Items .menu-items1{
     position: absolute;
     top: 0;
@@ -194,9 +175,9 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1; /* Đặt z-index cao để menu-bar luôn nằm trên các phần tử khác */
+    z-index: 1; 
     transition: all 0.3s ease; /* Giúp tạo hiệu ứng chuyển đổi mượt mà khi menu-bar thay đổi vị trí */
-    cursor: pointer; /* Khi di chuột qua sẽ hiện con trỏ tay */
+    cursor: pointer;
     
 }
 .top .menu_bar.active{
@@ -238,10 +219,7 @@ li{
     width: 100%;
     /* hai cái height và width đều là 100% để tạo một thanh giống như thanh gốc */
     background-color: var(--sup-color); 
-      transition: all 0.3s ease;
-      /* giúp tạo hiệu ứng chuyển đổi mượt mà khi xoay thanh menu */
-    
-
+    transition: all 0.3s ease;
 }
 /* Chuyển từ nút menu thành nút chéo bằng rotate và js */
 .top .menu_bar.active span{
@@ -292,10 +270,6 @@ li{
     font-size: 30px;
     display: inline;
 }
-/* .menu-Items-bottom{
-
-
-} */
 /* Big Image */
 .big-image{
     display: flex;
@@ -346,7 +320,7 @@ li{
     height: 100%;
     background-color: black;
     opacity: 0.5; /* Độ mờ của lớp phủ */
-    z-index: -2; /* Đặt z-index thấp hơn để lớp phủ nằm dưới nội dung nhưng trên hình nền */
+    z-index: -2;
 
 }
 .big-image .big-content{
@@ -357,20 +331,18 @@ li{
 .big-image .big-content h2{
     color: var(--text-color);
     font-size: 50px;
-    /* text-transform: uppercase; Chuyển chữ thường thành chữ in hoa */
     font-family: "Momo Signature", cursive;
 }
 .big-image .big-content p{
     color: var(--text-color);
     font-size: 20px;
-    font-weight: bold; /* In đậm chữ */
+    font-weight: bold; 
     margin: 20px 0;
     font-family: "Momo Signature", cursive;
 }
 /* Phần Giữa */
 .phangiua{
     display:flex; /* Dùng flexbox để xếp hàng */
-    /* flex-wrap: wrap; Cho phép xuống hàng tự động */
     flex-wrap: wrap;
     max-width: 1400px;
     margin: 0 auto;
@@ -397,20 +369,15 @@ li{
     text-align: center;
 }
 .item img{
-    /* Đã có sẵn: */
-    /* width: 100%; */ /* BỎ hoặc thay bằng max-width */
     height: 150px;
     object-fit: cover;  
     border-radius: 20px;
-    display: block; /* GIỮ NGUYÊN HOẶC THÊM NẾU CHƯA CÓ */
-    /* THÊM 2 DÒNG NÀY ĐỂ CĂN GIỮA */
-    max-width: 90%; /* Ví dụ: ảnh chỉ chiếm 90% chiều rộng của khung */
-    margin: 0 auto; /* Đặt lề trái và phải tự động để căn giữa */
+    display: block;
+    max-width: 90%; 
+    margin: 0 auto; 
     padding: 10px;
-   
 }
-/* ============ CSS CHO PHẦN về Chúng tôi  =========== */
-
+/* Css phần about */
 .about-us {
     width: 100%;
     margin-top: 40px; /* Tạo khoảng cách với phần "món ăn nổi bật" */
@@ -420,18 +387,14 @@ li{
 .about-us-container {
     display: flex;
     flex-wrap: wrap; /* Cho phép xuống hàng trên di động */
-    max-width: 1400px; /* Giống .phangiua */
+    max-width: 1400px; 
     margin: 0 auto;
 }
-
 /* Cột hình ảnh (bên trái) */
 .about-us-image {
     flex: 1; /* Chiếm 1/2 chiều rộng */
     min-height: 450px; /* Đặt chiều cao tối thiểu */
-    
-    /* !!! THAY ĐỔI ĐƯỜNG DẪN NÀY !!! */
-    background-image: url('../images/Font/anh_about.jpg'); /* Đường dẫn tới ảnh của bạn */
-    
+    background-image: url('../images/Font/anh_about.jpg');
     background-size:contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -440,17 +403,15 @@ li{
 /* Cột nội dung (bên phải) */
 .about-us-content {
     flex: 1; /* Chiếm 1/2 chiều rộng */
-    color: #ffffff; /* Màu chữ trắng */
-    padding: 60px 40px; /* Tạo không gian bên trong */
-    box-sizing: border-box; /* Để padding không làm vỡ layout */
+    color: #ffffff; 
+    padding: 60px 40px; 
+    box-sizing: border-box; 
 }
-
 .about-us-content h2 {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 10px;
 }
-
 /* Đây là vạch đỏ nhỏ dưới tiêu đề */
 .about-us-content .decorator-line {
     display: block;
@@ -466,23 +427,12 @@ li{
     color: #f0f0f0; /* Màu chữ xám nhạt cho dễ đọc */
     margin-bottom: 20px;
 }
-
-/* --- Responsive cho di động --- */
-@media (max-width: 768px) {
-    .about-us-image,
-    .about-us-content {
-        /* Trên di động, 2 cột sẽ xếp chồng lên nhau */
-        flex-basis: 100%; 
-    }
-}
 /* ============ CSS CHO PHẦN CÁCH ĐẶT HÀNG =========== */
-
 .how-to-order {
     text-align: center;
     padding: 60px 20px;
     background-color: #f9f9f9; /* Màu nền xám nhạt */
 }
-
 .how-to-order h2 {
     font-size: 28px;
     font-weight: 700;
@@ -540,11 +490,7 @@ li{
     line-height: 1.6;
     color: #555;
 }
-
-
 /* Footer */
-/* --- BẮT ĐẦU CSS CHO FOOTER --- */
-
 .footer {
     background-color: #2c3e50; /* Nền tối */
     color: #ecf0f1; /* Chữ sáng */
@@ -552,30 +498,22 @@ li{
     font-size: 15px;
 }
 .footer-container {
-/* 1. Kích hoạt Flexbox */
    display: flex;
-/* 2. Căn đều theo chiều ngang */
    justify-content: space-between; /* Đẩy cột trái/phải ra 2 lề */
-/* 3. Cho phép xuống hàng trên điện thoại */
    flex-wrap: wrap;
-/* Giới hạn chiều rộng và căn giữa */
    max-width: 1200px;
    margin: 0 auto;
    padding: 0 20px; /* Thêm đệm 2 bên */
 }   
-/* * Áp dụng style cho cả 3 cột
-* Bạn có thể gộp 3 class lại để đỡ lặp code
-*/
+/* * Áp dụng style cho cả 3 cột*/
 .footer-column-left,
 .footer-column-center,
 .footer-column-right {
-/* 4. Cho phép các cột co giãn */
     flex: 1;
-/* 5. Chiều rộng tối thiểu trước khi xuống hàng */
+    /* 5. Chiều rộng tối thiểu trước khi xuống hàng */
     min-width: 280px;
     margin: 20px; /* Tạo khoảng cách giữa các cột */
 }
-/* --- Các style trang trí (giống các ví dụ trước) --- */
 .footer h3 {
     color: #ffffff;
     margin-bottom: 25px;

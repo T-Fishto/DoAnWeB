@@ -1,21 +1,21 @@
 <?php
-session_start();
+   session_start();
 
-$payment_success = isset($_GET['payment']) && $_GET['payment'] == 'success';
+   $payment_success = isset($_GET['payment']) && $_GET['payment'] == 'success';
 
-$cart_items = [];
-$tong_phu = 0;
-$phi_van_chuyen = 25000; 
+   $cart_items = [];
+   $tong_phu = 0;
+   $phi_van_chuyen = 25000; 
 
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $cart_items = $_SESSION['cart'];
     // Tính tổng ban đầu (giả định tất cả được check)
     foreach ($cart_items as $item) {
         $thanh_tien_item = (float)$item['price'] * (int)$item['quantity'];
         $tong_phu += $thanh_tien_item;
+      }
     }
-}
-$tong_cong = $tong_phu + $phi_van_chuyen;
+    $tong_cong = $tong_phu + $phi_van_chuyen;
 ?>
 
 <!DOCTYPE html>
@@ -27,10 +27,6 @@ $tong_cong = $tong_phu + $phi_van_chuyen;
     <link rel="stylesheet" href="css/gio_hang.css"> 
     <script src="js/giohang.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        .summary-line.total-line { border-top: 1px dashed #ccc; padding-top: 10px; margin-top: 10px; }
-        .summary-line.total-line .summary-total { font-size: 1.2em; font-weight: 700; color: var(--orange); }
-    </style>
 </head>
 <body>
 
