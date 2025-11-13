@@ -36,7 +36,7 @@
             header("Location: danhsachsanpham.php?msg=deleted");
             exit();
         }
-    }
+    }   
 
     function display_products($result)
     {

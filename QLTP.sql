@@ -155,6 +155,10 @@ VALUES
 (1, 'Mì Quảng', 30000.00, 'images/ads/hinhanh4.png'),
 (1, 'Phở Hà Nội', 30000.00, 'images/ads/hinhanh5.png'),
 (1, 'Cơm gà xối mỡ', 45000.00, 'images/ads/hinhanh6.png'),
+(1, 'Bánh mì chảo', 40000.00, 'images/ads/monan1.jpg'), 
+(1, 'Hủ tiếu Nam Vang', 35000.00, 'images/ads/monan2.jpg'), 
+(1, 'Bánh canh cua', 45000.00, 'images/ads/monan3.jpg'), 
+(1, 'Cơm tấm sườn bì chả', 50000.00, 'images/ads/monan4.png'),
 (2, 'Trà me muối ớt', 30000.00, 'images/ads/hinhanh11.png'),
 (2, 'Trà sữa truyền thống', 30000.00, 'images/ads/hinhanh12.png'),
 (2, 'Hồng trà bí đao', 25000.00, 'images/ads/hinhanh13.png'),
@@ -162,10 +166,19 @@ VALUES
 (2, 'Matcha latte', 30000.00, 'images/ads/hinhanh15.png'),
 (2, 'Trà nhiệt đới', 25000.00, 'images/ads/hinhanh16.png'),
 (2, 'Hồng trà trân châu', 25000.00, 'images/ads/hinhanh17.png'),
+(2, 'Cà phê sữa', 20000.00, 'images/ads/nuoc1.jpg'), 
+(2, 'Nước ép cam', 25000.00, 'images/ads/nuoc2.jpg'), 
+(2, 'Sữa chua dâu', 30000.00, 'images/ads/nuoc3.jpg'),
 (3, 'Bánh tráng trộn', 20000.00, 'images/ads/hinhanh7.png'),
 (3, 'Bánh tráng da heo tốp mỡ', 20000.00, 'images/ads/hinhanh9.png'),
 (3, 'Cơm cháy Chà Bông', 20000.00, 'images/ads/hinhanh8.png'),
-(3, 'Đồ chiên', 5000.00 / 1, 'images/ads/hinhanh10.png');
+(3, 'Đồ chiên', 5000.00, 'images/ads/hinhanh10.png'),
+(3, 'Xoài lắc', 20000.00, 'images/ads/hinhanh21.jpg'),
+(3, 'Khoai tây chiên', 25000.00, 'images/ads/hinhanh22.jpg'), 
+(3, 'Phô mai que', 25000.00, 'images/ads/hinhanh23.jpg'), 
+(3, 'Cá viên chiên', 20000.00, 'images/ads/hinhanh24.png'), 
+(3, 'Bò bía', 15000.00, 'images/ads/hinhanh25.jpg'), 
+(3, 'Gỏi cuốn', 25000.00, 'images/ads/hinhanh26.jpg');
 
 --
 -- Dumping data for table `nguoi_dung`
