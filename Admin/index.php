@@ -23,63 +23,95 @@
 
 <body>
     <section class="top">
-        <div class="container">
-            <div class="row justify-content">	
+    <div class="container">
+        <div class="row justify-content"> 
+            
+            <div class="top-left-group">
+                
                 <div class="logo">
                     <img src="images/Font/logoNB.jpg" alt="">
-                </div>     
-
-                <div class="menu_bar">
-                    <span></span> 
                 </div>
+                
+                <?php
+                // --- SỬA LẠI LOGIC HIỂN THỊ ---
+                if (isset($_SESSION['MaNguoiDung']) && isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1) {
+                    // ---- ĐÃ ĐĂNG NHẬP (ADMIN) ----
+                    // 1. Hiển thị "Xin chào"
+                    echo '<div class="user-welcome-header">';
+                    echo '    <span class="welcome-text">Xin chào, Admin</span>';
+                    echo '    <span class="user-name">' . htmlspecialchars($_SESSION['HoVaTen']) . '</span>';
+                    echo '</div>';
 
-                <div class="menu-Items">
-                    <li class="menu-items1">
-                        <span>Coffee NB</span> 
-                        <i class="fa-solid fa-mug-hot"></i>
-                    </li>        
-                    <li class="menu-items">
-                        <i class="fa-solid fa-circle-info ic"></i>
-                        <a href="">Thông Tin</a>
-                    </li>
-                    <?php
-                    if (isset($_SESSION['MaNguoiDung'])) 
-                    {                      
-                        if ($_SESSION['VaiTro'] == 1) 
-                        {
-                            echo '<li class="menu-items">';
-                            echo '    <i class="ti-user ic"></i>';
-                            echo '    <a href="indexnguoidung.php">Người Dùng</a>';
-                            echo '</li>';
-                        } 
+                } else {
+                    // ---- CHƯA ĐĂNG NHẬP ----
+                    echo '<li class="top_login">';
+                    echo '    <a href="dangnhap.php">';
+                    echo '        <i class="ti-user ic"></i>';
+                    echo '        <span>Đăng Nhập</span>'; 
+                    echo '    </a>';
+                    echo '</li>';
+                }
+                // --- KẾT THÚC SỬA LOGIC ---
+                ?>
+            </div> 
 
-                        echo '<li class="menu-items">';
-                        echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
-                        echo '    <a href="danhsachsanpham.php">Sản Phẩm</a>';
-                        echo '</li>';
+            <div class="top_right">
+                <div class="menu_bar"> 
+                    <span></span> 
+                </div> 
+            </div> 
+            
+            <div class="menu-Items">
+                <li class="menu-items1">
+                    <span>Coffee NB</span> 
+                    <i class="fa-solid fa-mug-hot"></i>
+                </li> 
+                <li class="menu-items">
+                    <i class="fa-solid fa-circle-info ic"></i>
+                    <a href="">Thông Tin</a>
+                </li>
+                <li class="menu-items">
+                    <i class="fa-solid fa-thumbs-up ic"></i>
+                    <a href="#footer">Liên Hệ</a>
+                </li>
+                <li class="menu-items">
+                    <i class="fa-solid fa-child-reaching ic"></i>
+                    <a href="#about">Về Chúng Tôi</a>
+                </li>
 
-                        echo '<li class="menu-items">';
-                        echo '    <i class="fa-solid fa-chart-simple ic"></i>';
-                        echo '    <a href="">Thống kê</a>';
-                        echo '</li>';
-
-                        echo '<li class="menu-items">';
-                        echo '    <i class="ti-share ic"></i>';
-                        echo '    <a href="dangxuat.php">Đăng Xuất</a>';
-                        echo '</li>';
-
-                    }
-                     else 
+                <?php
+                // --- SỬA LẠI: CHỈ HIỂN THỊ LINK KHI ĐÃ ĐĂNG NHẬP ---
+                if (isset($_SESSION['MaNguoiDung'])) 
+                { 
+                    if ($_SESSION['VaiTro'] == 1) 
                     {
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-user ic"></i>';
-                        echo '    <a href="dangnhap.php">Đăng Nhập</a>';
+                        echo '    <a href="indexnguoidung.php">Người Dùng</a>';
                         echo '</li>';
-                    }
-                    ?>
-                </div>
+                    } 
+
+                    echo '<li class="menu-items">';
+                    echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
+                    echo '    <a href="danhsachsanpham.php">Sản Phẩm</a>';
+                    echo '</li>';
+
+                    echo '<li class="menu-items">';
+                    echo '    <i class="fa-solid fa-chart-simple ic"></i>';
+                    echo '    <a href="">Thống kê</a>';
+                    echo '</li>';
+
+                    // Nút Đăng Xuất nằm ở đây
+                    echo '<li class="menu-items">';
+                    echo '    <i class="ti-share ic"></i>';
+                    echo '    <a href="dangxuat.php">Đăng Xuất</a>';
+                    echo '</li>';
+                }
+                // Khối "Đăng Nhập" đã bị xóa khỏi đây
+                ?>
             </div>
         </div>
+    </div>
     </section>
 
     <section class="big-image">
@@ -126,7 +158,7 @@
         <div class="about-us-container">
             <div class="about-us-image"></div>
 
-            <div class="about-us-content">
+            <div id="about" class="about-us-content">
                 <h2>NB FOOD VIETNAM</h2>
                 <span class="decorator-line"></span>
                 <p>

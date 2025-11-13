@@ -1,564 +1,640 @@
+/* --- Imports và Cài đặt chung (Global) --- */
 @import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&family=BBH+Sans+Bogle&family=Momo+Signature&display=swap');
+
 *{
-    margin: 0;
-    padding: 0;
-    outline: none; 
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-a{
-    text-decoration: none;
-    list-style-type: none;
-}
-
-#span{
-    color: rgb(255, 0, 0);
-    font-size: 20px;
-    font-weight: bold;
-    font-family: "Momo Signature", cursive;
-
-}
-
-:root{
-    --main-color: #191F3A;
-    --sup-color : #EAA023;
-    --text-color : #fff;
-
-}
-
-.btn{
-    background-color: transparent;
-    padding: 15px 30px;
-    border: 2px solid var(--sup-color);
-    border-radius: 50px;
-    color: var(--text-color);
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.btn:hover{
-    background-color: var(--sup-color);
-    color: var(--main-color);
-    transition: all 0.3s ease;
-}
-
-.justify-content{
-    justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  outline: none; 
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-ul{
-    list-style: none;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
 
 a{
-    text-decoration: none;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+ul{
+  list-style: none;
 }
 
 li{
-    list-style: none;
+  list-style: none;
+}
+
+/* --- Biến màu (CSS Variables) --- */
+:root{
+  --main-color: #191F3A;
+  --sup-color : #EAA023;
+  --text-color : #fff;
+}
+
+/* --- Lớp CSS tiện ích (Utility Classes) --- */
+.btn{
+  background-color: transparent;
+  padding: 15px 30px;
+  border: 2px solid var(--sup-color);
+  border-radius: 50px;
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background-color: var(--sup-color);
+  color: var(--main-color);
+  transition: all 0.3s ease;
+}
+
+.justify-content{
+  justify-content: space-between;
 }
 
 .container {
-    margin: auto;
-    max-width: 1200px;
-}
-
-.top .logo{
-    padding: 10px 0 0 0;
-    position: relative;
-}
-
-.top .logo img{
-    width: 50px;
-    border-radius: 50%;
+  margin: auto;
+  max-width: 1200px;
 }
 
 .row{
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+/* --- Phần Top (Header) --- */
 .top {
-    background-color: transparent;
-    position: fixed;
-    width: 100%; 
-    z-index: 99;
+  background-color: transparent;
+  position: fixed;
+  width: 100%; 
+  z-index: 99;
 }
 
+/* Hiệu ứng đổi màu nền header khi cuộn */
 .top::before{
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: var(--main-color);
-    z-index: -1;
-    transform: translateY(-100%); 
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--main-color);
+  z-index: -1;
+  transform: translateY(-100%); 
 }
 
 .top.active::before{
-    transform: translateY(0);   
-    transition: all 0.3s ease;
+  transform: translateY(0);  
+  transition: all 0.3s ease;
 }
 
-.menu-Items .menu-items1{
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 25px;
-    font-weight: bold;
-    line-height: 68.44px;
-    width: 250px;
-    height: 68.44px;
+/* --- Header: Logo --- */
+.top .logo{
+  padding: 10px 0 0 0;
+  position: relative;
 }
 
-.menu-Items .menu-items1 span{
-    color: var(--sup-color);
-    margin-left: 70px;
-    font-family: "Momo Signature", cursive;
+.top .logo img{
+  width: 50px;
+  border-radius: 50%;
 }
 
-.fa-mug-hot{
-    color: #fff;
-    font-size:35px;
+/* --- Header: Nhóm Trái (Logo + Welcome/Login) --- */
+.top-left-group {
+  display: flex;
+  align-items: center; 
+  z-index: 101; /* LỚP 101 (Nằm trên) */
+  position: relative; 
 }
 
+/* --- Header: Nhóm Phải (Menu Bar) --- */
+.top_right {
+  display: flex;
+  align-items: center; 
+  z-index: 101; /* LỚP 101 (Nằm trên) */
+}
+
+/* --- Header: Nút Đăng Nhập --- */
+.top_login {
+  margin-left: 20px; 
+  list-style: none;
+}
+.top_login a {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background-color: var(--sup-color);
+  color: var(--text-color); 
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 140px; 
+}
+.top_login .ic {
+  font-size: 18px;
+  color: var(--text-color);
+  margin-right: 8px;
+  padding: 0; 
+}
+.top_login a span {
+  line-height: 1; 
+}
+.top_login a:hover {
+  background-color: var(--text-color);
+  color: var(--main-color);
+}
+.top_login a:hover .ic {
+  color: var(--main-color);
+}
+
+/* --- Header: Lời chào User/Admin --- */
+.user-welcome-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px; 
+  color: var(--text-color);
+}
+.user-welcome-header .welcome-text {
+  font-size: 13px;
+  color: #ccc;
+}
+.user-welcome-header .user-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--sup-color); /* Màu vàng cam */
+}
+
+/* --- Header: Nút Menu Bar (Hamburger) --- */
 .top .menu_bar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
 }
 
 .top .menu_bar.active{
-    position: fixed;
-    top: 30px;
-    right: 0;
-    transform: translateX(-200px);
+  position: fixed;
+  top: 30px;
+  right: 0;
+  transform: translateX(-200px);
 }
 
 .top .menu_bar span{
-    height: 2px;
-    width: 30px;
-    background-color: var(--sup-color);
-    position: relative;
-    cursor: pointer;
-
+  height: 2px;
+  width: 30px;
+  background-color: var(--sup-color);
+  position: relative;
+  cursor: pointer;
 }
 
 .top .menu_bar span::before{
-    content: "";
-    position: absolute;
-    display: block;
-    transform: translateY(-10px);
-    height: 100%;
-    width: 100%;
-    background-color: var(--sup-color); 
-    transition: all 0.3s ease;
+  content: "";
+  position: absolute;
+  display: block;
+  transform: translateY(-10px);
+  height: 100%;
+  width: 100%;
+  background-color: var(--sup-color); 
+  transition: all 0.3s ease;
 }
 
 .top .menu_bar span::after{
-    content: "";
-    position: absolute;
-    display: block;
-    transform: translateY(10px);
-    height: 100%;
-    width: 100%;
-    background-color: var(--sup-color); 
-    transition: all 0.3s ease;
+  content: "";
+  position: absolute;
+  display: block;
+  transform: translateY(10px);
+  height: 100%;
+  width: 100%;
+  background-color: var(--sup-color); 
+  transition: all 0.3s ease;
 }
 
+/* Hiệu ứng Nút Menu Bar (dấu X) */
 .top .menu_bar.active span{
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .top .menu_bar.active span::before{
-    transform:  rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .top .menu_bar.active span::after{
-    transform:  rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
-.timkiem{
-    background-color: #fff;
-}
-
+/* --- Thanh Menu Trượt (Sidebar) --- */
 .menu-Items{
-    position: fixed;
-    width: 250px;
-    height: 100vh;
-    background-color: var(--main-color);
-    top: 0;
-    right: 0;
-    padding: 70px 20px;
-    transform: translateX(100%);
-}
-
-.menu-Items a{
-   color: var(--text-color);
-   line-height: 50px;
-   font-size: 20px;
-   z-index: 10;
-}
-
-.menu-Items a:hover{
-    color: var(--sup-color);
-    text-decoration: underline;
-    transition: all 0.3s ease;
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--main-color);
+  top: 0;
+  right: 0;
+  padding: 70px 20px;
+  transform: translateX(100%);
 }
 
 .menu-Items.active {
-    transform: translateX(0);
-    transition: transform 0.3s ease;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
 } 
 
+.menu-Items .menu-items1{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 68.44px;
+  width: 250px;
+  height: 68.44px;
+}
+
+.menu-Items .menu-items1 span{
+  color: var(--sup-color);
+  margin-left: 70px;
+  font-family: "Momo Signature", cursive;
+}
+
+.menu-Items a{
+ color: var(--text-color);
+ line-height: 50px;
+ font-size: 20px;
+ z-index: 10;
+}
+
+.menu-Items a:hover{
+  color: var(--sup-color);
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+/* Icon chung trong menu */
 .ic{
-    font-size: 20px;
-    padding: 0 10px;
-    color: #fff;
+  font-size: 20px;
+  padding: 0 10px;
+  color: #fff;
 }
 
-.fa-fire{
-    color: red;
-    font-size: 30px;
-    display: inline;
+.fa-mug-hot{
+  color: #fff;
+  font-size:35px;
 }
 
+/* --- Banner Chính (Big Image / Hero) --- */
 .big-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; 
 }
 
-.big-image::before{
-    content: "";
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;   
-    bottom: 0;  
-    width: 100%;
-    height: 100%;
-    background-image: url("../images/Font/baner.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: -2;
-    animation: Inout 5s infinite;
+.big-image::before{ /* Lớp ảnh nền */
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;  
+  bottom: 0; 
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/Font/baner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -2;
+  animation: Inout 5s infinite;
 }
 
 @keyframes Inout {
-    0%,100%{
-        transform: scale(1);
-    }
-    50%{
-        transform: scale(1.1);
-    } 
+  0%,100%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  } 
 }
 
-.big-image::after{
-    content:"";
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.5;
-    z-index: -2;
+.big-image::after{ /* Lớp phủ mờ */
+  content:"";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: -2;
 }
 
 .big-image .big-content{
-    text-align: center;
-    max-width: 500px;
-
+  text-align: center;
+  max-width: 500px;
 }
 
 .big-image .big-content h2{
-    color: var(--text-color);
-    font-size: 50px;
-    font-family: "Momo Signature", cursive;
+  color: var(--text-color);
+  font-size: 50px;
+  font-family: "Momo Signature", cursive;
 }
 
 .big-image .big-content p{
-    color: var(--text-color);
-    font-size: 20px;
-    font-weight: bold;
-    margin: 20px 0;
-    font-family: "Momo Signature", cursive;
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0;
+  font-family: "Momo Signature", cursive;
 }
 
+/* --- Tiêu đề "Các món ăn nổi bậc" --- */
+#span{
+  color: rgb(255, 0, 0);
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Momo Signature", cursive;
+}
+
+.fa-fire{
+  color: red;
+  font-size: 30px;
+  display: inline;
+}
+
+/* --- Lưới Sản Phẩm (Phần Giữa) --- */
 .phangiua{
-    display:flex;
-    flex-wrap: wrap;
-    max-width: 1400px;
-    margin: 0 auto;
+  display:flex;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.item{  
-    width: 18%;
-    margin: 1%;
-    box-sizing: border-box;
-    border: 2px solid #fcfcfc;
-    border-radius: 8px; 
-    box-shadow: 
-        5px 5px 10px #bebebe,
-        -5px -5px 10px #ffffff;
-    transition: all  0.5s ease-in; 
-    cursor: pointer;
+.item{ 
+  width: 18%;
+  margin: 1%;
+  box-sizing: border-box;
+  border: 2px solid #fcfcfc;
+  border-radius: 8px; 
+  box-shadow: 
+    5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  transition: all 0.5s ease-in; 
+  cursor: pointer;
 }
 
-.item:hover{  
-    transform: scale(1.1);
+.item:hover{ 
+  transform: scale(1.1);
 }
 
 .item h4{
-    text-align: center;
+  text-align: center;
 }
 
 .item img{
-    height: 150px;
-    object-fit: cover;  
-    border-radius: 20px;
-    display: block;
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 10px;
+  height: 150px;
+  object-fit: cover; 
+  border-radius: 20px;
+  display: block;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 10px;
 }
 
+/* --- Phần About Us --- */
 .about-us {
-    width: 100%;
-    margin-top: 40px;
-    background-color: #1a1a1a;
+  width: 100%;
+  margin-top: 40px;
+  background-color: #1a1a1a;
 }
 
 .about-us-container {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1400px;
-    margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .about-us-image {
-    flex: 1;
-    min-height: 450px;
-    background-image: url('../images/Font/anh_about.jpg');
-    background-size:contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  flex: 1;
+  min-height: 450px;
+  background-image: url('../images/Font/anh_about.jpg');
+  background-size:contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .about-us-content {
-    flex: 1;
-    color: #ffffff;
-    padding: 60px 40px;
-    box-sizing: border-box;
+  flex: 1;
+  color: #ffffff;
+  padding: 60px 40px;
+  box-sizing: border-box;
 }
 
 .about-us-content h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .about-us-content .decorator-line {
-    display: block;
-    width: 50px;
-    height: 3px;
-    background-color: #e53935;
-    margin-bottom: 30px;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #e53935;
+  margin-bottom: 30px;
 }
 
 .about-us-content p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #f0f0f0;
-    margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #f0f0f0;
+  margin-bottom: 20px;
 }
 
+/* Responsive cho About Us */
 @media (max-width: 768px) {
-    .about-us-image,
-    .about-us-content {
-        flex-basis: 100%; 
-    }
+  .about-us-image,
+  .about-us-content {
+    flex-basis: 100%; 
+  }
 }
 
+/* --- Phần How To Order (Cách Đặt Hàng) --- */
 .how-to-order {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #f9f9f9;
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
 }
 
 .how-to-order h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 .how-to-order .decorator-line {
-    display: block;
-    width: 50px;
-    height: 3px;
-    background-color: #e53935;
-    margin: 0 auto 40px auto;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #e53935;
+  margin: 0 auto 40px auto;
 }
 
 .how-to-order-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .order-step-card {
-    flex: 1;
-    min-width: 250px;
-    max-width: 300px; 
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    text-align: left;
-    transition: transform 0.3s ease;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px; 
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: left;
+  transition: transform 0.3s ease;
 }
 
 .order-step-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .order-step-card .step-icon {
-    font-size: 45px;
-    color: #333;
-    margin-bottom: 20px;
+  font-size: 45px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .order-step-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #222;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #222;
 }
 
 .order-step-card p {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
 }
-/* Footer */
-/* --- BẮT ĐẦU CSS CHO FOOTER --- */
+
+/* --- Phần Footer (Chân Trang) --- */
 .footer {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 50px 0 0 0;
-    font-size: 15px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 50px 0 0 0;
+  font-size: 15px;
 }
 .footer-container {
-   display: flex;
-   justify-content: space-between;
-   flex-wrap: wrap;
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 0 20px;
-}   
+ display: flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 20px;
+}  
 
 .footer-column-left,
 .footer-column-center,
 .footer-column-right {
-    flex: 1;
-    min-width: 280px;
-    margin: 20px;
+  flex: 1;
+  min-width: 280px;
+  margin: 20px;
 }
 
 .footer h3 {
-    color: #ffffff;
-    margin-bottom: 25px;
-    font-size: 18px;
-    text-transform: uppercase;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    display: inline-block;
+  color: #ffffff;
+  margin-bottom: 25px;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  display: inline-block;
 }
 
 .footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}  
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} 
 
 .footer ul li {
-    margin-bottom: 15px;
-    line-height: 1.6;
+  margin-bottom: 15px;
+  line-height: 1.6;
 }
 
 .footer ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer ul li a:hover {
-    color: #3498db;
+  color: #3498db;
 }
 
 .footer ul li i {
-    width: 25px;
-    margin-right: 10px;
-    color: #3498db;
-    text-align: center;
+  width: 25px;
+  margin-right: 10px;
+  color: #3498db;
+  text-align: center;
 }
 
+/* Footer: Mạng xã hội */
 .footer-social-list {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 .footer-social-list li a {
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    border: 1px solid #34495e;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border: 1px solid #34495e;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 .footer-social-list li a:hover {
-    background-color: #3498db;
-    border-color: #3498db;    
+  background-color: #3498db;
+  border-color: #3498db;  
 }
 .footer-social-list li a i {
-    font-size: 20px;
-    margin-right: 8px;
-    width: auto;    
+  font-size: 20px;
+  margin-right: 8px;
+  width: auto;  
 }
 
+/* Footer: Dòng Copyright */
 .footer-bottom {
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
-    border-top: 1px solid #34495e;
-    font-size: 13px;
-    color: #95a5a6;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 30px;
+  border-top: 1px solid #34495e;
+  font-size: 13px;
+  color: #95a5a6;
 }

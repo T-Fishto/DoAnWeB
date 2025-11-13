@@ -1,4 +1,4 @@
-    <footer class="footer">
+    <footer id="footer" class="footer">
         <div class="footer-container">
             <div class="footer-column-left">
                 <h3>Về Food & Drink</h3>
