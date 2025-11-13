@@ -1,21 +1,10 @@
 <?php
     session_start();
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "qltp";
-    
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    $conn->set_charset("utf8mb4");
-    
-    if ($conn->connect_error) 
-    {
-        die("Kết nối CSDL thất bại: " . $conn->connect_error);
-    }
+
+    require_once 'cauhinh.php';
 
     $sql = "SELECT * FROM quang_cao LIMIT 10";
-    $result = $conn->query($sql);
+    $result = $connect->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +118,7 @@
         {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
         }       
-        $conn->close();
+        $connect->close();
         ?>
     </div>
 
