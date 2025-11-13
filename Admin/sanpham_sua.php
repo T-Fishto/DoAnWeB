@@ -34,7 +34,6 @@
             if (move_uploaded_file($_FILES['hinh_anh_new']['tmp_name'], $target_file)) 
             {
                 $hinh_anh_new = $target_file; 
-                // Xóa ảnh cũ
                 if (!empty($hinh_anh_old) && file_exists($hinh_anh_old)) 
                 {
                     unlink($hinh_anh_old);
@@ -95,91 +94,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Sửa Sản Phẩm</title>
-    <link rel="stylesheet" href="css/menu.css"> 
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/sanpham_sua.css">
+    <link rel="stylesheet" href="css/footer.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <style>
-        .admin-form { 
-            max-width: 600px; 
-            margin: 50px auto; 
-            padding: 20px; 
-            border: 1px solid #ccc; 
-            border-radius: 8px; 
-            background-color: #f9f9f9; 
-        }
-
-        .admin-form h2 { 
-            text-align: center; 
-            color: #333; 
-        }
-
-        .form-group { 
-            margin-bottom: 15px; 
-        }
-
-        .form-group label { 
-            display: block; 
-            margin-bottom: 5px; 
-            font-weight: bold; 
-        }
-
-        .form-group input[type="text"], 
-        .form-group input[type="number"], 
-        .form-group select { 
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #ddd; 
-            border-radius: 4px; 
-            box-sizing: border-box; 
-        }
-
-        .form-group input[type="file"] { 
-            padding: 5px; 
-        }
-
-        .form-group button { 
-            background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; float: right; 
-            transition: background-color 0.3s ease;
-        }
-        
-        .form-group button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        .message { 
-            padding: 10px; 
-            margin-bottom: 15px; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            text-align: center; 
-        }
-
-        .success { 
-            background-color: #d4edda; 
-            color: #155724; 
-            border-color: #c3e6cb; 
-        }
-
-        .error { 
-            background-color: #f8d7da; 
-            color: #721c24; 
-            border-color: #f5c6cb; 
-        }
-
-        .current-image { 
-            text-align: center; 
-            margin-bottom: 15px; 
-        }
-
-        .current-image img { 
-            max-width: 100%; 
-            height: auto; 
-            border: 1px solid #ddd; 
-            padding: 5px; 
-            border-radius: 4px; 
-        }
-    </style>
 </head>
 <body>
     <div class="admin-form">
@@ -232,28 +151,11 @@
         <p style="text-align: center; margin-top: 20px;"><a href="danhsachsanpham.php"><i class="fas fa-arrow-left"></i> Quay lại Menu</a></p>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() 
-        { 
-            const updateButton = document.getElementById('update-btn');         
-            const formInputs = document.querySelectorAll('.form-control');
-            function enableButton() 
-            {
-                updateButton.disabled = false;
-            }
-            
-            formInputs.forEach(function(input) 
-            {
-                if (input.type === 'file') 
-                {
-                    input.addEventListener('change', enableButton);
-                } 
-                else 
-                {
-                    input.addEventListener('input', enableButton);
-                }
-            });
-        });
-    </script>
+    <script src="../js/sanpham_sua.js" defer></script>
+
+    <?php 
+        require_once '../Footer/footer.php'; 
+    ?>
+
 </body>
 </html>
