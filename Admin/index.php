@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     $servername = "localhost";
@@ -24,7 +23,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Food & Drink</title>
+
     <link rel="stylesheet" href="css/giaodien.css">
+    <link rel="stylesheet" href="css/footer.css">
+
     <link rel="stylesheet" href="images/Font/themify-icons/themify-icons.css" referrerpolicy="no-referrer" />
     <script src="js/giaodien.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -80,7 +82,6 @@
                     }
                      else 
                     {
-                        //  Hiển thị "Đăng Nhập" nếu chưa đăng nhập
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-user ic"></i>';
                         echo '    <a href="dangnhap.php">Đăng Nhập</a>';
@@ -187,62 +188,10 @@
             </div>
         </div>
     </section>
+    
+    <?php 
+        require_once '../Footer/footer.php'; 
+    ?>
 
-   <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-column-left">
-                <h3>Về Food & Drink</h3>
-                <ul>
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Coffee NB, 55 2 Phường Mỹ Xuyên,Thành Phố Long Xuyên,An Giang</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-phone-alt"></i>
-                        <a href="tel:0123456789">0123456789</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-column-center">
-                <h3>Liên hệ Email</h3>
-                <ul>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <a href="https://mail.google.com/ " target="_blank">thang_dpm235479@student.agu.edu.vn</a>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <a href="https://mail.google.com/" target="_blank">thanh_dpm235480@student.agu.edu.vn</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-column-right social-column"> <h3>Theo dõi chúng tôi</h3>
-                <ul class="footer-social-list">
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                            <span>Facebook</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/" target="_blank">
-                            <i class="fa-solid fa-cat"></i>
-                            <span>GitHub</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-        <div class="footer-bottom">
-            Bản Quyền Bởi © 2025 - Website Food & Drink
-        </div>
-    </footer>
 </body>
 </html>

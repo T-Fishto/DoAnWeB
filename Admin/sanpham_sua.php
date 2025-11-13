@@ -1,18 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "qltp";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) 
-    {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-    $conn->set_charset("utf8mb4");
-
+    require_once 'cauhinh.php';
 
     if (!isset($_SESSION['VaiTro']) || $_SESSION['VaiTro'] != 1 || !isset($_GET['id'])) 
     {
@@ -20,7 +9,7 @@
         exit();
     }
 
-    $product_id = $conn->real_escape_string($_GET['id']);
+    $product_id = $connect->real_escape_string($_GET['id']);
     $message = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -59,7 +48,7 @@
 
         if (empty($message)) 
         {
-            $stmt = $conn->prepare("UPDATE san_pham SET id_danh_muc = ?, ten_san_pham = ?, gia = ?, hinh_anh = ? WHERE id_san_pham = ?");
+            $stmt = $connect->prepare("UPDATE san_pham SET id_danh_muc = ?, ten_san_pham = ?, gia = ?, hinh_anh = ? WHERE id_san_pham = ?");
             $stmt->bind_param("isdsi", $id_danh_muc, $ten_san_pham, $gia, $hinh_anh_new, $product_id);
 
             if ($stmt->execute()) 
@@ -75,7 +64,7 @@
     }
 
     $sql_sp = "SELECT * FROM san_pham WHERE id_san_pham = ?";
-    $stmt_sp = $conn->prepare($sql_sp);
+    $stmt_sp = $connect->prepare($sql_sp);
     $stmt_sp->bind_param("i", $product_id);
     $stmt_sp->execute();
     $result_sp = $stmt_sp->get_result();
@@ -88,7 +77,7 @@
     $stmt_sp->close();
 
     $sql_dm = "SELECT id_danh_muc, ten_danh_muc FROM danh_muc ORDER BY id_danh_muc";
-    $result_dm = $conn->query($sql_dm);
+    $result_dm = $connect->query($sql_dm);
     $danh_muc_options = "";
     if ($result_dm->num_rows > 0) 
     {
@@ -98,7 +87,7 @@
             $danh_muc_options .= '<option value="' . $row['id_danh_muc'] . '" ' . $selected . '>' . htmlspecialchars($row['ten_danh_muc']) . '</option>';
         }
     }
-    $conn->close();
+    $connect->close();
 ?>
 
 <!DOCTYPE html>
