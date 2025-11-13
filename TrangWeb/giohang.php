@@ -7,13 +7,14 @@
    $tong_phu = 0;
    $phi_van_chuyen = 25000; 
 
-    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    $cart_items = $_SESSION['cart'];
-    // Tính tổng ban đầu (giả định tất cả được check)
-    foreach ($cart_items as $item) {
-        $thanh_tien_item = (float)$item['price'] * (int)$item['quantity'];
-        $tong_phu += $thanh_tien_item;
-      }
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) 
+    {
+        $cart_items = $_SESSION['cart'];
+        foreach ($cart_items as $item) 
+        {
+            $thanh_tien_item = (float)$item['price'] * (int)$item['quantity'];
+            $tong_phu += $thanh_tien_item;
+        }
     }
     $tong_cong = $tong_phu + $phi_van_chuyen;
 ?>
@@ -125,8 +126,10 @@
 
     <?php if ($payment_success): ?>
     <script>
-        setTimeout(function() {
-            if (confirm("Thanh toán thành công! Bạn có muốn quay lại trang Thực Đơn không?")) {
+        setTimeout(function() 
+        {
+            if (confirm("Thanh toán thành công! Bạn có muốn quay lại trang Thực Đơn không?")) 
+            {
                 window.location.href = 'danhsachsanpham.php';
             }
         }, 500);

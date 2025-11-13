@@ -1,21 +1,11 @@
 
 <?php
     session_start();
-    $servername = "localhost"; 
-    $username = "root"; 
-    $password = ""; 
-    $dbname = "qltp"; 
-    //Tạo kết nối
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    //Đặt charset là utf8mb4 để hiển thị tiếng Việt chính xác
-    $conn->set_charset("utf8mb4");
-    // Kiểm tra kết nối
-    if ($conn->connect_error) {
-        die("Kết nối CSDL thất bại: " . $conn->connect_error);
-    }
-    //Viết câu truy vấn SQL lấy 10 sản phẩm
+
+    require_once 'cauhinh.php';
+
     $sql = "SELECT * FROM quang_cao LIMIT 10";
-    $result = $conn->query($sql);
+    $result = $connect->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,21 +30,20 @@
                 </div>
                 
                 <?php
-                // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
-                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                    //Xin Chào
+                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) 
+                {
                     echo '<div class="user-welcome-header">';
                     echo '  <span class="welcome-text">Xin chào,</span>';
                     echo '  <span class="user-name">' . htmlspecialchars($_SESSION['HoVaTen']) . '</span>';
                     echo '</div>';
-                    // Hiện giỏ hàng
                     echo '<li class="top_login">';
                     echo '    <a href="giohang.php">';
                     echo '        <i class="fa-solid fa-cart-shopping"></i>';
                     echo '    </a>';
                     echo '</li>';
-                } else {
-                    // ---- CHƯA ĐĂNG NHẬP ----
+                } 
+                else 
+                {
                     echo '<li class="top_login">';
                     echo '    <a href="../Admin/dangnhap.php">';
                     echo '        <i class="ti-user ic"></i>';
@@ -85,9 +74,9 @@
                     <a href="#about">Về Chúng Tôi</a>
                 </li>
                 <?php
-                // Thêm nút Đăng Xuất vào ĐÂY nếu đã đăng nhập
-                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                    echo '<li class="menu-items">'; // Dùng class .menu-items cho đồng bộ
+                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) 
+                {
+                    echo '<li class="menu-items">';
                     echo '    <i class="ti-share ic"></i>';
                     echo '    <a href="../Admin/dangxuat.php">Đăng Xuất</a>';
                     echo '</li>';
@@ -110,14 +99,13 @@
           <span id="span">Các món ăn nổi bậc</span>               
         </li>
     </ul>     
-    <!-- Giữa Trang --> 
     <div class="phangiua">
         <?php
-        // Kiểm tra xem có dữ liệu trả về không
-        if ($result->num_rows > 0) {           
-            while($row = $result->fetch_assoc()) {
+        if ($result->num_rows > 0) 
+        {           
+            while($row = $result->fetch_assoc()) 
+            {
             echo '<div class="item">';       
-            // In ra dữ liệu trực tiếp từ $row
             echo '<a href="' . $row["duong_dan_lien_ket"] . '">';
             echo '    <img width="200" height="150" src="' . $row["hinh_anh_banner"] . '">';
             echo '</a>'; 
@@ -125,17 +113,16 @@
             echo '<p>' . $row["ten_mon"] . '</p>';
             echo '<p>⭐ ' . $row["so_sao"] . ' | 🕒 ' . $row["ngay"] . '</p>';
             echo '<p><strong>' . $row["tag"] . '</strong></p>';
-            // Kết thúc một "item"
             echo '</div>';  
             } 
         }
-        else {
+        else 
+        {
             echo "<p>Không có sản phẩm nào để hiển thị.</p>";
         }
-        $conn->close();
+        $connect->close();
         ?>
     </div>
-       <!-- Về menu và nhà hàng -->
     <section class="about-us">
         <div class="about-us-container">
             <div class="about-us-image">
@@ -162,7 +149,6 @@
         </div>
 
     </section> 
-    <!-- Giới thiệu cách hoạt động -->
     <section class="how-to-order">
         <h2>CÁCH ĐẶT HÀNG</h2>
         <span class="decorator-line"></span>
@@ -193,7 +179,6 @@
             </div>
         </div>
     </section>
-    <!-- Chân trang -->
    <footer id="footer"  class="footer">
         <div class="footer-container">
             <div class="footer-column-left">

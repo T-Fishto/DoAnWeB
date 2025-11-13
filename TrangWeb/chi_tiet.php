@@ -1,98 +1,95 @@
 <?php
-    session_start(); // Luôn bắt đầu session ở đầu file
+    session_start();
 
-    // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "qltp"; 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) { die("Kết nối thất bại: " . $conn->connect_error); }
-    $conn->set_charset("utf8");
+    require_once 'cauhinh.php';
 
-    // --- 2. XỬ LÝ KHI NGƯỜI DÙNG NHẤN NÚT "THÊM VÀO GIỎ" HOẶC "ĐẶT HÀNG NGAY" ---
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || isset($_POST['order_now']))) {
-    
-    // --- PHẦN A: LOGIC THÊM VÀO GIỎ HÀNG (Dùng chung cho cả 2 nút) ---
-    $product_id_to_add = $_POST['product_id'];
-    $product_name = $_POST['product_name'];
-    $product_price = $_POST['product_price'];
-    $product_image = $_POST['product_image'];
-    $quantity = (int)$_POST['quantity'];
-    $size = $_POST['size'];
-    $notes = $_POST['notes'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_POST['add_to_cart']) || isset($_POST['order_now']))) 
+    {
+        $product_id_to_add = $_POST['product_id'];
+        $product_name = $_POST['product_name'];
+        $product_price = $_POST['product_price'];
+        $product_image = $_POST['product_image'];
+        $quantity = (int)$_POST['quantity'];
+        $size = $_POST['size'];
+        $notes = $_POST['notes'];
 
-    $desc = "Size " . $size; 
-    $cart_item_id = $product_id_to_add . '_' . $size;
+        $desc = "Size " . $size; 
+        $cart_item_id = $product_id_to_add . '_' . $size;
 
-    $cart_item = [
-        'id' => $product_id_to_add,
-        'name' => $product_name,
-        'price' => $product_price,
-        'image' => $product_image,
-        'quantity' => $quantity,
-        'size' => $size,
-        'desc' => $desc,
-        'notes' => $notes 
-    ];
+        $cart_item = [
+            'id' => $product_id_to_add,
+            'name' => $product_name,
+            'price' => $product_price,
+            'image' => $product_image,
+            'quantity' => $quantity,
+            'size' => $size,
+            'desc' => $desc,
+            'notes' => $notes 
+        ];
 
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
+        if (!isset($_SESSION['cart'])) 
+        {
+            $_SESSION['cart'] = [];
+        }
+
+        if (isset($_SESSION['cart'][$cart_item_id])) 
+        {
+            $_SESSION['cart'][$cart_item_id]['quantity'] += $quantity;
+        } 
+        else
+        {
+            $_SESSION['cart'][$cart_item_id] = $cart_item;
+        }
+
+        if (isset($_POST['order_now'])) 
+        {
+            header("Location: giohang.php");
+            exit;
+            
+        } 
+        else 
+        {
+            $_SESSION['flash_message'] = "Đã thêm '" . $product_name . " (" . $desc . ")' vào giỏ hàng!";
+            header("Location: chi_tiet.php?id=" . $product_id_to_add);
+            exit;
+        }
     }
-
-    if (isset($_SESSION['cart'][$cart_item_id])) {
-        $_SESSION['cart'][$cart_item_id]['quantity'] += $quantity;
-    } else {
-        $_SESSION['cart'][$cart_item_id] = $cart_item;
-    }
-
-    // --- PHẦN B: LOGIC CHUYỂN HƯỚNG (Khác nhau) ---
-    if (isset($_POST['order_now'])) {
-        // NẾU BẤM "ĐẶT HÀNG NGAY" -> Chuyển thẳng đến giỏ hàng
-        header("Location: giohang.php");
-        exit;
-        
-    } else {
-        // NẾU BẤM "THÊM VÀO GIỎ" -> Gửi thông báo và tải lại trang
-        $_SESSION['flash_message'] = "Đã thêm '" . $product_name . " (" . $desc . ")' vào giỏ hàng!";
-        header("Location: chi_tiet.php?id=" . $product_id_to_add);
-        exit;
-    }
-}
-// --- 3. LẤY ID SẢN PHẨM TỪ URL VÀ KIỂM TRA ĐĂNG NHẬP ---
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $product = null;
 
-if (!isset($_SESSION['MaNguoiDung'])) {
+if (!isset($_SESSION['MaNguoiDung'])) 
+{
     $_SESSION['flash_message'] = "Bạn cần đăng nhập để xem chi tiết sản phẩm!";
     $redirect_url = "chi_tiet.php?" . $_SERVER['QUERY_STRING'];
     header("Location: ../Admin/dangnhap.php?redirect_url=" . urlencode($redirect_url));
     exit;
 }
 
-// --- 4. TRUY VẤN DỮ LIỆU SẢN PHẨM ---
-if ($product_id > 0) {
+if ($product_id > 0) 
+{
     $sql = "SELECT sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta, dm.ten_danh_muc 
             FROM san_pham sp 
             JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
             WHERE sp.id_san_pham = ?";
-    $stmt = $conn->prepare($sql);
+    $stmt = $connect->prepare($sql);
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
     $result = $stmt->get_result();
     
-    if ($result && $result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) 
+    {
         $product = $result->fetch_assoc();
     }
     $stmt->close();
 }
-if (!$product) {
+if (!$product) 
+{
     header("Location: danhsachsanpham.php"); 
     exit();
 }
-// 5. LẤY VÀ XÓA FLASH MESSAGE (thông báo nếu đăng hàng thành công)
 $flash_message = "";
-if (isset($_SESSION['flash_message'])) {
+if (isset($_SESSION['flash_message'])) 
+{
     $flash_message = $_SESSION['flash_message'];
     unset($_SESSION['flash_message']);
 }
@@ -112,10 +109,12 @@ if (isset($_SESSION['flash_message'])) {
     <i class="fa-solid fa-cart-shopping"></i>
     <?php
     $cart_count = 0;
-    if (isset($_SESSION['cart'])) {
+    if (isset($_SESSION['cart'])) 
+    {
         $cart_count = count($_SESSION['cart']);
     }
-    if ($cart_count > 0) {
+    if ($cart_count > 0) 
+    {
         echo '<span class="cart-item-count">' . $cart_count . '</span>';
     }
     ?>
@@ -128,7 +127,6 @@ if (isset($_SESSION['flash_message'])) {
         </a>
     </div>
 <?php endif; ?>
-
 
 <?php if ($product): ?>
 
@@ -205,6 +203,6 @@ if (isset($_SESSION['flash_message'])) {
         <p><a href="danhsachsanpham.php">Quay lại Menu</a></p>
     </div>
 <?php endif; ?>
-<?php $conn->close(); ?>
+<?php $connect->close(); ?>
 </body>
 </html>

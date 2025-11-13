@@ -1,15 +1,5 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "qltp";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-    $conn->set_charset("utf8");
+    require_once 'cauhinh.php';
 
     session_start();
 
@@ -17,9 +7,9 @@
 
     if ($is_admin && isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) 
     {
-        $id_san_pham_to_delete = $conn->real_escape_string($_GET['id']);
+        $id_san_pham_to_delete = $connect->real_escape_string($_GET['id']);
         $sql_img = "SELECT hinh_anh FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-        $result_img = $conn->query($sql_img);
+        $result_img = $connect->query($sql_img);
         if ($result_img->num_rows > 0) 
         {
             $row_img = $result_img->fetch_assoc();
@@ -31,7 +21,7 @@
         }
         
         $sql_delete = "DELETE FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-        if ($conn->query($sql_delete) === TRUE) 
+        if ($connect->query($sql_delete) === TRUE) 
         {
             header("Location: danhsachsanpham.php?msg=deleted");
             exit();
@@ -139,7 +129,7 @@
                                     FROM san_pham sp 
                                     JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                     WHERE dm.ten_danh_muc = 'Món ăn'";
-                        $result_mon_an = $conn->query($sql_mon_an);
+                        $result_mon_an = $connect->query($sql_mon_an);
                         display_products($result_mon_an);
                     ?>
                 </div>
@@ -153,7 +143,7 @@
                                     FROM san_pham sp 
                                     JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                     WHERE dm.ten_danh_muc = 'Nước giải khát'";
-                        $result_nuoc = $conn->query($sql_nuoc);
+                        $result_nuoc = $connect->query($sql_nuoc);
                         display_products($result_nuoc);
                     ?>
                 </div>
@@ -167,7 +157,7 @@
                                     FROM san_pham sp 
                                     JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                     WHERE dm.ten_danh_muc = 'Đồ ăn vặt'";
-                        $result_an_vat = $conn->query($sql_an_vat);
+                        $result_an_vat = $connect->query($sql_an_vat);
                         display_products($result_an_vat);
                         ?>
                 </div>
@@ -175,7 +165,7 @@
         </main>
     </div>
     <?php
-    $conn->close();
+    $connect->close();
     ?>
 
     <?php 

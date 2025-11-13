@@ -1,24 +1,12 @@
 <?php
-   // --- 1. KẾT NỐI CƠ SỞ DỮ LIỆU ---
-   $servername = "localhost"; 
-   $username = "root";
-   $password = "";           
-   $dbname = "qltp"; 
-   // Tạo kết nối
-   $conn = new mysqli($servername, $username, $password, $dbname);
-   // Kiểm tra kết nối
-   if ($conn->connect_error) {
-       die("Kết nối thất bại: " . $conn->connect_error);
-   }
-   $conn->set_charset("utf8");
+   require_once 'cauhinh.php';
 
-   //xử lý tìm kiếm
    $search_keyword = '';
    $search_condition = '';
 
    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
     // Làm sạch từ khóa tìm kiếm
-    $search_keyword = $conn->real_escape_string(trim($_GET['search']));
+    $search_keyword = $connect->real_escape_string(trim($_GET['search']));
     // Tạo điều kiện tìm kiếm: Tìm trong tên sản phẩm HOẶC mô tả
     $search_condition = " AND (sp.ten_san_pham LIKE '%$search_keyword%' OR dm.mo_ta LIKE '%$search_keyword%')";
    }
@@ -125,7 +113,7 @@ function display_products($result)
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                    WHERE dm.ten_danh_muc = 'Món ăn' " . $search_condition;
-                    $result_mon_an = $conn->query($sql_mon_an);
+                    $result_mon_an = $connect->query($sql_mon_an);
                     display_products($result_mon_an);
 
                     // Hiển thị thông báo nếu tìm kiếm không có kết quả trong danh mục này
@@ -145,7 +133,7 @@ function display_products($result)
                                  FROM san_pham sp 
                                  JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                  WHERE dm.ten_danh_muc = 'Nước giải khát' " . $search_condition;
-                    $result_nuoc = $conn->query($sql_nuoc);
+                    $result_nuoc = $connect->query($sql_nuoc);
                     display_products($result_nuoc);
                     
                     if (!empty($search_keyword) && $result_nuoc->num_rows == 0) {
@@ -164,7 +152,7 @@ function display_products($result)
                                    FROM san_pham sp 
                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
                                    WHERE dm.ten_danh_muc = 'Đồ ăn vặt' " . $search_condition;
-                    $result_an_vat = $conn->query($sql_an_vat);
+                    $result_an_vat = $connect->query($sql_an_vat);
                     display_products($result_an_vat);
                     
                     if (!empty($search_keyword) && $result_an_vat->num_rows == 0) {
@@ -176,7 +164,7 @@ function display_products($result)
         </main>
     </div>
     <?php
-    $conn->close();
+    $connect->close();
     ?>
 </body>
 </html>
