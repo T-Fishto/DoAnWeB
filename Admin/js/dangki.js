@@ -4,17 +4,14 @@ function validateForm()
     const confirmPassword = document.getElementById('confirmPassword').value;
     const errorElement = document.getElementById('errorMessage');
 
+    errorElement.textContent = '';
+    errorElement.classList.add('hidden');
+
     if (password !== confirmPassword) {
         errorElement.textContent = "Lỗi: Mật khẩu và Xác nhận mật khẩu không khớp!";
         errorElement.classList.remove('hidden');
-        return false;
+        return false; 
     } 
-    else 
-    {
-        errorElement.classList.add('hidden');
-                
-        console.log('Dữ liệu hợp lệ. Form sẵn sàng để gửi.');
-                                
-        return false;
-    }
+    
+    return true;
 }

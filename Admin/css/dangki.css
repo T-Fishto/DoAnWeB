@@ -12,17 +12,17 @@ body {
     padding: 50px 0;
 }
 
-.reristration-container {
+.registration-container {
     background-color: #fff;
     padding: 30px 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 380px; /* Chiều rộng tối đa của form */
+    max-width: 380px;
     text-align: center;
 }
 
-.reristration-container h1 {
+.registration-container h1 {
     color: #333;
     margin-bottom: 25px;
     font-size: 28px;
@@ -30,7 +30,7 @@ body {
 }
 
 .error-message {
-    color: #e74c3c; /* Màu đỏ cho thông báo lỗi */
+    color: #e74c3c;
     margin-bottom: 15px;
     font-size: 14px;
 }
@@ -48,12 +48,11 @@ body {
     font-weight: 600;
 }
 
-.form-group input[type="address"],
 .form-group input[type="tel"],
 .form-group input[type="email"],
 .form-group input[type="text"],
 .form-group input[type="password"] {
-    width: calc(100% - 20px); /* Trừ padding để input vừa khung */
+    width: calc(100% - 20px);
     padding: 12px 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -61,21 +60,20 @@ body {
     transition: border-color 0.3s ease;
 }
 
-.form-group input[type="address"]:focus,
 .form-group input[type="tel"]:focus,
 .form-group input[type="email"]:focus,
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus {
-    border-color: #6a11cb; /* Màu border khi focus */
-    outline: none; /* Bỏ outline mặc định */
+    border-color: #6a11cb;
+    outline: none;
 }
 
-.reristration-button {
+.registration-button {
     width: 100%;
     padding: 13px;
     border: none;
     border-radius: 5px;
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient màu nút */
+    background: linear-gradient(to right, #6a11cb, #2575fc);
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -83,8 +81,8 @@ body {
     transition: background 0.3s ease;
 }
 
-.reristration-button:hover {
-    background: linear-gradient(to right, #5a0eae, #1e5fc7); /* Đổi màu khi hover */
+.registration-button:hover {
+    background: linear-gradient(to right, #5a0eae, #1e5fc7);
 }
 
 .signup-link {
@@ -94,7 +92,7 @@ body {
 }
 
 .signup-link a {
-    color: #2575fc; /* Màu link Đăng ký */
+    color: #2575fc;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -103,4 +101,16 @@ body {
 .signup-link a:hover {
     color: #6a11cb;
     text-decoration: underline;
+}
+
+.ThongBaoLoi {
+    padding: 0;
+    margin: 0;
+    color: #ff0000;
+}
+
+.ThongBao {
+    padding: 0;
+    margin: 0;
+    color: #0000ff;
 }
