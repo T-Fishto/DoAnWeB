@@ -151,7 +151,30 @@
         <p style="text-align: center; margin-top: 20px;"><a href="danhsachsanpham.php"><i class="fas fa-arrow-left"></i> Quay lại Menu</a></p>
     </div>
 
-    <script src="../js/sanpham_sua.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() 
+        { 
+            const updateButton = document.getElementById('update-btn'); 
+            const formInputs = document.querySelectorAll('.form-control');
+            
+            function enableButton() 
+            {
+                updateButton.disabled = false;
+            }
+
+            formInputs.forEach(function(input) 
+            {
+                if (input.type === 'file') 
+                {
+                    input.addEventListener('change', enableButton);
+                } 
+                else 
+                {
+                    input.addEventListener('input', enableButton);
+                }
+            });
+        });
+    </script>
 
     <?php 
         require_once '../Footer/footer.php'; 
