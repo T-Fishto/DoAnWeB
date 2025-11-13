@@ -78,11 +78,11 @@
                 </li>
                 <li class="menu-items">
                     <i class="fa-solid fa-thumbs-up ic"></i>
-                    <a href="">Liên Hệ</a>
+                    <a href="#footer">Liên Hệ</a>
                 </li>
                 <li class="menu-items">
                     <i class="fa-solid fa-child-reaching ic"></i>
-                    <a href="">Về Chúng Tôi</a>
+                    <a href="#about">Về Chúng Tôi</a>
                 </li>
                 <?php
                 // Thêm nút Đăng Xuất vào ĐÂY nếu đã đăng nhập
@@ -141,7 +141,7 @@
             <div class="about-us-image">
                 </div>
             
-            <div class="about-us-content">
+            <div id="about" class="about-us-content">
                 <h2>NB FOOD VIETNAM</h2>
                 <span class="decorator-line"></span>
                 <p>
@@ -194,7 +194,7 @@
         </div>
     </section>
     <!-- Chân trang -->
-   <footer class="footer">
+   <footer id="footer"  class="footer">
         <div class="footer-container">
             <div class="footer-column-left">
                 <h3>Về Food & Drink</h3>
