@@ -1,17 +1,7 @@
 <?php
     session_start();
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "qltp";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) 
-    {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-    $conn->set_charset("utf8mb4");
+    require_once 'cauhinh.php';
 
     if (!isset($_SESSION['VaiTro']) || $_SESSION['VaiTro'] != 1) 
     {
@@ -51,7 +41,7 @@
 
         if (empty($message)) 
         {
-            $stmt = $conn->prepare("INSERT INTO san_pham (id_danh_muc, ten_san_pham, gia, hinh_anh, trang_thai) VALUES (?, ?, ?, ?, 1)");
+            $stmt = $connect->prepare("INSERT INTO san_pham (id_danh_muc, ten_san_pham, gia, hinh_anh, trang_thai) VALUES (?, ?, ?, ?, 1)");
             $stmt->bind_param("isds", $id_danh_muc, $ten_san_pham, $gia, $hinh_anh);
 
             if ($stmt->execute()) 
@@ -67,7 +57,7 @@
     }
 
     $sql_dm = "SELECT id_danh_muc, ten_danh_muc FROM danh_muc ORDER BY id_danh_muc";
-    $result_dm = $conn->query($sql_dm);
+    $result_dm = $connect->query($sql_dm);
     $danh_muc_options = "";
     if ($result_dm->num_rows > 0) 
     {
@@ -77,7 +67,7 @@
         }
     }
 
-    $conn->close();
+    $connect->close();
 ?>
 
 <!DOCTYPE html>

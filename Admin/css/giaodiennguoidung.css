@@ -5,7 +5,7 @@ margin: 0;
 padding: 0; 
 }
 
-header, footer { 
+header{ 
 background-color: #4CAF50;
 color: white; 
 padding: 15px 20px; 
@@ -30,11 +30,8 @@ header nav a:hover {
 opacity: 0.8;
 }
 
-main { min-height: 60vh; }
-footer {
-margin-top: 30px;
-box-shadow: none;
-border-top: 1px solid #e0e0e0;
+main { 
+    min-height: 60vh; 
 }
 
 .user-container { 

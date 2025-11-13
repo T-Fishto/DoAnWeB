@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/giaodiennguoidung.css">
+    <link rel="stylesheet" href="css/footer_quanly.css">
     <title>Trang Quản Trị</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,13 +81,14 @@
         ?>
     </main>
 
-    <footer>
-        <p>Bản quyền &copy; <?php echo date("Y"); ?>.</p>
-    </footer>
-
     <?php
         $connect->close();
         ob_end_flush();
     ?>
+
+    <?php
+        require_once '../Footer/footer.php'; 
+    ?>
+
 </body>
 </html>
