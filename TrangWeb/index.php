@@ -42,12 +42,12 @@
                 <?php
                 // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
                 if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                    echo '<li class="top_login">';
-                    echo '    <a href="../Admin/dangxuat.php">';
-                    echo '        <i class="ti-share ic"></i>';
-                    echo '        <span>Đăng Xuất</span>'; 
-                    echo '    </a>';
-                    echo '</li>';
+                    // echo '<li class="top_login">';
+                    // echo '    <a href="../Admin/dangxuat.php">';
+                    // echo '        <i class="ti-share ic"></i>';
+                    // echo '        <span>Đăng Xuất</span>'; 
+                    // echo '    </a>';
+                    // echo '</li>';
                     // Hiện giỏ hàng
                     echo '<li class="top_login">';
                     echo '    <a href="giohang.php">';
@@ -85,6 +85,15 @@
                     <i class="fa-solid fa-child-reaching ic"></i>
                     <a href="">Về Chúng Tôi</a>
                 </li>
+                <?php
+                // Thêm nút Đăng Xuất vào ĐÂY nếu đã đăng nhập
+                if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
+                    echo '<li class="menu-items">'; // Dùng class .menu-items cho đồng bộ
+                    echo '    <i class="ti-share ic"></i>';
+                    echo '    <a href="../Admin/dangxuat.php">Đăng Xuất</a>';
+                    echo '</li>';
+                }
+                ?>
             </div>
         </div>
     </div>

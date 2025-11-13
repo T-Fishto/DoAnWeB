@@ -6,7 +6,7 @@ padding: 0;
 }
 
 header{ 
-background-color: #4CAF50;
+background-color: #191F3A;
 color: white; 
 padding: 15px 20px; 
 text-align: center; 
@@ -63,7 +63,7 @@ vertical-align: middle;
 }
 
 .user-table th { 
-background-color: #4CAF50; 
+background-color: #323f6e; 
 color: white; 
 font-weight: 700; 
 } 
@@ -145,7 +145,7 @@ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 
 .form-container h3 { 
 color: #333; 
-border-bottom: 2px solid #4CAF50; 
+border-bottom: 2px solid #191F3A; 
 padding-bottom: 10px; 
 }
 
@@ -185,7 +185,7 @@ color: #777;
 .btn-submit { 
 display: inline-block; 
 padding: 10px 20px; 
-background-color: #4CAF50; 
+background-color: #191F3A; 
 color: white; 
 border: none; 
 border-radius: 5px; 
@@ -196,7 +196,7 @@ transition: background-color 0.2s;
 }
 
 .btn-submit:hover { 
-background-color: #45a049; 
+background-color: #f4820f; 
 }
 
 .error-box { 
@@ -252,7 +252,7 @@ box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 
 .dashboard-card i {
 font-size: 3em;
-color: #4CAF50; 
+color: #191F3A; 
 }
 
 .dashboard-card h3 {
