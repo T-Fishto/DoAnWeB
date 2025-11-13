@@ -60,13 +60,13 @@
                         {
                             echo '<li class="menu-items">';
                             echo '    <i class="ti-user ic"></i>';
-                            echo '    <a href="indexnguoidung.php">QL Người Dùng</a>';
+                            echo '    <a href="indexnguoidung.php">Người Dùng</a>';
                             echo '</li>';
                         } 
 
                         echo '<li class="menu-items">';
                         echo '    <i class="fa-solid fa-bowl-rice ic"></i>';
-                        echo '    <a href="danhsachsanpham.php">QL Sản Phẩm</a>';
+                        echo '    <a href="danhsachsanpham.php">Sản Phẩm</a>';
                         echo '</li>';
 
                         echo '<li class="menu-items">';
@@ -76,7 +76,7 @@
 
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-share ic"></i>';
-                        echo '    <a href="dangxuat.php">Đăng Xuất (' . $_SESSION['HoVaTen'] . ')</a>';
+                        echo '    <a href="dangxuat.php">Đăng Xuất</a>';
                         echo '</li>';
 
                     }
