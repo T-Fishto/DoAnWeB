@@ -149,6 +149,42 @@ li{
 .top_login a:hover .ic {
     color: var(--main-color);
 }
+/* Style cho khối "Xin chào" */
+.user-welcome-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px; 
+    color: var(--text-color);
+}
+.user-welcome-header .welcome-text {
+    font-size: 13px;
+    color: #ccc;
+}
+.user-welcome-header .user-name {
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--sup-color); /* Màu vàng cam */
+}
+.top_login.cart-button a {
+    background-color: transparent;
+    min-width: 40px; 
+    width: 40px; 
+    height: 40px; 
+    padding: 0; 
+    border: 1px solid var(--sup-color);
+}
+.top_login.cart-button .ic {
+    margin-right: 0; 
+    font-size: 16px;
+    color: var(--sup-color); 
+}
+.top_login.cart-button a:hover {
+    background-color: var(--sup-color);
+}
+.top_login.cart-button a:hover .ic {
+    color: var(--text-color);
+}
 /* Tiêu đề bên Nút Menu */
 .menu-Items .menu-items1{
     position: absolute;

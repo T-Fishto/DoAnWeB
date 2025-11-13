@@ -42,12 +42,11 @@
                 <?php
                 // Kiểm tra xem người dùng đã đăng nhập VÀ có VaiTro = 0 hay chưa
                 if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 0) {
-                    // echo '<li class="top_login">';
-                    // echo '    <a href="../Admin/dangxuat.php">';
-                    // echo '        <i class="ti-share ic"></i>';
-                    // echo '        <span>Đăng Xuất</span>'; 
-                    // echo '    </a>';
-                    // echo '</li>';
+                    //Xin Chào
+                    echo '<div class="user-welcome-header">';
+                    echo '  <span class="welcome-text">Xin chào,</span>';
+                    echo '  <span class="user-name">' . htmlspecialchars($_SESSION['HoVaTen']) . '</span>';
+                    echo '</div>';
                     // Hiện giỏ hàng
                     echo '<li class="top_login">';
                     echo '    <a href="giohang.php">';
@@ -68,10 +67,10 @@
                 <div class="menu_bar"> 
                     <span></span> 
                 </div> 
-            </div> <div class="menu-Items">
+            </div> 
+            <div class="menu-Items">
                 <li class="menu-items1">
-                    <span>Coffee NB</span> 
-                    <i class="fa-solid fa-mug-hot"></i>
+                    <span>Coffee NB</span> <i class="fa-solid fa-mug-hot"></i>
                 </li>
                 <li class="menu-items">
                     <i class="fa-solid fa-bowl-rice ic"></i>
