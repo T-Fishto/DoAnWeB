@@ -329,7 +329,7 @@ li{
     bottom: 0;  
     width: 100%;
     height: 100%;
-    background-image: url("../images/Font/baner.jpg");
+    background-image: url("../../images/Font/baner.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -432,7 +432,7 @@ li{
 .about-us-image {
     flex: 1; /* Chiếm 1/2 chiều rộng */
     min-height: 450px; /* Đặt chiều cao tối thiểu */
-    background-image: url('../images/Font/anh_about.jpg');
+    background-image: url('../../images/Font/anh_about.jpg');
     background-size:contain;
     background-position: center;
     background-repeat: no-repeat;
