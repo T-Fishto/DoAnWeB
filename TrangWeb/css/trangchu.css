@@ -220,7 +220,7 @@ li{
 }
 .top .menu_bar.active{
     position: fixed;
-    top: 30px;
+    top: 20px;
     right: 0;
     transform: translateX(-200px); /*Di chuyển thanh menu vào trong màn hình*/
 }
