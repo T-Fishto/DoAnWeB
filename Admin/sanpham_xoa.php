@@ -11,18 +11,29 @@
     {
 
         $product_id_to_delete = $_GET['id'];
+
         require_once 'cauhinh.php';
 
-        $sql = "DELETE FROM san_pham WHERE id_san_pham = ?";
-        $stmt = $connect->prepare($sql);
-
-        if ($stmt) 
+        $sqlct = "DELETE FROM chi_tiet_don_hang WHERE id_san_pham = ?";
+        $stmtct = $connect->prepare($sqlct);
+        if ($stmtct) 
         {
-            $stmt->bind_param("i", $product_id_to_delete);
+            $stmtct->bind_param("i", $product_id_to_delete);
 
-            $stmt->execute();
+            $stmtct->execute();
 
-            $stmt->close();
+            $stmtct->close();
+        }
+
+        $sqlsp = "DELETE FROM san_pham  WHERE id_san_pham = ?";
+        $stmtsp = $connect->prepare($sqlsp);
+        if ($stmtsp) 
+        {
+            $stmtsp->bind_param("i", $product_id_to_delete);
+
+            $stmtsp->execute();
+
+            $stmtsp->close();
         }
         
         $connect->close();
