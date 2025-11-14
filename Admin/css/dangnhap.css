@@ -28,7 +28,7 @@ body {
 
 .left-panel {
     flex: 1;
-    background-image: url('../images/Font/bg_login.jpg');
+    background-image: url('../../images/Font/bg_login.jpg');
     background-size: cover;
     background-position: center;
     padding: 40px;
