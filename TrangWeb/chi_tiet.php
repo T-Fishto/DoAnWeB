@@ -101,6 +101,7 @@ if (isset($_SESSION['flash_message']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($product['ten_san_pham']); ?></title>
     <link rel="stylesheet" href="css/menu_chitiet.css"> 
+    <link rel="stylesheet" href="css/footer.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/thongbao_giohang.css"> </head>
 <body>
@@ -199,5 +200,10 @@ if (isset($_SESSION['flash_message']))
     </div>
 <?php endif; ?>
 <?php $connect->close(); ?>
+
+<?php 
+    require_once '../Footer/footer.php'; 
+?>
+
 </body>
 </html>
