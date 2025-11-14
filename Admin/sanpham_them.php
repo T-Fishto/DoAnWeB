@@ -120,10 +120,5 @@
         <div style="clear: both;"></div>
         <p style="text-align: center; margin-top: 20px;"><a href="danhsachsanpham.php"><i class="fas fa-arrow-left"></i> Quay lại Menu</a></p>
     </div>
-
-    <?php 
-        require_once '../Footer/footer.php'; 
-    ?>
-
 </body>
 </html>

@@ -164,11 +164,6 @@ if (isset($_SESSION['flash_message']))
                     <label for="size-l">L</label>
                 </div>
             </div>
-            <div class="options-group">
-                <label>Ghi chú</label>
-                <input type="text" name="notes" placeholder="Thêm ghi chú món này" class="notes-input">
-            </div>
-
             <div class="options-group quantity-control">
                 <label>Số lượng:</label>
                 <div class="quantity-input-group">

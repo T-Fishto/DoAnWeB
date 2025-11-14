@@ -176,9 +176,5 @@
         });
     </script>
 
-    <?php 
-        require_once '../Footer/footer.php'; 
-    ?>
-
 </body>
 </html>
