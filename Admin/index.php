@@ -96,11 +96,6 @@
                     echo '    <a href="danhsachsanpham.php">Sản Phẩm</a>';
                     echo '</li>';
 
-                    echo '<li class="menu-items">';
-                    echo '    <i class="fa-solid fa-chart-simple ic"></i>';
-                    echo '    <a href="">Thống kê</a>';
-                    echo '</li>';
-
                     // Nút Đăng Xuất nằm ở đây
                     echo '<li class="menu-items">';
                     echo '    <i class="ti-share ic"></i>';
