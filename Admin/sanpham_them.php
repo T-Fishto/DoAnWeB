@@ -17,7 +17,7 @@
         $gia = $_POST['gia'];
         $id_danh_muc = $_POST['id_danh_muc'];
         $hinh_anh = null;
-        $upload_dir = '../images/sanpham/';
+        $upload_dir = '../images/ads/';
 
         if (isset($_FILES['hinh_anh']) && $_FILES['hinh_anh']['error'] == 0) 
         {
