@@ -119,16 +119,16 @@ CREATE TABLE IF NOT EXISTS `quang_cao` (
 -- Dumping data for table `quang_cao`
 --
 INSERT INTO `quang_cao` (`tieu_de`, `hinh_anh_banner`, `ten_mon`, `so_sao`, `ngay`, `tag`, `duong_dan_lien_ket`) VALUES
-('Bánh Tráng Trứng Cút', 'images/ads/banh_trang.jpg', 'Ăn trong hôm nay,siêu ngon', 4.0, '35 phút', 'NB ưu đãi bánh tráng', 'danhsachsanpham.php?id=1'),
-('Bún Bò Huế - Đặc Sản Huế', 'images/ads/bun_bo_hue.jpg', 'Món Nước ngon tuyệt vời', 4.5, '30 phút', 'Ưu đãi chào mừng đến NB', 'danhsachsanpham.php?id=2'),
-('Cơm Cháy Chà Bông', 'images/ads/com_chay.jpg', 'Món ăn vặt giòn tan', 4.2, '15 phút', '🔥 Mua 3 Tặng 1 🔥', 'danhsachsanpham.php?id=3'),
-('Gỏi Heo Tai Mũi (Gỏi Leo)', 'images/ads/goi_leo.jpg', 'Gỏi trộn chua ngọt', 4.6, '25 phút', '🎉 Món mới khao 15% 🎉', 'danhsachsanpham.php?id=4'),
-('Thịt Xiên Que Nướng', 'images/ads/thit_xien_que.jpg', 'Thơm lừng, nóng hổi', 4.3, '20 phút', '🍢 Mua 10 Tặng 2 🍢', 'danhsachsanpham.php?id=5'),
-('Nước Cam Vắt Tươi', 'images/ads/nuoc_camjpg.jpg', 'Vitamin C giải nhiệt', 4.7, '10 phút', '🍊 Tươi ngon mỗi ngày 🍊', 'danhsachsanpham.php?id=6'),
-('Matcha Latte', 'images/ads/matcha.jpg', 'Trà xanh Nhật Bản', 4.8, '20 phút', '💚 Đồng giá 39k 💚', 'danhsachsanpham.php?id=7'),
-('Trà Sữa Trân Châu', 'images/ads/tra_sua.jpg', 'Trà sữa truyền thống', 4.5, '25 phút', '🎁 Tặng topping trân châu 🎁', 'danhsachsanpham.php?id=8'),
-('Trà Trái Cây Nhiệt Đới', 'images/ads/tra_trai_cay.jpg', 'Giải khát mùa hè', 4.6, '20 phút', '☀️ Mua 2 Tính Tiền 1 ☀️', 'danhsachsanpham.php?id=9'),
-('Trà Sữa Cam Vàng', 'images/ads/tra-sua-cam.jpg', 'Hương vị mới lạ', 4.4, '25 phút', '🧡 Thử ngay vị mới 🧡', 'danhsachsanpham.php?id=10');
+('Bánh Tráng Trứng Cút', '../images/ads/banh_trang.jpg', 'Ăn trong hôm nay,siêu ngon', 4.0, '35 phút', 'NB ưu đãi bánh tráng', 'danhsachsanpham.php?id=1'),
+('Bún Bò Huế - Đặc Sản Huế', '../images/ads/bun_bo_hue.jpg', 'Món Nước ngon tuyệt vời', 4.5, '30 phút', 'Ưu đãi chào mừng đến NB', 'danhsachsanpham.php?id=2'),
+('Cơm Cháy Chà Bông', '../images/ads/com_chay.jpg', 'Món ăn vặt giòn tan', 4.2, '15 phút', '🔥 Mua 3 Tặng 1 🔥', 'danhsachsanpham.php?id=3'),
+('Gỏi Heo Tai Mũi (Gỏi Leo)', '../images/ads/goi_leo.jpg', 'Gỏi trộn chua ngọt', 4.6, '25 phút', '🎉 Món mới khao 15% 🎉', 'danhsachsanpham.php?id=4'),
+('Thịt Xiên Que Nướng', '../images/ads/thit_xien_que.jpg', 'Thơm lừng, nóng hổi', 4.3, '20 phút', '🍢 Mua 10 Tặng 2 🍢', 'danhsachsanpham.php?id=5'),
+('Nước Cam Vắt Tươi', '../images/ads/nuoc_camjpg.jpg', 'Vitamin C giải nhiệt', 4.7, '10 phút', '🍊 Tươi ngon mỗi ngày 🍊', 'danhsachsanpham.php?id=6'),
+('Matcha Latte', '../images/ads/matcha.jpg', 'Trà xanh Nhật Bản', 4.8, '20 phút', '💚 Đồng giá 39k 💚', 'danhsachsanpham.php?id=7'),
+('Trà Sữa Trân Châu', '../images/ads/tra_sua.jpg', 'Trà sữa truyền thống', 4.5, '25 phút', '🎁 Tặng topping trân châu 🎁', 'danhsachsanpham.php?id=8'),
+('Trà Trái Cây Nhiệt Đới', '../images/ads/tra_trai_cay.jpg', 'Giải khát mùa hè', 4.6, '20 phút', '☀️ Mua 2 Tính Tiền 1 ☀️', 'danhsachsanpham.php?id=9'),
+('Trà Sữa Cam Vàng', '../images/ads/tra-sua-cam.jpg', 'Hương vị mới lạ', 4.4, '25 phút', '🧡 Thử ngay vị mới 🧡', 'danhsachsanpham.php?id=10');
 
 --
 -- Constraints for dumped tables
@@ -149,36 +149,36 @@ INSERT INTO `danh_muc` (`id_danh_muc`, `ten_danh_muc`, `mo_ta`) VALUES
 TRUNCATE TABLE `san_pham`;
 INSERT INTO `san_pham` (`id_danh_muc`, `ten_san_pham`, `gia`, `hinh_anh`)
 VALUES
-(1, 'Mì cay hải sản', 55000.00, 'images/ads/hinhanh1.png'),
-(1, 'Mì cay bò ', 55000.00, 'images/ads/hinhanh2.png'),
-(1, 'Bún bò Huế', 25000.00, 'images/ads/hinhanh3.png'),
-(1, 'Mì Quảng', 30000.00, 'images/ads/hinhanh4.png'),
-(1, 'Phở Hà Nội', 30000.00, 'images/ads/hinhanh5.png'),
-(1, 'Cơm gà xối mỡ', 45000.00, 'images/ads/hinhanh6.png'),
-(1, 'Bánh mì chảo', 40000.00, 'images/ads/monan1.jpg'), 
-(1, 'Hủ tiếu Nam Vang', 35000.00, 'images/ads/monan2.jpg'), 
-(1, 'Bánh canh cua', 45000.00, 'images/ads/monan3.jpg'), 
-(1, 'Cơm tấm sườn bì chả', 50000.00, 'images/ads/monan4.png'),
-(2, 'Trà me muối ớt', 30000.00, 'images/ads/hinhanh11.png'),
-(2, 'Trà sữa truyền thống', 30000.00, 'images/ads/hinhanh12.png'),
-(2, 'Hồng trà bí đao', 25000.00, 'images/ads/hinhanh13.png'),
-(2, 'Ca cao muối', 25000.00, 'images/ads/hinhanh14.png'),
-(2, 'Matcha latte', 30000.00, 'images/ads/hinhanh15.png'),
-(2, 'Trà nhiệt đới', 25000.00, 'images/ads/hinhanh16.png'),
-(2, 'Hồng trà trân châu', 25000.00, 'images/ads/hinhanh17.png'),
-(2, 'Cà phê sữa', 20000.00, 'images/ads/nuoc1.jpg'), 
-(2, 'Nước ép cam', 25000.00, 'images/ads/nuoc2.jpg'), 
-(2, 'Sữa chua dâu', 30000.00, 'images/ads/nuoc3.jpg'),
-(3, 'Bánh tráng trộn', 20000.00, 'images/ads/hinhanh7.png'),
-(3, 'Bánh tráng da heo tốp mỡ', 20000.00, 'images/ads/hinhanh9.png'),
-(3, 'Cơm cháy Chà Bông', 20000.00, 'images/ads/hinhanh8.png'),
-(3, 'Đồ chiên', 5000.00, 'images/ads/hinhanh10.png'),
-(3, 'Xoài lắc', 20000.00, 'images/ads/hinhanh21.jpg'),
-(3, 'Khoai tây chiên', 25000.00, 'images/ads/hinhanh22.jpg'), 
-(3, 'Phô mai que', 25000.00, 'images/ads/hinhanh23.jpg'), 
-(3, 'Cá viên chiên', 20000.00, 'images/ads/hinhanh24.png'), 
-(3, 'Bò bía', 15000.00, 'images/ads/hinhanh25.jpg'), 
-(3, 'Gỏi cuốn', 25000.00, 'images/ads/hinhanh26.jpg');
+(1, 'Mì cay hải sản', 55000.00, '../images/ads/hinhanh1.png'),
+(1, 'Mì cay bò ', 55000.00, '../images/ads/hinhanh2.png'),
+(1, 'Bún bò Huế', 25000.00, '../images/ads/hinhanh3.png'),
+(1, 'Mì Quảng', 30000.00, '../images/ads/hinhanh4.png'),
+(1, 'Phở Hà Nội', 30000.00, '../images/ads/hinhanh5.png'),
+(1, 'Cơm gà xối mỡ', 45000.00, '../images/ads/hinhanh6.png'),
+(1, 'Bánh mì chảo', 40000.00, '../images/ads/monan1.jpg'), 
+(1, 'Hủ tiếu Nam Vang', 35000.00, '../images/ads/monan2.jpg'), 
+(1, 'Bánh canh cua', 45000.00, '../images/ads/monan3.jpg'), 
+(1, 'Cơm tấm sườn bì chả', 50000.00, '../images/ads/monan4.png'),
+(2, 'Trà me muối ớt', 30000.00, '../images/ads/hinhanh11.png'),
+(2, 'Trà sữa truyền thống', 30000.00, '../images/ads/hinhanh12.png'),
+(2, 'Hồng trà bí đao', 25000.00, '../images/ads/hinhanh13.png'),
+(2, 'Ca cao muối', 25000.00, '../images/ads/hinhanh14.png'),
+(2, 'Matcha latte', 30000.00, '../images/ads/hinhanh15.png'),
+(2, 'Trà nhiệt đới', 25000.00, '../images/ads/hinhanh16.png'),
+(2, 'Hồng trà trân châu', 25000.00, '../images/ads/hinhanh17.png'),
+(2, 'Cà phê sữa', 20000.00, '../images/ads/nuoc1.jpg'), 
+(2, 'Nước ép cam', 25000.00, '../images/ads/nuoc2.jpg'), 
+(2, 'Sữa chua dâu', 30000.00, '../images/ads/nuoc3.jpg'),
+(3, 'Bánh tráng trộn', 20000.00, '../images/ads/hinhanh7.png'),
+(3, 'Bánh tráng da heo tốp mỡ', 20000.00, '../images/ads/hinhanh9.png'),
+(3, 'Cơm cháy Chà Bông', 20000.00, '../images/ads/hinhanh8.png'),
+(3, 'Đồ chiên', 5000.00, '../images/ads/hinhanh10.png'),
+(3, 'Xoài lắc', 20000.00, '../images/ads/hinhanh21.jpg'),
+(3, 'Khoai tây chiên', 25000.00, '../images/ads/hinhanh22.jpg'), 
+(3, 'Phô mai que', 25000.00, '../images/ads/hinhanh23.jpg'), 
+(3, 'Cá viên chiên', 20000.00, '../images/ads/hinhanh24.png'), 
+(3, 'Bò bía', 15000.00, '../images/ads/hinhanh25.jpg'), 
+(3, 'Gỏi cuốn', 25000.00, '../images/ads/hinhanh26.jpg');
 
 --
 -- Dumping data for table `nguoi_dung`

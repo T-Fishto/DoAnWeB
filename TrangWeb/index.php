@@ -15,7 +15,7 @@
     <title>Website Food & Drink</title>
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/trangchu.css">
-    <link rel="stylesheet" href="images/Font/themify-icons/themify-icons.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../images/Font/themify-icons/themify-icons.css" referrerpolicy="no-referrer" />
     <script src="js/giaodien.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -27,7 +27,7 @@
             <div class="top-left-group">
                 
                 <div class="logo">
-                    <img src="images/Font/logoNB.jpg" alt="">
+                    <img src="../images/Font/logoNB.jpg" alt="">
                 </div>
                 
                 <?php

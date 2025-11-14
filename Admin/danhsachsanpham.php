@@ -14,7 +14,7 @@
         {
             $row_img = $result_img->fetch_assoc();
             $file_path = $row_img['hinh_anh'];
-            if (!empty($file_path) && file_exists($file_path) && strpos($file_path, 'images/sanpham/') !== false) 
+            if (!empty($file_path) && file_exists($file_path) && strpos($file_path, '../images/ads/') !== false) 
             {
                 unlink($file_path);
             }
