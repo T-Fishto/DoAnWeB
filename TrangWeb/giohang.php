@@ -25,12 +25,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ hàng của bạn</title>
-    <link rel="stylesheet" href="css/gio_hang.css"> 
+    <link rel="stylesheet" href="css/gio_hang.css">
     <script src="js/giohang.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
 
+<body>
     <div class="cart-container">
         <div class="cart-header">
             <h2 class="cart-title">Giỏ hàng của bạn</h2>

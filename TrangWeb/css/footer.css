@@ -4,6 +4,7 @@
     padding: 50px 0 0 0;
     font-size: 15px;
 }
+
 .footer-container {
    display: flex;
    justify-content: space-between;
@@ -79,6 +80,7 @@
     background-color: #3498db;
     border-color: #3498db;    
 }
+
 .footer-social-list li a i {
     font-size: 20px;
     margin-right: 8px;
@@ -91,5 +93,5 @@
     margin-top: 30px;
     border-top: 1px solid #34495e;
     font-size: 13px;
-    color: rgb(255, 255, 255);
+    color: #95a5a6;
 }

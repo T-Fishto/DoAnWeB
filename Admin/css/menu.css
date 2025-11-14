@@ -21,6 +21,10 @@ a{
 }
 
 .menu-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     text-align: center;
     padding: 15px;
     background-color: #f8f8f8;
@@ -33,6 +37,7 @@ a{
 }
 
 .container {
+    padding-top: 60px;
     display: flex;
     align-items: flex-start;
     max-width: 1400px;
