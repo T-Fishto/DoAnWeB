@@ -68,7 +68,7 @@
                 </li> 
                 <li class="menu-items">
                     <i class="fa-solid fa-circle-info ic"></i>
-                    <a href="">Thông Tin</a>
+                    <a href="#" id="open-about-modal">Thông Tin</a>
                 </li>
                 <li class="menu-items">
                     <i class="fa-solid fa-thumbs-up ic"></i>
@@ -212,6 +212,9 @@
     
     <?php 
         require_once '../Footer/footer.php'; 
+    ?>
+    <?php 
+        require_once 'modal_about.php'; 
     ?>
 
 </body>

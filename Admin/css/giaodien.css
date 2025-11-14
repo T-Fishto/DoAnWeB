@@ -640,3 +640,109 @@ li{
   font-size: 13px;
   color: #95a5a6;
 }
+/* --- CSS CHO MODAL THÔNG TIN ỨNG DỤNG --- */
+.modal-overlay {
+    position: fixed; /* Nằm cố định trên màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Lớp nền mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Nằm trên tất cả mọi thứ */
+    
+    /* Ẩn đi ban đầu */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Lớp .show sẽ được JS thêm vào để hiện modal */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #333; /* Nền tối (giống ảnh) */
+    color: #f0f0f0; /* Chữ sáng */
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    width: 100%;
+    max-width: 400px; /* Chiều rộng của hộp thoại */
+    text-align: left;
+    
+    /* Hiệu ứng mờ dần khi hiện */
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+    text-align: center; /* Tiêu đề ra giữa */
+}
+
+.modal-content ul {
+    list-style: none; /* Bỏ dấu chấm mặc định */
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.modal-content li {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444; /* Gạch chân mờ */
+    padding-bottom: 15px;
+}
+.modal-content li:last-child {
+    border-bottom: none; /* Dòng cuối không có gạch */
+    margin-bottom: 0;
+}
+
+.modal-content li strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.modal-content .version {
+    font-size: 14px;
+    color: #999;
+    padding-left: 10px;
+}
+
+.modal-content li a {
+    color: #3498db; /* Màu link xanh */
+    text-decoration: none;
+}
+.modal-content li a:hover {
+    text-decoration: underline;
+}
+
+.modal-close-btn {
+    display: block;
+    width: 100px;
+    padding: 10px 20px;
+    margin-left: auto; /* Đẩy nút sang phải */
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0; /* Nút "Đóng" màu trắng/xám nhạt */
+    color: #333; /* Chữ đen */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: #ddd;
+}

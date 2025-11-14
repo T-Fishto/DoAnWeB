@@ -14,3 +14,35 @@ window.addEventListener("scroll",function(){
     else {this.document.querySelector(".top").classList.remove("active")}
 
 })
+// --- JAVASCRIPT CHO MODAL THÔNG TIN ---
+
+// Chờ cho toàn bộ HTML tải xong
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Tìm các nút
+    const aboutModal = document.getElementById('about-modal');
+    const openModalBtn = document.getElementById('open-about-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    // Kiểm tra xem các nút có tồn tại không
+    if (openModalBtn && aboutModal && closeModalBtn) {
+        
+        // Bấm "Thông Tin" -> Mở modal
+        openModalBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Ngăn link nhảy
+            aboutModal.classList.add('show'); // Hiển thị modal
+        });
+
+        // Bấm nút "Đóng" -> Đóng modal
+        closeModalBtn.addEventListener('click', function() {
+            aboutModal.classList.remove('show'); // Ẩn modal
+        });
+
+        // Bấm vào nền mờ -> Đóng modal
+        aboutModal.addEventListener('click', function(e) {
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('show'); // Ẩn modal
+            }
+        });
+    }
+});
