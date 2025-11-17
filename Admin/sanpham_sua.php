@@ -19,7 +19,7 @@
         $id_danh_muc = $_POST['id_danh_muc'];
         $hinh_anh_old = $_POST['hinh_anh_old'];
         $hinh_anh_new = $hinh_anh_old;
-        $upload_dir = '../images/sanpham/'; 
+        $upload_dir = '../images/ads/'; 
 
         if (isset($_FILES['hinh_anh_new']) && $_FILES['hinh_anh_new']['error'] == 0) 
         {

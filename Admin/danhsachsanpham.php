@@ -5,28 +5,28 @@
 
     $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
 
-    if ($is_admin && isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) 
-    {
-        $id_san_pham_to_delete = $connect->real_escape_string($_GET['id']);
-        $sql_img = "SELECT hinh_anh FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-        $result_img = $connect->query($sql_img);
-        if ($result_img->num_rows > 0) 
-        {
-            $row_img = $result_img->fetch_assoc();
-            $file_path = $row_img['hinh_anh'];
-            if (!empty($file_path) && file_exists($file_path) && strpos($file_path, '../images/ads/') !== false) 
-            {
-                unlink($file_path);
-            }
-        }
+    // if ($is_admin && isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) 
+    // {
+    //     $id_san_pham_to_delete = $connect->real_escape_string($_GET['id']);
+    //     $sql_img = "SELECT hinh_anh FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
+    //     $result_img = $connect->query($sql_img);
+    //     if ($result_img->num_rows > 0) 
+    //     {
+    //         $row_img = $result_img->fetch_assoc();
+    //         $file_path = $row_img['hinh_anh'];
+    //         if (!empty($file_path) && file_exists($file_path) && strpos($file_path, '../images/ads/') !== false) 
+    //         {
+    //             unlink($file_path);
+    //         }
+    //     }
         
-        $sql_delete = "DELETE FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-        if ($connect->query($sql_delete) === TRUE) 
-        {
-            header("Location: danhsachsanpham.php?msg=deleted");
-            exit();
-        }
-    }   
+    //     $sql_delete = "DELETE FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
+    //     if ($connect->query($sql_delete) === TRUE) 
+    //     {
+    //         header("Location: danhsachsanpham.php?msg=deleted");
+    //         exit();
+    //     }
+    // }   
 
     function display_products($result)
     {
