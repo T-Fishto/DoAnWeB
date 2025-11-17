@@ -59,7 +59,6 @@ $product = null;
 
 if (!isset($_SESSION['MaNguoiDung'])) 
 {
-    $_SESSION['flash_message'] = "Bạn cần đăng nhập để xem chi tiết sản phẩm!";
     $redirect_url = "chi_tiet.php?" . $_SERVER['QUERY_STRING'];
     header("Location: ../Admin/dangnhap.php?redirect_url=" . urlencode($redirect_url));
     exit;
@@ -200,10 +199,5 @@ if (isset($_SESSION['flash_message']))
     </div>
 <?php endif; ?>
 <?php $connect->close(); ?>
-
-<?php 
-    require_once '../Footer/footer.php'; 
-?>
-
 </body>
 </html>
