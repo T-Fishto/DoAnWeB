@@ -2,68 +2,77 @@
     require_once 'cauhinh.php';
 
     session_start();
-
-    $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
-
-    // if ($is_admin && isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) 
-    // {
-    //     $id_san_pham_to_delete = $connect->real_escape_string($_GET['id']);
-    //     $sql_img = "SELECT hinh_anh FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-    //     $result_img = $connect->query($sql_img);
-    //     if ($result_img->num_rows > 0) 
-    //     {
-    //         $row_img = $result_img->fetch_assoc();
-    //         $file_path = $row_img['hinh_anh'];
-    //         if (!empty($file_path) && file_exists($file_path) && strpos($file_path, '../images/ads/') !== false) 
-    //         {
-    //             unlink($file_path);
-    //         }
-    //     }
-        
-    //     $sql_delete = "DELETE FROM san_pham WHERE id_san_pham = '$id_san_pham_to_delete'";
-    //     if ($connect->query($sql_delete) === TRUE) 
-    //     {
-    //         header("Location: danhsachsanpham.php?msg=deleted");
-    //         exit();
-    //     }
-    // }   
-
-    function display_products($result)
+    $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;  
+   function display_products($result)
     {
+        global $is_admin; // Lấy biến kiểm tra Admin
+        
+        // Kiểm tra đăng nhập cơ bản (để phục vụ nút xem chi tiết/mua)
+        $is_logged_in = isset($_SESSION['MaNguoiDung']);
+
         if ($result->num_rows > 0) 
         {
             while ($row = $result->fetch_assoc()) 
             {
                 $product_id = $row["id_san_pham"];
-                $detail_url = "chi_tiet.php?id=" . $product_id;          
-                echo '<div class="menu-item">';      
-                echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
+                
+                // Các đường dẫn
+                $detail_url = "chi_tiet.php?id=" . $product_id;
+                // Đường dẫn đăng nhập (chuyển hướng về trang Admin login)
+                $login_url = "../Admin/dangnhap.php";
+
+                echo '<div class="menu-item">'; 
+                
+                // --- 1. ẢNH SẢN PHẨM ---
+                if ($is_admin) {
+                    echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
+                } else {
+                     if ($is_logged_in) {
+                        echo '<a href="' . htmlspecialchars($detail_url) . '">';
+                    } else {
+                        echo '<a href="#" onclick="if(confirm(\'Bạn cần đăng nhập để xem chi tiết. Đăng nhập ngay?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">';
+                    }
+                    echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
+                    echo '</a>';
+                }
+
                 echo '  <div class="item-content">';
                 echo '      <div class="item-info">';
                 echo '          <h3>' . htmlspecialchars($row["ten_san_pham"]) . '</h3>'; 
                 echo '          <p>' . htmlspecialchars($row["mo_ta"]) . '</p>'; 
                 echo '      </div>';
                 echo '      <div class="item-price-add">';
-                if ($row["gia"] > 0) 
-                {
+                
+                if ($row["gia"] > 0) {
                     echo '      <span class="price">' . number_format($row["gia"], 0, '.', '.') . 'đ</span>'; 
-                } else 
-                {
+                } else {
                     echo '      <span class="price"></span>';
                 }
 
-            $delete_url = "sanpham_xoa.php?id=" . $product_id;
-
-                echo '          <button class="add-btn" 
+                // --- 2. XỬ LÝ NÚT XÓA VÀ SỬA ) ---
+                
+                if ($is_admin) { 
+                    $delete_url = "sanpham_xoa.php?id=" . $product_id;
+                    echo '      <button class="add-btn" 
                                 onclick="if(confirm(\'Bạn có chắc chắn muốn xóa món ' . htmlspecialchars($row["ten_san_pham"]) . '?\')) { window.location.href=\'' . htmlspecialchars($delete_url) . '\'; } return false;">
                                 <i class="fa-solid fa-trash"></i>
                                 </button>';
 
-            $edit_url = "sanpham_sua.php?id=" . $product_id;
-                echo '      <button class="add-btn" 
-                            onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
-                            <i class="fa-solid fa-screwdriver-wrench"></i>
-                            </button>';
+                    $edit_url = "sanpham_sua.php?id=" . $product_id;
+                    echo '      <button class="add-btn" 
+                                onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                </button>';
+                } else {
+                    echo '      <button class="add-btn" 
+                                onclick="if(confirm(\'Bạn cần đăng nhập trước khi xóa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
+                                <i class="fa-solid fa-trash"></i>
+                                </button>';
+                    echo '      <button class="add-btn" 
+                                onclick="if(confirm(\'Bạn cần đăng nhập trước khi sửa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                </button>';
+                }
                 echo '      </div>';
                 echo '  </div>';
                 echo '</div>';
@@ -106,7 +115,9 @@
                     <li><a href="#mon-an"><i class="fas fa-hamburger"></i> MÓN ĂN</a></li>
                     <li><a href="#nuoc-giai-khat"><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</a></li>
                     <li><a href="#do-an-vat"><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</a></li>
-                    <li><a href="sanpham_them.php"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
+                   <?php if ($is_admin): ?>
+                        <li><a href="sanpham_them.php"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
+                   <?php endif; ?>
                 </ul>
             </nav>
 
