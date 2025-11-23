@@ -40,21 +40,32 @@
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) exitWithError("Email không hợp lệ!", $connect);
     if ($matKhau != $xacNhanMatKhau) exitWithError("Lỗi: Mật khẩu và Xác nhận mật khẩu không khớp!", $connect);
 
-    $sql_kiemtra = "SELECT id_nguoi_dung FROM nguoi_dung WHERE ten_dang_nhap = ?";
+   $sql_kiemtra = "SELECT ten_dang_nhap, email FROM nguoi_dung WHERE ten_dang_nhap = ? OR email = ?";
+    
     if (!($stmt_kiemtra = $connect->prepare($sql_kiemtra))) 
     {
         exitWithError("Lỗi chuẩn bị SQL kiểm tra: " . $connect->error, $connect);
     }
 
-    $stmt_kiemtra->bind_param("s", $tenDangNhap);
+    // 2. Điền 2 tham số: Username và Email
+    $stmt_kiemtra->bind_param("ss", $tenDangNhap, $email);
     $stmt_kiemtra->execute();
     $ketQuaKiemTra = $stmt_kiemtra->get_result();
-    $stmt_kiemtra->close();
-
+    
+    // 3. Nếu tìm thấy dữ liệu trùng
     if($ketQuaKiemTra->num_rows > 0) 
     {
-        exitWithError("Tên đăng nhập **$tenDangNhap** đã tồn tại. Vui lòng chọn tên khác!", $connect);
+        $row = $ketQuaKiemTra->fetch_assoc();
+        $stmt_kiemtra->close(); 
+
+        // Kiểm tra cụ thể xem trùng cái gì để báo lỗi cho đúng
+        if ($row['ten_dang_nhap'] === $tenDangNhap) {
+            exitWithError("Tên đăng nhập **$tenDangNhap** đã tồn tại. Vui lòng chọn tên khác!", $connect);
+        } else {
+            exitWithError("Email **$email** đã được sử dụng. Vui lòng dùng email khác!", $connect);
+        }
     }
+    
 
 
     $matKhauAnToan = password_hash($matKhau, PASSWORD_DEFAULT);
