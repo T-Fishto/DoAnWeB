@@ -23,17 +23,21 @@
 
         if (isset($_FILES['hinh_anh_new']) && $_FILES['hinh_anh_new']['error'] == 0) 
         {
+            //Tạo tên file duy nhất
             $file_name = uniqid('sp_') . '_' . basename($_FILES['hinh_anh_new']['name']);
             $target_file = $upload_dir . $file_name;
-            
+
+            //Tạo thư mục nếu chưa tồn tại
             if (!is_dir($upload_dir)) 
             {
                 mkdir($upload_dir, 0777, true);
             }
 
+            //Di chuyển file đã upload
             if (move_uploaded_file($_FILES['hinh_anh_new']['tmp_name'], $target_file)) 
             {
                 $hinh_anh_new = $target_file; 
+                //Xóa ảnh cũ nếu upload thành công
                 if (!empty($hinh_anh_old) && file_exists($hinh_anh_old)) 
                 {
                     unlink($hinh_anh_old);
@@ -49,6 +53,7 @@
         {
             $stmt = $connect->prepare("UPDATE san_pham SET id_danh_muc = ?, ten_san_pham = ?, gia = ?, hinh_anh = ? WHERE id_san_pham = ?");
             $stmt->bind_param("isdsi", $id_danh_muc, $ten_san_pham, $gia, $hinh_anh_new, $product_id);
+            //i: int, s: string, d: double/decimal
 
             if ($stmt->execute()) 
             {
