@@ -1,7 +1,6 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') 
     {
-        
         $id = (int)$_POST['id_nguoi_dung'];
         $ho_ten = $_POST['ho_ten'];
         $email = $_POST['email'];

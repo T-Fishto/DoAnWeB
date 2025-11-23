@@ -1,4 +1,5 @@
 <?php
+//chỉ giữ lại mấy cái mấy cái trong body để cái cái header bên mấy trang khác đc sử dụng
     ob_start();
     require_once 'cauhinh.php';
     

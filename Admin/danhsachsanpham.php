@@ -2,6 +2,7 @@
     require_once 'cauhinh.php';
 
     session_start();
+    //kiểm tra xem biến Session VaiTro có tồn tại và có bằng 1
     $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;  
    function display_products($result)
     {
@@ -25,6 +26,7 @@
                 
                 // --- 1. ẢNH SẢN PHẨM ---
                 if ($is_admin) {
+                    //htmlspecialchars biến đổi các ký tự đặc biệt thành dạng mã an toàn trước khi in ra trình duyệt.
                     echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
                 } else {
                      if ($is_logged_in) {
