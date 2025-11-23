@@ -28,6 +28,8 @@
         <nav>
             <a href="indexnguoidung.php?do=trangchu">Trang Chủ</a>
             <a href="indexnguoidung.php?do=nguoidung">Quản Lý Người Dùng</a>
+            <a href="indexnguoidung.php?do=danhmuc">Quản Lý Danh Mục</a>
+
         </nav>
     </header>
 
@@ -53,6 +55,18 @@
                 
             case 'dangky':
                 include 'nguoidung_them.php'; 
+                break;
+            case 'danhmuc':
+                include 'danhmuc_danhsach.php';
+                break;
+            case 'danhmuc_them':
+                include 'danhmuc_them.php';
+                break;
+            case 'danhmuc_sua':
+                include 'danhmuc_sua.php';
+                break;
+            case 'danhmuc_xoa':
+                include 'danhmuc_xoa.php';
                 break;
 
             case 'trangchu':

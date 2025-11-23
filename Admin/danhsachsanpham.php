@@ -2,31 +2,28 @@
     require_once 'cauhinh.php';
 
     session_start();
-    //kiểm tra xem biến Session VaiTro có tồn tại và có bằng 1
+    // Logic kiểm tra Admin giữ nguyên (để dùng cho Sidebar)
     $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;  
-   function display_products($result)
+
+    // Hàm hiển thị sản phẩm (Đã tối ưu lấy quyền từ Session)
+    function display_products($result)
     {
-        global $is_admin; // Lấy biến kiểm tra Admin
-        
-        // Kiểm tra đăng nhập cơ bản (để phục vụ nút xem chi tiết/mua)
+        // Lấy quyền trực tiếp từ Session
+        $is_admin_func = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
         $is_logged_in = isset($_SESSION['MaNguoiDung']);
 
-        if ($result->num_rows > 0) 
+        if ($result && $result->num_rows > 0) 
         {
             while ($row = $result->fetch_assoc()) 
             {
                 $product_id = $row["id_san_pham"];
-                
-                // Các đường dẫn
                 $detail_url = "chi_tiet.php?id=" . $product_id;
-                // Đường dẫn đăng nhập (chuyển hướng về trang Admin login)
                 $login_url = "../Admin/dangnhap.php";
 
                 echo '<div class="menu-item">'; 
                 
                 // --- 1. ẢNH SẢN PHẨM ---
-                if ($is_admin) {
-                    //htmlspecialchars biến đổi các ký tự đặc biệt thành dạng mã an toàn trước khi in ra trình duyệt.
+                if ($is_admin_func) {
                     echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
                 } else {
                      if ($is_logged_in) {
@@ -41,7 +38,7 @@
                 echo '  <div class="item-content">';
                 echo '      <div class="item-info">';
                 echo '          <h3>' . htmlspecialchars($row["ten_san_pham"]) . '</h3>'; 
-                echo '          <p>' . htmlspecialchars($row["mo_ta"]) . '</p>'; 
+                echo '          <p>' . htmlspecialchars($row["mo_ta"] ?? '') . '</p>'; 
                 echo '      </div>';
                 echo '      <div class="item-price-add">';
                 
@@ -51,36 +48,32 @@
                     echo '      <span class="price"></span>';
                 }
 
-                // --- 2. XỬ LÝ NÚT XÓA VÀ SỬA ) ---
-                
-                if ($is_admin) { 
+                // --- 2. XỬ LÝ NÚT XÓA VÀ SỬA ---
+                if ($is_admin_func) { 
                     $delete_url = "sanpham_xoa.php?id=" . $product_id;
-                    echo '      <button class="add-btn" 
-                                onclick="if(confirm(\'Bạn có chắc chắn muốn xóa món ' . htmlspecialchars($row["ten_san_pham"]) . '?\')) { window.location.href=\'' . htmlspecialchars($delete_url) . '\'; } return false;">
-                                <i class="fa-solid fa-trash"></i>
+                    $edit_url = "sanpham_sua.php?id=" . $product_id;
+                    
+                    echo '      <button class="add-btn" onclick="if(confirm(\'Bạn có chắc chắn muốn xóa món ' . htmlspecialchars($row["ten_san_pham"]) . '?\')) { window.location.href=\'' . htmlspecialchars($delete_url) . '\'; } return false;">
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>';
 
-                    $edit_url = "sanpham_sua.php?id=" . $product_id;
-                    echo '      <button class="add-btn" 
-                                onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                    echo '      <button class="add-btn" onclick="window.location.href=\'' . htmlspecialchars($edit_url) . '\'; return false;">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
                                 </button>';
                 } else {
-                    echo '      <button class="add-btn" 
-                                onclick="if(confirm(\'Bạn cần đăng nhập trước khi xóa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
-                                <i class="fa-solid fa-trash"></i>
+                    // Nút cho khách (bắt đăng nhập)
+                    echo '      <button class="add-btn" onclick="if(confirm(\'Bạn cần đăng nhập trước khi xóa/sửa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>';
-                    echo '      <button class="add-btn" 
-                                onclick="if(confirm(\'Bạn cần đăng nhập trước khi sửa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
-                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                    echo '      <button class="add-btn" onclick="if(confirm(\'Bạn cần đăng nhập trước khi xóa/sửa. Bạn có muốn đến trang đăng nhập không?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
                                 </button>';
                 }
                 echo '      </div>';
                 echo '  </div>';
                 echo '</div>';
             }
-        } else 
-        {
+        } else {
             echo "<p>Chưa có món ăn nào trong danh mục này.</p>";
         }
     }
@@ -101,24 +94,37 @@
         <div class="trangchu">
             <i class="fa-solid fa-house"></i> 
             <span><a href="index.php">TRANG CHỦ</a></span>
-           
         </div>
         <div class="menu">
             <i class="fas fa-utensils"></i> 
             <span>MENU THỰC ĐƠN</span>
         </div>
-
     </header>
+
     <div class="container">
         <aside class="sidebar">
             <nav class="category-menu">
                 <h3><i class="fas fa-bars"></i> Danh mục</h3>
                 <ul>
-                    <li><a href="#mon-an"><i class="fas fa-hamburger"></i> MÓN ĂN</a></li>
-                    <li><a href="#nuoc-giai-khat"><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</a></li>
-                    <li><a href="#do-an-vat"><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</a></li>
+                    <?php
+                        // Lấy toàn bộ danh mục từ database để tạo Menu
+                        $sql_menu = "SELECT * FROM danh_muc ORDER BY id_danh_muc ASC";
+                        $result_menu = $connect->query($sql_menu);
+                        
+                        if ($result_menu->num_rows > 0) {
+                            while ($dm_menu = $result_menu->fetch_assoc()) {
+                                // Tạo link neo dạng #dm-1, #dm-2...
+                                echo '<li>
+                                        <a href="#dm-' . $dm_menu['id_danh_muc'] . '">
+                                            <i class="fas fa-utensils"></i> ' . htmlspecialchars($dm_menu['ten_danh_muc']) . '
+                                        </a>
+                                      </li>';
+                            }
+                        }
+                    ?>
+                    
                    <?php if ($is_admin): ?>
-                        <li><a href="sanpham_them.php"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
+                        <li><a href="sanpham_them.php" style="color: #ffffffff;"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
                    <?php endif; ?>
                 </ul>
             </nav>
@@ -134,49 +140,44 @@
         </aside>
 
         <main class="main-content">
-            <section id="mon-an" class="category-section">
-                <h2><i class="fas fa-hamburger"></i> MÓN ĂN</h2>
-                <div class="item-list">
-                    <?php
-                        $sql_mon_an = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
-                                    FROM san_pham sp 
-                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                    WHERE dm.ten_danh_muc = 'Món ăn'";
-                        $result_mon_an = $connect->query($sql_mon_an);
-                        display_products($result_mon_an);
-                    ?>
-                </div>
-            </section>
+            <?php
+                // 1. Lấy lại danh sách danh mục để tạo từng Section
+                // (Phải chạy query lại vì result_menu ở trên đã dùng hết rồi)
+                $sql_sections = "SELECT * FROM danh_muc ORDER BY id_danh_muc ASC";
+                $result_sections = $connect->query($sql_sections);
 
-            <section id="nuoc-giai-khat" class="category-section">
-                <h2><i class="fas fa-cocktail"></i> NƯỚC GIẢI KHÁT</h2>
-                <div class="item-list">
-                    <?php
-                        $sql_nuoc = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
-                                    FROM san_pham sp 
-                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                    WHERE dm.ten_danh_muc = 'Nước giải khát'";
-                        $result_nuoc = $connect->query($sql_nuoc);
-                        display_products($result_nuoc);
-                    ?>
-                </div>
-            </section>
+                if ($result_sections->num_rows > 0) 
+                {
+                    // Vòng lặp: Chạy qua từng danh mục có trong hệ thống
+                    while ($dm = $result_sections->fetch_assoc()) 
+                    {
+                        $current_dm_id = $dm['id_danh_muc'];
+                        
+                        // Tạo Section với ID khớp với Menu (#dm-1...)
+                        echo '<section id="dm-' . $current_dm_id . '" class="category-section">';
+                        echo '    <h2><i class="fas fa-utensils"></i> ' . htmlspecialchars($dm['ten_danh_muc']) . '</h2>';
+                        echo '    <div class="item-list">';
 
-            <section id="do-an-vat" class="category-section">
-                <h2><i class="fas fa-cookie-bite"></i> ĐỒ ĂN VẶT</h2>
-                <div class="item-list">
-                    <?php
-                        $sql_an_vat = "SELECT sp.id_san_pham, sp.ten_san_pham, sp.gia, sp.hinh_anh, dm.mo_ta 
-                                    FROM san_pham sp 
-                                    JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc 
-                                    WHERE dm.ten_danh_muc = 'Đồ ăn vặt'";
-                        $result_an_vat = $connect->query($sql_an_vat);
-                        display_products($result_an_vat);
-                        ?>
-                </div>
-            </section>
+                        // 2. Với mỗi danh mục, lấy sản phẩm thuộc về nó
+                        // Lưu ý: Dùng id_danh_muc để tìm chính xác
+                        $sql_sp = "SELECT * FROM san_pham WHERE id_danh_muc = $current_dm_id";
+                        $result_sp = $connect->query($sql_sp);
+                        
+                        // 3. Gọi hàm hiển thị sản phẩm
+                        display_products($result_sp);
+
+                        echo '    </div>';
+                        echo '</section>';
+                    }
+                } 
+                else 
+                {
+                    echo "<p>Chưa có danh mục nào trong hệ thống.</p>";
+                }
+            ?>
         </main>
     </div>
+
     <?php
     $connect->close();
     ?>
