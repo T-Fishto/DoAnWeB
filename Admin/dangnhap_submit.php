@@ -19,14 +19,23 @@
         $sql_kiemtra = "SELECT * FROM `nguoi_dung` WHERE `ten_dang_nhap` = ?";
         
         $stmt = $connect->prepare($sql_kiemtra);
+        // tạo 1 biến gửi đến sql để thành cái khuôn thông báo cho nó trước
         $stmt->bind_param("s", $TenDangNhap);
+        //Điền thông tin chỉ là chuỗi ko phải mã lệnh để tránh 
         $stmt->execute();
+        //thực thi câu lệnh sql
+
         $danhsach = $stmt->get_result();
+        //Lấy toàn bộ gán vào biến danh sách
+
         
         if ($danhsach->num_rows == 1) {
             $dong = $danhsach->fetch_assoc();
+            // bốc dữ liệu từ danh sách gán vào mảng dong
             $mat_khau_bam_tu_db = $dong['mat_khau'];
+            //lấy mật khẩu đã mã hóa từ db gán vào biến
 
+            // Bắt đầu so sánh
             if (password_verify($MatKhau, $mat_khau_bam_tu_db)) { 
                 
                 if ($dong['Khoa'] == 0) {

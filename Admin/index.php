@@ -33,10 +33,8 @@
                 </div>
                 
                 <?php
-                // --- SỬA LẠI LOGIC HIỂN THỊ ---
                 if (isset($_SESSION['MaNguoiDung']) && isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1) {
                     // ---- ĐÃ ĐĂNG NHẬP (ADMIN) ----
-                    // 1. Hiển thị "Xin chào"
                     echo '<div class="user-welcome-header">';
                     echo '    <span class="welcome-text">Xin chào, Admin</span>';
                     echo '    <span class="user-name">' . htmlspecialchars($_SESSION['HoVaTen']) . '</span>';
@@ -51,7 +49,6 @@
                     echo '    </a>';
                     echo '</li>';
                 }
-                // --- KẾT THÚC SỬA LOGIC ---
                 ?>
             </div> 
 
@@ -80,7 +77,6 @@
                 </li>
 
                 <?php
-                // --- SỬA LẠI: CHỈ HIỂN THỊ LINK KHI ĐÃ ĐĂNG NHẬP ---
                 if (isset($_SESSION['MaNguoiDung'])) 
                 { 
                     if ($_SESSION['VaiTro'] == 1) 
@@ -102,7 +98,6 @@
                     echo '    <a href="dangxuat.php">Đăng Xuất</a>';
                     echo '</li>';
                 }
-                // Khối "Đăng Nhập" đã bị xóa khỏi đây
                 ?>
             </div>
         </div>

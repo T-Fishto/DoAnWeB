@@ -210,3 +210,24 @@ body {
     color: #6a11cb;
     text-decoration: underline;
 }
+.login-card-wrapper {
+        position: relative; 
+    }
+
+    /* Định dạng nút đóng */
+.close-btn {
+    position: absolute; /* Tuyệt đối so với khung cha */
+    top: 15px;          /* Cách mép trên 15px */
+    right: 15px;        /* Cách mép phải 15px */
+    font-size: 24px;    /* Kích thước icon */
+    color: #333;        /* Màu xám đen */
+    text-decoration: none;
+    z-index: 10;        /* Nổi lên trên cùng */
+    transition: 0.3s;   /* Hiệu ứng mượt */
+}
+
+/* Hiệu ứng khi di chuột vào (đổi màu đỏ) */
+.close-btn:hover {
+    color: #ff4d4d;
+    transform: scale(1.1); /* Phóng to nhẹ */
+}

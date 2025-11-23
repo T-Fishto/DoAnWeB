@@ -21,6 +21,9 @@ $redirect_url = isset($_GET['redirect_url']) ? htmlspecialchars($_GET['redirect_
 </head>
 <body>
     <div class="login-card-wrapper">
+        <a href="index.php" class="close-btn" title="Về trang chủ">
+            <i class="fa-solid fa-xmark"></i>
+        </a>
         <div class="left-panel">
             <div class="left-panel-content">
                 <h2>Hương Vị <br> Cuộc Sống</h2>
@@ -39,7 +42,7 @@ $redirect_url = isset($_GET['redirect_url']) ? htmlspecialchars($_GET['redirect_
                         <?php echo $error_message; ?>
                     </div>
                 <?php endif; ?>
-                
+                <!-- Quay lại trang cũ sau khi đăng nhập và để ghi nhớ nó -->
                 <input type="hidden" name="redirect_url" value="<?php echo $redirect_url; ?>">
 
                 <div class="form-group">
