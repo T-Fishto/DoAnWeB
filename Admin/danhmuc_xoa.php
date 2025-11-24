@@ -3,17 +3,28 @@
     {
         $id = (int)$_GET['id'];
         
-        // Lưu ý: Nếu database có ràng buộc khóa ngoại (Foreign Key), bạn có thể cần xóa sản phẩm thuộc danh mục này trước.
-        // Ở đây mình viết lệnh xóa danh mục cơ bản:
-        $sql = "DELETE FROM `danh_muc` WHERE `id_danh_muc` = ?";
+        // [BƯỚC 1: XÓA TẤT CẢ SẢN PHẨM THUỘC VỀ DANH MỤC NÀY TRƯỚC]
+        $sql_sp = "DELETE FROM `san_pham` WHERE `id_danh_muc` = ?";
         
-        if ($stmt = $connect->prepare($sql)) 
+        if ($stmt_sp = $connect->prepare($sql_sp)) 
         {
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $stmt->close();
-        } 
+            $stmt_sp->bind_param("i", $id);
+            $stmt_sp->execute();
+            $stmt_sp->close();
+        }
+
+        // [BƯỚC 2: SAU ĐÓ MỚI XÓA DANH MỤC]
+        $sql_dm = "DELETE FROM `danh_muc` WHERE `id_danh_muc` = ?";
+        
+        if ($stmt_dm = $connect->prepare($sql_dm)) 
+        {
+            $stmt_dm->bind_param("i", $id);
+            $stmt_dm->execute();
+            $stmt_dm->close();
+        }
+        
     }
+    // Chuyển hướng về trang danh mục sau khi hoàn thành
     header("Location: TrangAdmin.php?do=danhmuc");
     exit();
 ?>

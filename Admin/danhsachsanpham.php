@@ -104,13 +104,13 @@
                 <h3><i class="fas fa-bars"></i> Danh mục</h3>
                 <ul>
                     <?php
-                        // Lấy toàn bộ danh mục từ database để tạo Menu
+                        // Lấy toàn bộ danh mục từ bảng danh mục và sắp xep theo id_danh_muc
                         $sql_menu = "SELECT * FROM danh_muc ORDER BY id_danh_muc ASC";
                         $result_menu = $connect->query($sql_menu);
                         
                         if ($result_menu->num_rows > 0) {
                             while ($dm_menu = $result_menu->fetch_assoc()) {
-                                // Tạo link neo dạng #dm-1, #dm-2...
+                                // Tạo link neo dạng #dm-1, #dm-2... để liên kết với các section bên main giúp điều hướng nhanh
                                 echo '<li>
                                         <a href="#dm-' . $dm_menu['id_danh_muc'] . '">
                                             <i class="fas fa-utensils"></i> ' . htmlspecialchars($dm_menu['ten_danh_muc']) . '

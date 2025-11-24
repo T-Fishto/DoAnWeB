@@ -30,6 +30,8 @@
             //Tạo thư mục nếu chưa tồn tại
             if (!is_dir($upload_dir)) 
             {
+                //0777 là quyền truy cập đầy đủ cho thư mục
+                // true để tạo đệ quy các thư mục cha nếu chưa tồn tại
                 mkdir($upload_dir, 0777, true);
             }
 
@@ -115,6 +117,7 @@
         <?php endif; ?>
         
         <form method="POST" action="sanpham_sua.php?id=<?php echo $product_id; ?>" enctype="multipart/form-data">
+            <!--  -->
             <input type="hidden" name="hinh_anh_old" value="<?php echo htmlspecialchars($product_data['hinh_anh']); ?>">
             
             <div class="form-group">

@@ -26,6 +26,8 @@
             
             if (!is_dir($upload_dir)) 
             {
+                //0777 là quyền truy cập đầy đủ cho thư mục
+                // true để tạo đệ quy các thư mục cha nếu chưa tồn tại
                 mkdir($upload_dir, 0777, true);
             }
 
