@@ -9,7 +9,7 @@
    if (isset($_GET['search']) && !empty(trim($_GET['search']))) {
         $search_keyword = $connect->real_escape_string(trim($_GET['search']));
         // Tìm trong tên sản phẩm HOẶC mô tả
-        $search_condition = " AND (sp.ten_san_pham LIKE '%$search_keyword%' OR sp.mo_ta LIKE '%$search_keyword%')";
+        $search_condition = " AND (sp.ten_san_pham LIKE '%$search_keyword%' OR dm.mo_ta LIKE '%$search_keyword%')";
    }
 
    // 2. HÀM HIỂN THỊ SẢN PHẨM (Tự động)
@@ -147,7 +147,10 @@
                         $current_dm_id = $dm['id_danh_muc'];
                         
                         // 2. Tìm sản phẩm thuộc danh mục này
-                        $sql_sp = "SELECT * FROM san_pham WHERE id_danh_muc = $current_dm_id" . $search_condition;
+                       $sql_sp = "SELECT sp.*, dm.mo_ta 
+                           FROM san_pham sp
+                           JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc
+                           WHERE sp.id_danh_muc = $current_dm_id" . $search_condition; // Áp dụng tìm kiếm vào đây
                         $result_sp = $connect->query($sql_sp);
                         
                         // Logic hiển thị: Luôn hiện tên danh mục, nếu có món thì hiện món

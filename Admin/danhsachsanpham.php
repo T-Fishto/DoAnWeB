@@ -157,7 +157,10 @@
 
                         // 2. Với mỗi danh mục, lấy sản phẩm thuộc về nó
                         // Lưu ý: Dùng id_danh_muc để tìm chính xác
-                        $sql_sp = "SELECT * FROM san_pham WHERE id_danh_muc = $current_dm_id";
+                       $sql_sp = "SELECT sp.*, dm.mo_ta 
+                           FROM san_pham sp
+                           JOIN danh_muc dm ON sp.id_danh_muc = dm.id_danh_muc
+                           WHERE sp.id_danh_muc = $current_dm_id";
                         $result_sp = $connect->query($sql_sp);
                         
                         // 3. Gọi hàm hiển thị sản phẩm
