@@ -52,7 +52,7 @@
 
                     //Chuyển hướng theo vai trò
                     if ($dong['vai_tro'] == 1) {
-                        header("Location: indexnguoidung.php");
+                        header("Location: TrangAdmin.php");
                     } else {
                         header("Location: ../TrangWeb/index.php"); 
                     } 

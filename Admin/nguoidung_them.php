@@ -34,7 +34,6 @@
             } 
             else 
             {                
-                // Dùng password_hash thay vì md5 để khớp với file đăng nhập
                 $mat_khau_hash = password_hash($mat_khau, PASSWORD_DEFAULT);
 
                 $sql_insert = "INSERT INTO `nguoi_dung` (ten_dang_nhap, mat_khau, ho_ten, email, dia_chi, so_dien_thoai, vai_tro, Khoa) 
@@ -53,7 +52,7 @@
                     if ($stmt->execute()) 
                     {
                         // Chuyển hướng về danh sách sau khi thêm thành công
-                        header("Location: indexnguoidung.php?do=nguoidung");
+                        header("Location: TrangAdmin.php?do=nguoidung");
                         exit();
                     } 
                     else 
@@ -82,7 +81,7 @@
         }
     ?>
     
-    <form action="indexnguoidung.php?do=dangky" method="POST"> 
+    <form action="TrangAdmin.php?do=dangky" method="POST"> 
         <div class="form-group">
             <label for="ten_dang_nhap">Tên đăng nhập <span style="color: red;">*</span></label>
             <input type="text" id="ten_dang_nhap" name="ten_dang_nhap" required value="<?php echo isset($_POST['ten_dang_nhap']) ? htmlspecialchars($_POST['ten_dang_nhap']) : ''; ?>">

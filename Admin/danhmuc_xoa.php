@@ -14,6 +14,6 @@
             $stmt->close();
         } 
     }
-    header("Location: indexnguoidung.php?do=danhmuc");
+    header("Location: TrangAdmin.php?do=danhmuc");
     exit();
 ?>

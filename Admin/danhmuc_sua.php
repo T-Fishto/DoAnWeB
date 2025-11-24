@@ -1,6 +1,6 @@
 <?php
     if (!isset($_GET['id'])) {
-        header("Location: indexnguoidung.php?do=danhmuc");
+        header("Location: TrangAdmin.php?do=danhmuc");
         exit();
     }
     $id = (int)$_GET['id'];
@@ -15,7 +15,7 @@
         if ($stmt = $connect->prepare($sql_update)) {
             $stmt->bind_param("ssi", $ten_danh_muc, $mo_ta, $id);
             if ($stmt->execute()) {
-                header("Location: indexnguoidung.php?do=danhmuc");
+                header("Location: TrangAdmin.php?do=danhmuc");
                 exit();
             } else {
                 die("Lỗi cập nhật: " . $stmt->error);
@@ -34,7 +34,7 @@
 
 <div class="form-container">
     <h3>Sửa Danh Mục</h3>
-    <form action="indexnguoidung.php?do=danhmuc_sua&id=<?php echo $id; ?>" method="POST">
+    <form action="TrangAdmin.php?do=danhmuc_sua&id=<?php echo $id; ?>" method="POST">
         <div class="form-group">
             <label>Tên Danh Mục</label>
             <input type="text" name="ten_danh_muc" value="<?php echo htmlspecialchars($dong['ten_danh_muc']); ?>" required>

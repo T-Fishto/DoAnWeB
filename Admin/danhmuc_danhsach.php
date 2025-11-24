@@ -25,14 +25,14 @@
                             
                             // Nút Sửa
                             echo "<td class='action-links'>
-                                    <a href='indexnguoidung.php?do=danhmuc_sua&id=" . $dong["id_danh_muc"] . "' title='Sửa'>
+                                    <a href='TrangAdmin.php?do=danhmuc_sua&id=" . $dong["id_danh_muc"] . "' title='Sửa'>
                                         <i class='fa-solid fa-pen-to-square icon-edit'></i>
                                     </a>
                                   </td>";
                             
                             // Nút Xóa
                             echo "<td class='action-links'>
-                                    <a href='indexnguoidung.php?do=danhmuc_xoa&id=" . $dong["id_danh_muc"] . "' 
+                                    <a href='TrangAdmin.php?do=danhmuc_xoa&id=" . $dong["id_danh_muc"] . "' 
                                        onclick='return confirm(\"Cảnh báo: Xóa danh mục này có thể làm mất sản phẩm thuộc về nó! Bạn chắc chắn xóa?\")' 
                                        title='Xóa'>
                                         <i class='fa-solid fa-trash-can icon-delete'></i>
@@ -46,5 +46,5 @@
             ?>
         </tbody>
     </table>
-    <a href="indexnguoidung.php?do=danhmuc_them" class="btn-add-user">Thêm Danh Mục Mới</a>
+    <a href="TrangAdmin.php?do=danhmuc_them" class="btn-add-user">Thêm Danh Mục Mới</a>
 </div>

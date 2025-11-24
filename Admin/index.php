@@ -83,7 +83,7 @@
                     {
                         echo '<li class="menu-items">';
                         echo '    <i class="ti-user ic"></i>';
-                        echo '    <a href="indexnguoidung.php">Người Dùng</a>';
+                        echo '    <a href="TrangAdmin.php">Người Dùng</a>';
                         echo '</li>';
                     } 
 

@@ -25,6 +25,6 @@
             die("Lỗi SQL: " . $connect->error);
         }
     }
-    header("Location: indexnguoidung.php?do=nguoidung");
+    header("Location: TrangAdmin.php?do=nguoidung");
     exit();
 ?>

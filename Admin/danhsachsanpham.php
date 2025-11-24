@@ -2,15 +2,12 @@
     require_once 'cauhinh.php';
 
     session_start();
-    // Logic kiểm tra Admin giữ nguyên (để dùng cho Sidebar)
-    $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;  
-
     // Hàm hiển thị sản phẩm (Đã tối ưu lấy quyền từ Session)
     function display_products($result)
     {
         // Lấy quyền trực tiếp từ Session
-        $is_admin_func = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
-        $is_logged_in = isset($_SESSION['MaNguoiDung']);
+        $is_admin = isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1;
+        $is_login = isset($_SESSION['MaNguoiDung']);
 
         if ($result && $result->num_rows > 0) 
         {
@@ -23,10 +20,10 @@
                 echo '<div class="menu-item">'; 
                 
                 // --- 1. ẢNH SẢN PHẨM ---
-                if ($is_admin_func) {
+                if ($is_admin) {
                     echo '  <img src="' . htmlspecialchars($row["hinh_anh"]) . '" alt="' . htmlspecialchars($row["ten_san_pham"]) . '">';
                 } else {
-                     if ($is_logged_in) {
+                     if ($is_login) {
                         echo '<a href="' . htmlspecialchars($detail_url) . '">';
                     } else {
                         echo '<a href="#" onclick="if(confirm(\'Bạn cần đăng nhập để xem chi tiết. Đăng nhập ngay?\')) { window.location.href=\'' . htmlspecialchars($login_url) . '\'; } return false;">';
@@ -49,7 +46,7 @@
                 }
 
                 // --- 2. XỬ LÝ NÚT XÓA VÀ SỬA ---
-                if ($is_admin_func) { 
+                if ($is_admin) { 
                     $delete_url = "sanpham_xoa.php?id=" . $product_id;
                     $edit_url = "sanpham_sua.php?id=" . $product_id;
                     
@@ -123,7 +120,7 @@
                         }
                     ?>
                     
-                   <?php if ($is_admin): ?>
+                   <?php if (isset($_SESSION['VaiTro']) && $_SESSION['VaiTro'] == 1): ?>
                         <li><a href="sanpham_them.php" style="color: #ffffffff;"><i class="fa-solid fa-plus"></i> THÊM SẢN PHẨM</a></li>
                    <?php endif; ?>
                 </ul>

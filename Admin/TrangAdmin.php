@@ -26,9 +26,9 @@
     <header>
         <h1><i class="fa-solid fa-utensils"></i> Trang Quản Trị</h1>
         <nav>
-            <a href="indexnguoidung.php?do=trangchu">Trang Chủ</a>
-            <a href="indexnguoidung.php?do=nguoidung">Quản Lý Người Dùng</a>
-            <a href="indexnguoidung.php?do=danhmuc">Quản Lý Danh Mục</a>
+            <a href="TrangAdmin.php?do=trangchu">Trang Chủ</a>
+            <a href="TrangAdmin.php?do=nguoidung">Quản Lý Người Dùng</a>
+            <a href="TrangAdmin.php?do=danhmuc">Quản Lý Danh Mục</a>
 
         </nav>
     </header>
@@ -78,7 +78,7 @@
                 </div>
                 
                 <div class="dashboard-grid">
-                    <a href="indexnguoidung.php?do=nguoidung" class="dashboard-card">
+                    <a href="TrangAdmin.php?do=nguoidung" class="dashboard-card">
                         <i class="fa-solid fa-users-cog"></i>
                         <h3>Quản Lý Người Dùng</h3>
                         <p>Thêm, xóa, sửa và phân quyền tài khoản.</p>

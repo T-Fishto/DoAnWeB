@@ -12,7 +12,7 @@
             if ($stmt = $connect->prepare($sql)) {
                 $stmt->bind_param("ss", $ten_danh_muc, $mo_ta);
                 if ($stmt->execute()) {
-                    header("Location: indexnguoidung.php?do=danhmuc");
+                    header("Location: TrangAdmin.php?do=danhmuc");
                     exit();
                 } else {
                     $message = "Lỗi: " . $stmt->error;
@@ -27,7 +27,7 @@
     <h3>Thêm Danh Mục Mới</h3>
     <?php if (!empty($message)) echo "<div class='error-box'>$message</div>"; ?>
     
-    <form action="indexnguoidung.php?do=danhmuc_them" method="POST">
+    <form action="TrangAdmin.php?do=danhmuc_them" method="POST">
         <div class="form-group">
             <label>Tên Danh Mục <span style="color:red">*</span></label>
             <input type="text" name="ten_danh_muc" required>
